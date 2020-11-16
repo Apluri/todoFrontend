@@ -41,7 +41,12 @@ const App = () => {
         />
         <Route path={"/folders"} component={Folders}></Route>
         <Route path={"/settings"} component={Settings}></Route>
-        <Route path={"/add"} component={AddTodo}></Route>
+        <Route
+          path="/add"
+          render={(props) => (
+            <AddTodo {...props} todos={todos} setTodos={setTodos} />
+          )}
+        />
       </Switch>
     </BrowserRouter>
   );

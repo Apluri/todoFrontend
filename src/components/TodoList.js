@@ -1,5 +1,5 @@
 import React from "react";
-const TodoList = ({ todos }) => {
+const TodoList = ({ todos, handleDelete }) => {
   return (
     <div>
       <h1>List:</h1>
@@ -7,7 +7,7 @@ const TodoList = ({ todos }) => {
         <div className="todo-item" key={todo.id}>
           <div> {todo.task} </div>
           <div>
-            <button>Delete</button>
+            <button onClick={() => handleDelete(todo.id)}>Delete</button>
           </div>
         </div>
       ))}

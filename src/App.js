@@ -10,10 +10,18 @@ import Settings from "./components/Settings";
 import AddTodo from "./components/AddTodo";
 
 const App = () => {
+  // simulates tasklist fetched from backend
   const [todos, setTodos] = useState([
     { id: 1, task: "Mee toihi" },
     { id: 2, task: "Tiskaa" },
   ]);
+
+  // deletes task by given id from state
+  // TODO change this to delete from sql server
+  const handleDelete = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
   return (
     <BrowserRouter>
       <Header />
@@ -21,11 +29,15 @@ const App = () => {
         <Route
           path="/"
           exact
-          render={(props) => <Home {...props} todos={todos} />}
+          render={(props) => (
+            <Home {...props} todos={todos} handleDelete={handleDelete} />
+          )}
         />
         <Route
           path="/home"
-          render={(props) => <Home {...props} todos={todos} />}
+          render={(props) => (
+            <Home {...props} todos={todos} handleDelete={handleDelete} />
+          )}
         />
         <Route path={"/folders"} component={Folders}></Route>
         <Route path={"/settings"} component={Settings}></Route>
@@ -38,4 +50,3 @@ const App = () => {
 export default App;
 
 // <Header /> used to be <Root />
-// <Route path={"/"} exact component={Home}></Route>

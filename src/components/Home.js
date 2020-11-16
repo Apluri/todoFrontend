@@ -2,12 +2,12 @@
 import React from "react";
 import TodoList from "./TodoList";
 
-const Home = ({ todos }) => {
+const Home = ({ todos, handleDelete }) => {
   console.log(todos);
   return (
     <div className="home">
       <h1>Home</h1>
-      <TodoList todos={todos} />
+      <TodoList todos={todos} handleDelete={handleDelete} />
     </div>
   );
 };

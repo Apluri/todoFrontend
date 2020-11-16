@@ -39,8 +39,8 @@ const App = () => {
             <Home {...props} todos={todos} handleDelete={handleDelete} />
           )}
         />
-        <Route path={"/folders"} component={Folders}></Route>
-        <Route path={"/settings"} component={Settings}></Route>
+        <Route path={"/folders"} component={Folders} />
+        <Route path={"/settings"} component={Settings} />
         <Route
           path="/add"
           render={(props) => (

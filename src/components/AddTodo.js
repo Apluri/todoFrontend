@@ -12,9 +12,11 @@ const AddTodo = ({ todos, setTodos }) => {
     // prevent reload?
     e.preventDefault();
 
-    // create new array of todos and replace old with updated version
-    let newTodos = todos;
-    newTodos.push({ id: Math.floor(Math.random() * 10000), task: currInput });
+    // create copy of existing todos, update todos with the copy
+    const newTodos = [...todos].concat({
+      id: Math.floor(Math.random() * 10000),
+      task: currInput,
+    });
     setTodos(newTodos);
 
     // set input to empty when submitting
@@ -23,18 +25,13 @@ const AddTodo = ({ todos, setTodos }) => {
     // redirect to homepage after submit
     history.push("/home");
   };
-
-  // updates inputfield to match userinput
-  const handleInputChange = (input) => {
-    setCurrInput(input);
-  };
   return (
     <div className="add-todo">
       <h1>AddTodo</h1>
       <form onSubmit={handleSubmit}>
         <input
           value={currInput}
-          onChange={(e) => handleInputChange(e.target.value)}
+          onChange={(e) => setCurrInput(e.target.value)}
         />
         <button>Add</button>
       </form>

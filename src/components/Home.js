@@ -7,6 +7,7 @@ const Home = ({ todos, handleDelete }) => {
   return (
     <div className="home">
       <h1>Home</h1>
+
       <TodoList todos={todos} handleDelete={handleDelete} />
     </div>
   );

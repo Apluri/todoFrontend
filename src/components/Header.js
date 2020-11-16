@@ -1,36 +1,35 @@
-import React from "react";
+// useState to replace need for props usage
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom"; // import { Link } from "react-router-dom";
 
 // Navlink vs Link = NavLink enables the usage of activeClassName
 // activeClassname for dynamic css styling
 
-class Header extends React.Component {
-  render() {
-    return (
-      <nav className="navbar">
-        <div className="navbar-header">
-          <ul className="navbar-nav">
-            <li>
-              <NavLink to={"/home"} activeClassName={"active"}>
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={"/folders"} activeClassName={"active"}>
-                Folders
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={"/settings"} activeClassName={"active"}>
-                Settings
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    );
-  }
-}
+const Header = () => {
+  return (
+    <nav className="navbar">
+      <div className="navbar-header">
+        <ul className="navbar-nav">
+          <li>
+            <NavLink to={"/home"} activeClassName={"active"}>
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/folders"} activeClassName={"active"}>
+              Folders
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/settings"} activeClassName={"active"}>
+              Settings
+            </NavLink>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  );
+};
 export default Header;
 
 // OLD SOLUTION

@@ -1,0 +1,33 @@
+body {
+  background-color: black;
+  color: white;
+  background-image: url(https://render.fineartamerica.com/images/rendered/default/greeting-card/images/artworkimages/medium/2/hyperspepehype-illidan-morehead-transparent.png?&targetx=142&targety=39&imagewidth=416&imageheight=421&modelwidth=700&modelheight=500&backgroundcolor=000000&orientation=0);
+  background-repeat: no-repeat;
+}
+
+ul,
+li {
+  list-style-type: none;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:visited {
+  color: white;
+}
+
+.navbar-header {
+  background-color: rgb(53, 53, 53);
+  width: 100px;
+}
+
+.home,
+.folders,
+.settings,
+.add-todo {
+  background-color: rgb(53, 53, 53);
+}

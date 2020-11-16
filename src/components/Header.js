@@ -1,5 +1,5 @@
 // useState to replace need for props usage
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom"; // import { Link } from "react-router-dom";
 
 // Navlink vs Link = NavLink enables the usage of activeClassName
@@ -23,6 +23,11 @@ const Header = () => {
           <li>
             <NavLink to={"/settings"} activeClassName={"active"}>
               Settings
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/add"} activeClassName={"active"}>
+              AddTodo
             </NavLink>
           </li>
         </ul>

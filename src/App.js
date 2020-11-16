@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 // useState to replace need for props usage
 import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";

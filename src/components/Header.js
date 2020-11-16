@@ -7,32 +7,26 @@ import { NavLink } from "react-router-dom"; // import { Link } from "react-route
 
 const Header = () => {
   return (
-    <nav className="navbar">
-      <div className="navbar-header">
-        <ul className="navbar-nav">
-          <li>
-            <NavLink to={"/home"} activeClassName={"active"}>
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/folders"} activeClassName={"active"}>
-              Folders
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/settings"} activeClassName={"active"}>
-              Settings
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/add"} activeClassName={"active"}>
-              AddTodo
-            </NavLink>
-          </li>
-        </ul>
+    <div className="links">
+      <nav className="navbar">
+        <NavLink to={"/home"} activeClassName={"active"}>
+          Home
+        </NavLink>
+
+        <NavLink to={"/folders"} activeClassName={"active"}>
+          Folders
+        </NavLink>
+
+        <NavLink to={"/settings"} activeClassName={"active"}>
+          Settings
+        </NavLink>
+      </nav>
+      <div className="addtodo">
+        <NavLink to={"/add"} activeClassName={"active"}>
+          AddTodo
+        </NavLink>
       </div>
-    </nav>
+    </div>
   );
 };
 export default Header;

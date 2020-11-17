@@ -7,23 +7,11 @@ import { NavLink } from "react-router-dom"; // import { Link } from "react-route
 
 const Header = ({ handleNavSizeChange }) => {
   return (
-    <div className="links">
-      <nav className="navbar">
-        <button className="burger-btn" onClick={() => handleNavSizeChange()}>
-          Burg
-        </button>
-        <NavLink to={"/home"} activeClassName={"active"}>
-          Home
-        </NavLink>
-
-        <NavLink to={"/folders"} activeClassName={"active"}>
-          Folders
-        </NavLink>
-
-        <NavLink to={"/settings"} activeClassName={"active"}>
-          Settings
-        </NavLink>
-      </nav>
+    <div className="header">
+      <button className="burger-btn" onClick={() => handleNavSizeChange()}>
+        Burg
+      </button>
+      <h1> Get title here </h1>
     </div>
   );
 };

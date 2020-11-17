@@ -1,8 +1,6 @@
 body {
   background-color: black;
   color: white;
-  background-image: url(https://render.fineartamerica.com/images/rendered/default/greeting-card/images/artworkimages/medium/2/hyperspepehype-illidan-morehead-transparent.png?&targetx=142&targety=39&imagewidth=416&imageheight=421&modelwidth=700&modelheight=500&backgroundcolor=000000&orientation=0);
-  background-repeat: no-repeat;
 }
 h1 {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -40,18 +38,51 @@ a:visited {
   font-size: 2em;
   background-color: rgb(22, 22, 22);
 }
+
+/* does nothing?
 .navbar h1 {
   flex: 1;
 }
+*/
 
 .addtodo {
   //padding-top: 500px;
 }
 
+// home section
+.home-container {
+  display: flex;
+  .home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; // fills the rest of the container
+    .todo-item {
+      display: flex;
+      min-width: 400px;
+      padding-top: 10px;
+    }
+    .todo-item > div:first-child {
+      display: flex;
+      flex: 70%;
+    }
+    .todo-item > div:last-child {
+      display: flex;
+      flex: 30%;
+      justify-content: flex-end;
+    }
+  }
+}
+.left-sidebar {
+  flex: 15%;
+  background-color: #363636;
+}
+.right-sidebar {
+  flex: 15%; // note this reserves 15% of screen size even tho its not visible, used to center content even when sidebar is hidden
+  visibility: hidden;
+  background-color: red;
+}
 // for pc screen
 @media only screen and (min-width: 900px) {
-}
-
-// for mobile screen
-@media only screen and (max-width: 900px) {
 }

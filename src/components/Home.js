@@ -5,10 +5,14 @@ import TodoList from "./TodoList";
 const Home = ({ todos, handleDelete }) => {
   console.log(todos);
   return (
-    <div className="home">
-      <h1>Home</h1>
+    <div className="home-container">
+      <div className="left-sidebar">left:D sidebar:D</div>
+      <div className="home-content">
+        <h1>Home</h1>
+        <TodoList todos={todos} handleDelete={handleDelete} />
+      </div>
 
-      <TodoList todos={todos} handleDelete={handleDelete} />
+      <div className="right-sidebar">right:D</div>
     </div>
   );
 };

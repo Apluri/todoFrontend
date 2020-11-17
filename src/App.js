@@ -2,6 +2,9 @@ import "./App.scss";
 // useState to replace need for props usage
 import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+import { useMediaQuery } from "react-responsive";
+
 // import Root from "./components/Root";
 import Header from "./components/Header";
 import Home from "./components/Home";
@@ -15,10 +18,12 @@ const App = () => {
     { id: 1, task: "Mee toihi" },
     { id: 2, task: "Tiskaa" },
   ]);
-  const [navSize, setNavSize] = useState("200px");
-
-  const handleNavSizeChange = () => {
-    setNavSize(navSize === "200px" ? "0px" : "200px");
+  const [navSize, setNavSize] = useState("0px");
+  let smallScreen = useMediaQuery({ query: "(max-width: 900px)" });
+  const HandleNavSizeChange = () => {
+    smallScreen
+      ? setNavSize(navSize === "200px" ? "0px" : "200px")
+      : setNavSize(navSize === "600px" ? "0px" : "600px");
   };
   // deletes task by given id from state
   // TODO change this to delete from sql server
@@ -28,8 +33,8 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Header handleNavSizeChange={handleNavSizeChange} />
-      <LeftNav navSize={navSize} handleNavSizeChange={handleNavSizeChange} />
+      <Header handleNavSizeChange={HandleNavSizeChange} />
+      <LeftNav navSize={navSize} handleNavSizeChange={HandleNavSizeChange} />
       <Switch>
         <Route
           path="/"

@@ -15,8 +15,8 @@ const App = () => {
     { id: 1, task: "Mee toihi" },
     { id: 2, task: "Tiskaa" },
   ]);
-
   const [navSize, setNavSize] = useState("200px");
+  const [title, setTitle] = useState("Dynamic title here");
 
   const handleNavSizeChange = () => {
     setNavSize(navSize === "200px" ? "0px" : "200px");

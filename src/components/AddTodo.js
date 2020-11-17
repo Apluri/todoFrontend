@@ -28,9 +28,11 @@ const AddTodo = ({ todos, setTodos }) => {
   return (
     <div className="content">
       <div className="add-todo">
-        <h1>AddTodo</h1>
+        <h1> New task</h1>
         <form onSubmit={handleSubmit}>
           <input
+            type="test"
+            placeholder="Task title"
             value={currInput}
             onChange={(e) => setCurrInput(e.target.value)}
           />

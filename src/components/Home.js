@@ -7,7 +7,6 @@ const Home = ({ todos, handleDelete }) => {
   let history = useHistory();
   return (
     <div className="content">
-      <h1>Tasks</h1>
       <TodoList todos={todos} handleDelete={handleDelete} />
       <button
         className="add-btn"

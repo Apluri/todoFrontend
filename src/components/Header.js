@@ -1,6 +1,6 @@
 // useState to replace need for props usage
 import React from "react";
-import { NavLink } from "react-router-dom"; // import { Link } from "react-router-dom";
+import TitleComponent from "./TitleComponent";
 
 // Navlink vs Link = NavLink enables the usage of activeClassName
 // activeClassname for dynamic css styling
@@ -11,7 +11,7 @@ const Header = ({ handleNavSizeChange }) => {
       <button className="burger-btn" onClick={() => handleNavSizeChange()}>
         Burg
       </button>
-      <h1> Get title here </h1>
+      <TitleComponent />
     </div>
   );
 };

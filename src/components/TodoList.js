@@ -2,7 +2,7 @@ import React from "react";
 const TodoList = ({ todos, handleDelete }) => {
   return (
     <div>
-      <h1>List:</h1>
+      <h1>Things to do:</h1>
       {todos.map((todo) => (
         <div className="todo-item" key={todo.id}>
           <div> {todo.task} </div>

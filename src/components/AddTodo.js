@@ -26,15 +26,17 @@ const AddTodo = ({ todos, setTodos }) => {
     history.push("/home");
   };
   return (
-    <div className="add-todo">
-      <h1>AddTodo</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          value={currInput}
-          onChange={(e) => setCurrInput(e.target.value)}
-        />
-        <button>Add</button>
-      </form>
+    <div className="content">
+      <div className="add-todo">
+        <h1>AddTodo</h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            value={currInput}
+            onChange={(e) => setCurrInput(e.target.value)}
+          />
+          <button>Add</button>
+        </form>
+      </div>
     </div>
   );
 };

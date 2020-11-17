@@ -8,7 +8,7 @@ import Home from "./components/Home";
 import Folders from "./components/Folders";
 import Settings from "./components/Settings";
 import AddTodo from "./components/AddTodo";
-
+import LeftNav from "./components/LeftNav";
 const App = () => {
   // simulates tasklist fetched from backend
   const [todos, setTodos] = useState([
@@ -25,6 +25,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Header />
+      <LeftNav />
       <Switch>
         <Route
           path="/"

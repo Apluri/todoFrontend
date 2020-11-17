@@ -46,37 +46,36 @@ a:visited {
 */
 
 // home section
-.home-container {
+
+.content {
   display: flex;
-  .home-content {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%; // fills the rest of the container
+  .todo-item {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%; // fills the rest of the container
-    .todo-item {
-      display: flex;
-      min-width: 400px;
-      padding-top: 10px;
-    }
-    .todo-item > div:first-child {
-      display: flex;
-      flex: 70%;
-    }
-    .todo-item > div:last-child {
-      display: flex;
-      flex: 30%;
-      justify-content: flex-end;
-    }
-    .add-btn {
-      position: fixed;
-      height: 100px;
-      width: 100px;
-      bottom: 10%;
-      right: 40%;
-    }
+    min-width: 400px;
+    padding-top: 10px;
+  }
+  .todo-item > div:first-child {
+    display: flex;
+    flex: 70%;
+  }
+  .todo-item > div:last-child {
+    display: flex;
+    flex: 30%;
+    justify-content: flex-end;
+  }
+  .add-btn {
+    position: fixed;
+    height: 100px;
+    width: 100px;
+    bottom: 10%;
+    right: 40%;
   }
 }
+
 .left-sidebar {
   display: flex;
   flex: 15%;
@@ -85,6 +84,8 @@ a:visited {
   width: 15%;
   background-color: #363636;
 }
+
+/*
 .right-sidebar {
   display: flex;
   flex: 15%;
@@ -94,6 +95,7 @@ a:visited {
   visibility: hidden;
   background-color: red;
 }
+*/
 // for pc screen
 @media only screen and (min-width: 900px) {
 }

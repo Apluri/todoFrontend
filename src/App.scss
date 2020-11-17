@@ -73,11 +73,12 @@ a:visited {
   display: flex;
   position: fixed;
   flex-direction: column;
-  z-index: 1;
+  //z-index: 1;
   height: 100%;
   transition: 0.5s;
   overflow-x: hidden;
-  background-color: #363636;
+  background-color: rgba(126, 126, 126, 0.329);
+
   .navbar {
     display: flex;
     flex-direction: column;

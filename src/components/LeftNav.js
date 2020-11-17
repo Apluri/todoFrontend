@@ -5,7 +5,12 @@ import { NavLink } from "react-router-dom"; // import { Link } from "react-route
 const LeftNav = ({ navSize, handleNavSizeChange }) => {
   return (
     <div className="left-sidebar" style={{ width: navSize }}>
-      <button className="burger-btn" onClick={() => handleNavSizeChange()}>
+      <button
+        className="burger-btn"
+        onClick={() => {
+          handleNavSizeChange();
+        }}
+      >
         Burg
       </button>
       <nav className="navbar">

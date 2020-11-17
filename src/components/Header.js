@@ -21,11 +21,6 @@ const Header = () => {
           Settings
         </NavLink>
       </nav>
-      <div className="addtodo">
-        <NavLink to={"/add"} activeClassName={"active"}>
-          AddTodo
-        </NavLink>
-      </div>
     </div>
   );
 };

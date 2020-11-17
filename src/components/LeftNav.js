@@ -1,8 +1,22 @@
 // useState to replace need for props usage
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const LeftNav = () => {
-  return <div className="left-sidebar">left:D sidebar:D</div>;
+const LeftNav = ({ navSize, handleNavSizeChange }) => {
+  return (
+    <div className="left-sidebar" style={{ width: navSize }}>
+      <button className="burger-btn" onClick={() => handleNavSizeChange()}>
+        Burg
+      </button>
+      <div>
+        <ul>
+          <li>contsaa</li>
+          <li>contsaa</li>
+          <li>contsaa</li>
+          <li>contsaa</li>
+        </ul>
+      </div>
+    </div>
+  );
 };
 
 export default LeftNav;

@@ -5,10 +5,13 @@ import { NavLink } from "react-router-dom"; // import { Link } from "react-route
 // Navlink vs Link = NavLink enables the usage of activeClassName
 // activeClassname for dynamic css styling
 
-const Header = () => {
+const Header = ({ handleNavSizeChange }) => {
   return (
     <div className="links">
       <nav className="navbar">
+        <button className="burger-btn" onClick={() => handleNavSizeChange()}>
+          Burg
+        </button>
         <NavLink to={"/home"} activeClassName={"active"}>
           Home
         </NavLink>

@@ -16,6 +16,11 @@ const App = () => {
     { id: 2, task: "Tiskaa" },
   ]);
 
+  const [navSize, setNavSize] = useState("200px");
+
+  const handleNavSizeChange = () => {
+    setNavSize(navSize === "200px" ? "0px" : "200px");
+  };
   // deletes task by given id from state
   // TODO change this to delete from sql server
   const handleDelete = (id) => {
@@ -24,8 +29,8 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Header />
-      <LeftNav />
+      <Header handleNavSizeChange={handleNavSizeChange} />
+      <LeftNav navSize={navSize} handleNavSizeChange={handleNavSizeChange} />
       <Switch>
         <Route
           path="/"

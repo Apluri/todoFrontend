@@ -15,8 +15,8 @@ import LeftNav from "./components/LeftNav";
 const App = () => {
   // simulates tasklist fetched from backend
   const [todos, setTodos] = useState([
-    { id: 1, task: "Mee toihi" },
-    { id: 2, task: "Tiskaa" },
+    { id: 1, task: "Mee toihi", deadline: null },
+    { id: 2, task: "Tiskaa", deadline: null },
   ]);
   //let blurMe = useState(false);
   const [navSize, setNavSize] = useState("0px");

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import Calendar from "react-calendar";
 
 const AddTodo = ({ todos, setTodos }) => {
   const [currInput, setCurrInput] = useState("");
@@ -38,6 +39,9 @@ const AddTodo = ({ todos, setTodos }) => {
           />
           <button>Add</button>
         </form>
+      </div>
+      <div className="calendar">
+        <Calendar />
       </div>
     </div>
   );

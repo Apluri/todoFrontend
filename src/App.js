@@ -21,7 +21,9 @@ const App = () => {
   const [navSize, setNavSize] = useState("0px");
   let smallScreen = useMediaQuery({ query: "(max-width: 900px)" });
   const CloseNav = () => {
-    setNavSize("0px");
+    if (smallScreen) {
+      setNavSize("0px");
+    }
   };
   const HandleNavSizeChange = () => {
     smallScreen

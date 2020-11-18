@@ -1,7 +1,7 @@
 import "./App.scss";
 // useState to replace need for props usage
 import React, { useState } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import { useMediaQuery } from "react-responsive";
 
@@ -42,13 +42,10 @@ const App = () => {
       <Header handleNavSizeChange={HandleNavSizeChange} />
       <LeftNav navSize={navSize} handleNavSizeChange={HandleNavSizeChange} />
       <Switch>
-        <Route
-          path="/"
-          exact
-          render={(props) => (
-            <Home {...props} todos={todos} handleDelete={handleDelete} />
-          )}
-        />
+        <Route exact path="/">
+          <Redirect to="/home" />
+        </Route>
+
         <Route
           path="/home"
           render={(props) => (

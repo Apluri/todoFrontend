@@ -18,6 +18,7 @@ const App = () => {
     { id: 1, task: "Mee toihi" },
     { id: 2, task: "Tiskaa" },
   ]);
+  //let blurMe = useState(false);
   const [navSize, setNavSize] = useState("0px");
   let smallScreen = useMediaQuery({ query: "(max-width: 900px)" });
   const CloseNav = () => {

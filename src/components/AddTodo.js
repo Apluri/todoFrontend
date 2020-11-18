@@ -42,7 +42,7 @@ const AddTodo = ({ todos, setTodos }) => {
           <button>Add</button>
         </form>
       </div>
-
+      date selected: {value === null ? "" : value.toString()}
       <div className="calendar-container">
         <Calendar
           value={null}

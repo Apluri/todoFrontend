@@ -2,10 +2,13 @@ body {
   background-color: black;
   color: white;
 }
-
+.calendar-container {
+  display: flex;
+  width: 200px;
+}
 .todo-items,
 .todo-item > * {
-  filter: blur(3px);
+  filter: blur(0px);
 }
 /*
 blurring breaks static items,
@@ -31,7 +34,6 @@ a:visited {
 }
 
 .burger-btn {
-  filter: blur(5px);
   position: absolute;
   left: 5px;
   top: 5px;

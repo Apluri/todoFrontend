@@ -4,6 +4,7 @@ import Calendar from "react-calendar";
 
 const AddTodo = ({ todos, setTodos }) => {
   const [currInput, setCurrInput] = useState("");
+  const [value, onChange, onClickDay] = useState(null);
   // for redirecting
   let history = useHistory();
 
@@ -17,6 +18,7 @@ const AddTodo = ({ todos, setTodos }) => {
     const newTodos = [...todos].concat({
       id: Math.floor(Math.random() * 10000),
       task: currInput,
+      deadline: value === null ? null : value.toString(),
     });
     setTodos(newTodos);
 
@@ -40,8 +42,14 @@ const AddTodo = ({ todos, setTodos }) => {
           <button>Add</button>
         </form>
       </div>
-      <div className="calendar">
-        <Calendar />
+
+      <div className="calendar-container">
+        <Calendar
+          value={null}
+          locale={"en-EN"}
+          onChange={onChange}
+          onClickDay={console.log(value)}
+        />
       </div>
     </div>
   );

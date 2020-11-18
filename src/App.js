@@ -20,6 +20,9 @@ const App = () => {
   ]);
   const [navSize, setNavSize] = useState("0px");
   let smallScreen = useMediaQuery({ query: "(max-width: 900px)" });
+  const CloseNav = () => {
+    setNavSize("0px");
+  };
   const HandleNavSizeChange = () => {
     smallScreen
       ? setNavSize(navSize === "200px" ? "0px" : "200px")
@@ -46,7 +49,12 @@ const App = () => {
         <Route
           path="/home"
           render={(props) => (
-            <Home {...props} todos={todos} handleDelete={handleDelete} />
+            <Home
+              {...props}
+              todos={todos}
+              handleDelete={handleDelete}
+              closeNav={CloseNav}
+            />
           )}
         />
         <Route path={"/folders"} component={Folders} />

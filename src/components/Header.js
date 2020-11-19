@@ -8,9 +8,6 @@ import TitleComponent from "./TitleComponent";
 const Header = ({ handleNavSizeChange }) => {
   return (
     <div className="header">
-      <button className="burger-btn" onClick={() => handleNavSizeChange()}>
-        Burg
-      </button>
       <TitleComponent />
     </div>
   );

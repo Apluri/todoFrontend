@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Calendar from "react-calendar";
 
-const AddTodo = ({ todos, setTodos }) => {
+const AddTodo = ({ todos, setTodos, navSize }) => {
   const [currInput, setCurrInput] = useState("");
-  const [value, onChange, onClickDay] = useState(null);
+  const [value, onChange] = useState(null);
   // for redirecting
   let history = useHistory();
 
@@ -30,26 +30,25 @@ const AddTodo = ({ todos, setTodos }) => {
   };
   return (
     <div className="content">
-      <div className="add-todo">
-        <h1> New task</h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="test"
-            placeholder="Task title"
-            value={currInput}
-            onChange={(e) => setCurrInput(e.target.value)}
-          />
-          <button>Add</button>
-        </form>
-      </div>
-      date selected: {value === null ? "" : value.toString()}
-      <div className="calendar-container">
-        <Calendar
-          value={null}
-          locale={"en-EN"}
-          onChange={onChange}
-          onClickDay={console.log(value)}
-        />
+      <div className={navSize === "100%" ? "blur" : ""}>
+        <div className="add-todo">
+          <h1> New task</h1>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="test"
+              placeholder="Task title"
+              value={currInput}
+              onChange={(e) => setCurrInput(e.target.value)}
+            />
+            <button>Add</button>
+          </form>
+        </div>
+        <div className="date-selection-show">
+          date selected: {value === null ? "" : value.toString()}
+        </div>
+        <div className="calendar-container">
+          <Calendar value={null} locale={"en-EN"} onChange={onChange} />
+        </div>
       </div>
     </div>
   );

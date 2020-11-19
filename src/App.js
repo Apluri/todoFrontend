@@ -28,8 +28,8 @@ const App = () => {
   };
   const HandleNavSizeChange = () => {
     smallScreen
-      ? setNavSize(navSize === "200px" ? "0px" : "200px")
-      : setNavSize(navSize === "600px" ? "0px" : "600px");
+      ? setNavSize(navSize === "100%" ? "0%" : "100%")
+      : setNavSize(navSize === "300px" ? "0px" : "300px");
   };
   // deletes task by given id from state
   // TODO change this to delete from sql server
@@ -41,6 +41,7 @@ const App = () => {
     <BrowserRouter>
       <Header handleNavSizeChange={HandleNavSizeChange} />
       <LeftNav navSize={navSize} handleNavSizeChange={HandleNavSizeChange} />
+
       <Switch>
         <Route exact path="/">
           <Redirect to="/home" />
@@ -62,7 +63,12 @@ const App = () => {
         <Route
           path="/add"
           render={(props) => (
-            <AddTodo {...props} todos={todos} setTodos={setTodos} />
+            <AddTodo
+              {...props}
+              todos={todos}
+              setTodos={setTodos}
+              navSize={navSize}
+            />
           )}
         />
       </Switch>

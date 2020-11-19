@@ -3,12 +3,6 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom"; // import { Link } from "react-router-dom";
 
 const LeftNav = ({ navSize, handleNavSizeChange }) => {
-  //test
-  let blurring;
-  //for enabling dynamic blurring on mobile screen only
-  navSize === "100%" ? (blurring = true) : (blurring = false);
-  console.log(blurring);
-  //<div className={navSize === "100%" ? "one" : "two"}>
   return (
     <div>
       <div className="left-sidebar" style={{ width: navSize }}>

@@ -6,10 +6,17 @@ body {
   display: flex;
   width: 200px;
 }
-.todo-items,
-.todo-item > * {
-  filter: blur(0px);
+.one > * {
+  background-color: blue;
 }
+.two > * {
+  background-color: red;
+}
+///*
+.blur > * {
+  filter: blur(9px);
+}
+
 /*
 blurring breaks static items,
 specified blur parameters needed*/
@@ -37,7 +44,6 @@ a:visited {
   position: absolute;
   left: 5px;
   top: 5px;
-  z-index: 1;
   width: 40px;
   height: 40px;
 }
@@ -84,7 +90,6 @@ a:visited {
   display: flex;
   position: fixed;
   flex-direction: column;
-  //z-index: 1;
   height: 100%;
   transition: 0.5s;
   overflow-x: hidden;

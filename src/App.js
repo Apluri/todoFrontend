@@ -55,6 +55,7 @@ const App = () => {
               todos={todos}
               handleDelete={handleDelete}
               closeNav={CloseNav}
+              navSize={navSize}
             />
           )}
         />

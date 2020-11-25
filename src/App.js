@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import { useMediaQuery } from "react-responsive";
 
-// import Root from "./components/Root";
+// import Backend from "../../TodoBackend/index.js";???
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Folders from "./components/Folders";
@@ -18,7 +18,7 @@ const App = () => {
     { id: 1, task: "Mee toihi", deadline: null },
     { id: 2, task: "Tiskaa", deadline: null },
   ]);
-  //let blurMe = useState(false);
+
   const [navSize, setNavSize] = useState("0px");
   let smallScreen = useMediaQuery({ query: "(max-width: 900px)" });
   const CloseNav = () => {
@@ -78,5 +78,3 @@ const App = () => {
 };
 
 export default App;
-
-// <Header /> used to be <Root />

@@ -32,7 +32,7 @@ const AddTodo = ({ todos, setTodos, navSize }) => {
     const newTodos = [...todos].concat({
       id: Math.floor(Math.random() * 10000),
       task: currInput,
-      deadline: value === null ? null : value.toString(),
+      deadline: value === null ? null : tzoffset(value),
     });
     setTodos(newTodos);
 

@@ -3,10 +3,24 @@ import { useHistory } from "react-router-dom";
 import Calendar from "react-calendar";
 
 const AddTodo = ({ todos, setTodos, navSize }) => {
+  //date selected: {value === null ? "" : value.toString()}
   const [currInput, setCurrInput] = useState("");
   const [value, onChange] = useState(null);
+  const [taskContent] = useState("");
   // for redirecting
   let history = useHistory();
+
+  // handle timezone offset for sql-date conversion
+  // takes Date.object as an argument
+  let tzoffset = (v) => {
+    let offSet = v.getTimezoneOffset() / 60;
+    if (offSet < 0) {
+      offSet = offSet - offSet * 2;
+    }
+    v.setHours(offSet);
+    v = v.toISOString().split("T")[0];
+    return v;
+  };
 
   // here we could send task to sql server and then fetch tasks again
   // currently recreating todos state
@@ -44,7 +58,7 @@ const AddTodo = ({ todos, setTodos, navSize }) => {
           </form>
         </div>
         <div className="date-selection-show">
-          date selected: {value === null ? "" : value.toString()}
+          date selected: {value === null ? "nothing" : value.toDateString()}
         </div>
         <div className="calendar-container">
           <Calendar value={null} locale={"en-EN"} onChange={onChange} />
@@ -55,3 +69,9 @@ const AddTodo = ({ todos, setTodos, navSize }) => {
 };
 
 export default AddTodo;
+//new Date(tzoffset(value))
+//value.toDateString()
+//value.getTimezoneOffset() / 60;
+//value.setHours(tzoffset(value)),value.toISOString().split("T")[0]
+//console.log(tzoffset(value)),
+//console.log(new Date(tzoffset(value)))

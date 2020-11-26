@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Calendar from "react-calendar";
 
-const AddTodo = ({ todos, setTodos, navSize }) => {
+const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
   //date selected: {value === null ? "" : value.toString()}
   const [currInput, setCurrInput] = useState("");
   const [value, onChange] = useState(null);
@@ -28,13 +28,14 @@ const AddTodo = ({ todos, setTodos, navSize }) => {
     // prevent reload?
     e.preventDefault();
 
-    // create copy of existing todos, update todos with the copy
-    const newTodos = [...todos].concat({
-      id: Math.floor(Math.random() * 10000),
-      task: currInput,
+    // create new task and post it
+    const newTodo = {
+      title: currInput,
+      description: null, // add logic here
       deadline: value === null ? null : tzoffset(value),
-    });
-    setTodos(newTodos);
+      folder: "Default", // add logic here
+    };
+    postTaskHandler(newTodo);
 
     // set input to empty when submitting
     setCurrInput("");

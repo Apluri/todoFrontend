@@ -1,7 +1,5 @@
 import React from "react";
 const TodoList = ({ todos, handleDelete }) => {
-  console.log(todos);
-
   let sqlDateToDateString = (d) => {
     let temp;
     d == null ? (temp = "") : (temp = new Date(d).toDateString());
@@ -13,7 +11,7 @@ const TodoList = ({ todos, handleDelete }) => {
       <h1 className="todo-items">Things to do:</h1>
       {todos.map((todo) => (
         <div className="todo-item" key={todo.id}>
-          <div> {todo.task} </div>
+          <div> {todo.title} </div>
           <div> {sqlDateToDateString(todo.deadline)} </div>
           <div>
             <button onClick={() => handleDelete(todo.id)}>Delete</button>

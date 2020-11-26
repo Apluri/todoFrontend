@@ -1,24 +1,58 @@
 import "./App.scss";
-// useState to replace need for props usage
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-
 import { useMediaQuery } from "react-responsive";
+import axios from "axios";
 
-// import Backend from "../../TodoBackend/index.js";???
+// local components
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Folders from "./components/Folders";
 import Settings from "./components/Settings";
 import AddTodo from "./components/AddTodo";
 import LeftNav from "./components/LeftNav";
+
 const App = () => {
   // simulates tasklist fetched from backend
-  const [todos, setTodos] = useState([
-    { id: 1, task: "Mee toihi", deadline: null },
-    { id: 2, task: "Tiskaa", deadline: null },
-  ]);
+  const url = "http://localhost:8080/api/";
+  const [todos, setTodos] = useState([]);
 
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get(url + "/tasks");
+      setTodos(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const postTaskHandler = async (task) => {
+    try {
+      await axios.post(url, {
+        title: task.title,
+        description: task.description,
+        deadline: task.deadline,
+        folder: task.folder,
+      });
+      fetchTasks(); // Fetch tasks again after a successful post request
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const res = await axios.delete(url + id);
+    // 204 = ok no content
+    if (res.status !== 204) {
+      console.log("error while deleting");
+      console.log(res);
+    }
+    fetchTasks();
+  };
   const [navSize, setNavSize] = useState("0px");
   let smallScreen = useMediaQuery({ query: "(max-width: 900px)" });
   const CloseNav = () => {
@@ -33,9 +67,6 @@ const App = () => {
   };
   // deletes task by given id from state
   // TODO change this to delete from sql server
-  const handleDelete = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
 
   return (
     <BrowserRouter>
@@ -69,6 +100,7 @@ const App = () => {
               todos={todos}
               setTodos={setTodos}
               navSize={navSize}
+              postTaskHandler={postTaskHandler}
             />
           )}
         />

@@ -6,7 +6,6 @@ const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
   //date selected: {value === null ? "" : value.toString()}
   const [currInput, setCurrInput] = useState("");
   const [value, onChange] = useState(null);
-  const [taskContent] = useState("");
   // for redirecting
   let history = useHistory();
 

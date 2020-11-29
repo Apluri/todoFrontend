@@ -49,6 +49,11 @@ a:visited {
   justify-content: center;
   padding-top: 50px;
   width: 100%; // fills the rest of the container
+
+  // checkbox
+  .MuiCheckbox-root {
+    color: white;
+  }
   .todo-item {
     display: flex;
     min-width: 400px;

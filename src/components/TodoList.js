@@ -1,5 +1,15 @@
 import React from "react";
-const TodoList = ({ todos, handleDelete }) => {
+import { Checkbox } from "@material-ui/core";
+
+const TodoList = ({ todos, handleDelete, postTaskHandler }) => {
+  const handleChange = (event, task) => {
+    // post check
+    const editedTask = { ...task };
+    editedTask.isDone = !editedTask.isDone;
+    postTaskHandler(editedTask);
+    //setChecked(event.target.checked);
+  };
+
   let sqlDateToDateString = (d) => {
     let temp;
     d == null ? (temp = "") : (temp = new Date(d).toDateString());
@@ -13,6 +23,14 @@ const TodoList = ({ todos, handleDelete }) => {
         <div className="todo-item" key={todo.id}>
           <div> {todo.title} </div>
           <div> {sqlDateToDateString(todo.deadline)} </div>
+          <div>
+            <Checkbox
+              checked={Boolean(todo.isDone)}
+              onChange={(e) => handleChange(e, todo)}
+              color="default"
+              inputProps={{ "aria-label": "checkbox with default color" }}
+            />
+          </div>
           <div>
             <button onClick={() => handleDelete(todo.id)}>Delete</button>
           </div>

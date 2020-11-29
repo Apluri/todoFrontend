@@ -3,7 +3,7 @@ import React from "react";
 import TodoList from "./TodoList";
 import { useHistory } from "react-router-dom";
 
-const Home = ({ todos, handleDelete, closeNav, navSize }) => {
+const Home = ({ todos, handleDelete, closeNav, navSize, postTaskHandler }) => {
   let history = useHistory();
   let wrapperFunction = () => {
     closeNav();
@@ -12,7 +12,11 @@ const Home = ({ todos, handleDelete, closeNav, navSize }) => {
   return (
     <div className="content">
       <div className={navSize === "100%" ? "blur" : ""}>
-        <TodoList todos={todos} handleDelete={handleDelete} />
+        <TodoList
+          todos={todos}
+          handleDelete={handleDelete}
+          postTaskHandler={postTaskHandler}
+        />
       </div>
 
       <button

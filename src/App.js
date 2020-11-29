@@ -28,7 +28,6 @@ const App = () => {
 
   const fetchTasks = async () => {
     try {
-      console.log(url);
       const response = await axios.get(url + "/tasks");
       setTodos(response.data);
     } catch (e) {
@@ -38,11 +37,8 @@ const App = () => {
 
   const postTaskHandler = async (task) => {
     try {
-      await axios.post(url, {
-        title: task.title,
-        description: task.description,
-        deadline: task.deadline,
-        folder: task.folder,
+      await axios.post(url + "/tasks", {
+        ...task,
       });
       fetchTasks(); // Fetch tasks again after a successful post request
     } catch (e) {
@@ -51,7 +47,7 @@ const App = () => {
   };
 
   const handleDelete = async (id) => {
-    const res = await axios.delete(url + id);
+    const res = await axios.delete(url + "/tasks/" + id);
     // 204 = ok no content
     if (res.status !== 204) {
       console.log("error while deleting");
@@ -93,6 +89,7 @@ const App = () => {
               handleDelete={handleDelete}
               closeNav={CloseNav}
               navSize={navSize}
+              postTaskHandler={postTaskHandler}
             />
           )}
         />

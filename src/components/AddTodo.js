@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom";
 import Calendar from "react-calendar";
 
 const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
-  //date selected: {value === null ? "" : value.toString()}
   const [currInput, setCurrInput] = useState("");
+  const [dCurrInput, setDCurrInput] = useState(null);
   const [value, onChange] = useState(null);
   // for redirecting
   let history = useHistory();
@@ -30,31 +30,42 @@ const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
     // create new task and post it
     const newTodo = {
       title: currInput,
-      description: null, // add logic here
+      description: dCurrInput, // add logic here
       deadline: value === null ? null : tzoffset(value),
       folder: "Default", // add logic here
     };
     postTaskHandler(newTodo);
 
-    // set input to empty when submitting
+    // set input to empty when submitting -is this needed? works without
     setCurrInput("");
+    //setDCurrInput("");
 
     // redirect to homepage after submit
     history.push("/home");
   };
+
   return (
     <div className="content">
       <div className={navSize === "100%" ? "blur" : ""}>
         <div className="add-todo">
-          <h1> New task</h1>
           <form onSubmit={handleSubmit}>
             <input
-              type="test"
+              type="text"
               placeholder="Task title"
               value={currInput}
               onChange={(e) => setCurrInput(e.target.value)}
             />
             <button>Add</button>
+          </form>
+          <form onSubmit={handleSubmit}>
+            <div className="description-box">
+              <textarea
+                type="text"
+                placeholder="Task description (optional)"
+                value={dCurrInput}
+                onChange={(e) => setDCurrInput(e.target.value)}
+              />
+            </div>
           </form>
         </div>
         <div className="date-selection-show">
@@ -69,9 +80,3 @@ const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
 };
 
 export default AddTodo;
-//new Date(tzoffset(value))
-//value.toDateString()
-//value.getTimezoneOffset() / 60;
-//value.setHours(tzoffset(value)),value.toISOString().split("T")[0]
-//console.log(tzoffset(value)),
-//console.log(new Date(tzoffset(value)))

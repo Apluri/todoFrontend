@@ -19,12 +19,7 @@ const Home = ({ todos, handleDelete, closeNav, navSize, postTaskHandler }) => {
         />
       </div>
 
-      <button
-        className="add-btn"
-        style={{ backgroundColor: "red" }}
-        onClick={() => wrapperFunction()}
-        //onClick={() => history.push("/add")}
-      >
+      <button className="add-btn" onClick={() => wrapperFunction()}>
         Add task
       </button>
     </div>

@@ -15,6 +15,9 @@ const TitleComponent = () => {
     case "/settings":
       if (title !== "Settings") setTitle("Settings");
       break;
+    case "/add":
+      if (title !== "New task") setTitle("New task");
+      break;
     default:
       if (title !== "Default") setTitle("Default"); // this should not be shown
   }

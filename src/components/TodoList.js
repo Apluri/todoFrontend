@@ -10,10 +10,18 @@ const TodoList = ({ todos, handleDelete, postTaskHandler }) => {
     //setChecked(event.target.checked);
   };
 
+  // Function to convert the sql-date to preferred string with prefixed zeros
   let sqlDateToDateString = (d) => {
-    let temp;
-    d == null ? (temp = "") : (temp = new Date(d).toDateString());
-    return temp;
+    if (d !== null) {
+      let temp = new Date(d);
+      let dateFormat = `${("0" + temp.getDate()).slice(-2)} - ${(
+        "0" +
+        (temp.getMonth() + 1)
+      ).slice(-2)}`;
+      return dateFormat;
+    } else {
+      return "";
+    }
   };
 
   return (

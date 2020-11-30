@@ -83,10 +83,6 @@ a:visited {
   }
   .add-btn {
     position: fixed;
-    height: 100px;
-    width: 100px;
-    bottom: 10%;
-    right: 40%;
     z-index: 2;
   }
 }
@@ -130,17 +126,22 @@ a:visited {
   }
 }
 
-/*
-.right-sidebar {
-  display: flex;
-  flex: 15%;
-  position: absolute;
-  height: 100%;
-  width: 15%;
-  visibility: hidden;
-  background-color: red;
-}
-*/
 // for pc screen
 @media only screen and (min-width: 900px) {
+  .add-btn {
+    height: 100px;
+    width: 100px;
+    bottom: 10%;
+    right: 20%;
+  }
+}
+
+// for mobile screen
+@media only screen and (max-width: 900px) {
+  .add-btn {
+    height: 50px;
+    width: 50px;
+    top: 1%;
+    right: 1%;
+  }
 }

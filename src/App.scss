@@ -66,11 +66,19 @@ a:visited {
   }
   .todo-item > div:first-child {
     display: flex;
-    flex: 70%;
+    flex: 40%;
+  }
+  .todo-item > div:nth-child(2) {
+    display: flex;
+    flex: 15%;
+  }
+  .todo-item > div:nth-child(3) {
+    display: flex;
+    flex: 15%;
   }
   .todo-item > div:last-child {
     display: flex;
-    flex: 30%;
+    flex: 15%;
     justify-content: flex-end;
   }
   .add-btn {

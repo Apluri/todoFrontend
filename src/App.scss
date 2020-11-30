@@ -40,6 +40,11 @@ a:visited {
   z-index: 2;
 }
 
+.task-done {
+  color: red;
+  text-decoration: line-through;
+}
+
 // home section
 
 .content {

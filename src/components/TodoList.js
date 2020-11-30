@@ -21,7 +21,7 @@ const TodoList = ({ todos, handleDelete, postTaskHandler }) => {
       <h1 className="todo-items">Things to do:</h1>
       {todos.map((todo) => (
         <div className="todo-item" key={todo.id}>
-          <div> {todo.title} </div>
+          <div className={todo.isDone ? "task-done" : ""}> {todo.title} </div>
           <div> {sqlDateToDateString(todo.deadline)} </div>
           <div>
             <Checkbox

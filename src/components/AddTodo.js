@@ -1,14 +1,39 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Calendar from "react-calendar";
 
 const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
+  // title
   const [currInput, setCurrInput] = useState("");
+  // description
   const [dCurrInput, setDCurrInput] = useState(null);
+  // calendar
   const [value, onChange] = useState(null);
+  // dropdown
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
   const onClick = () => setIsActive(!isActive);
+  // handle clicks when clicked outside select folder
+  const closeFolder = useRef();
+  useEffect(() => {
+    // add when mounted
+    document.addEventListener("mousedown", handleClick);
+    // return function to be called when unmounted
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, []);
+  const handleClick = (e) => {
+    if (closeFolder.current.contains(e.target)) {
+      // inside click
+      return;
+    }
+    // outside click
+    if (isActive) {
+      setIsActive(!isActive);
+    }
+  };
+
   // for redirecting
   let history = useHistory();
 
@@ -23,6 +48,8 @@ const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
     v = v.toISOString().split("T")[0];
     return v;
   };
+
+  // function to close dropdownmenu on outside-clicks
 
   // here we could send task to sql server and then fetch tasks again
   // currently recreating todos state
@@ -71,7 +98,7 @@ const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
             </div>
           </form>
         </div>
-        <div className="dropdown-menu-container">
+        <div className="dropdown-menu-container" ref={closeFolder}>
           Folder selected:
           <br />
           <button onClick={onClick} className="folder-button-trigger">

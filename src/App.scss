@@ -9,7 +9,7 @@ body {
 }
 
 .blur > * {
-  filter: blur(9px);
+  filter: blur(9px) opacity(80%) brightness(50%);
 }
 
 h1 {
@@ -166,19 +166,16 @@ a:visited {
   transform: translateY(-20px);
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
 }
-
 .menu.active {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
-
 .menu ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
 .menu li {
   border-bottom: 1px solid #dddddd;
   text-decoration: none;

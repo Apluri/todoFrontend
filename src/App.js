@@ -15,7 +15,7 @@ import LeftNav from "./components/LeftNav";
 const App = () => {
   // simulates tasklist fetched from backend
   let url = "";
-  const useLocalHost = false; // change this to true if u want to use localHost, make sure to start your localhost server then
+  const useLocalHost = true; // change this to true if u want to use localHost, make sure to start your localhost server then
   useLocalHost
     ? (url = "http://localhost:8080/api/")
     : (url = "https://tamk-4a00ez62-3001-group04.herokuapp.com/api/");
@@ -37,9 +37,16 @@ const App = () => {
 
   const postTaskHandler = async (task) => {
     try {
-      await axios.post(url + "/tasks", {
-        ...task,
-      });
+      if (task.id !== undefined) {
+        await axios.post(url + `/tasks/${task.id}`, {
+          ...task,
+        });
+      } else {
+        await axios.post(url + "/tasks", {
+          ...task,
+        });
+      }
+
       fetchTasks(); // Fetch tasks again after a successful post request
     } catch (e) {
       console.log(e);

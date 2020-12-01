@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import Calendar from "react-calendar";
 
@@ -6,6 +6,9 @@ const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
   const [currInput, setCurrInput] = useState("");
   const [dCurrInput, setDCurrInput] = useState(null);
   const [value, onChange] = useState(null);
+  const dropdownRef = useRef(null);
+  const [isActive, setIsActive] = useState(false);
+  const onClick = () => setIsActive(!isActive);
   // for redirecting
   let history = useHistory();
 
@@ -68,8 +71,26 @@ const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
             </div>
           </form>
         </div>
+        <div className="dropdown-menu-container">
+          Folder selected:
+          <br />
+          <button onClick={onClick} className="folder-button-trigger">
+            Select folder
+          </button>
+          <div className="folders">
+            <nav
+              ref={dropdownRef}
+              className={`menu ${isActive ? "active" : "inactive"}`}
+            >
+              <ul>
+                <li>Create folder</li>
+                <li>example</li>
+              </ul>
+            </nav>
+          </div>
+        </div>
         <div className="date-selection-show">
-          date selected: {value === null ? "nothing" : value.toDateString()}
+          Date selected: {value === null ? "nothing" : value.toDateString()}
         </div>
         <div className="calendar-container">
           <Calendar value={null} locale={"en-EN"} onChange={onChange} />

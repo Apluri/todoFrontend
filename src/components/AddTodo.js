@@ -110,7 +110,10 @@ const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
               className={`menu ${isActive ? "active" : "inactive"}`}
             >
               <ul>
-                <li>Create folder</li>
+                <li>
+                  Create Folder
+                  <input type="text" placeholder="Folder title"></input>
+                </li>
                 <li>example</li>
               </ul>
             </nav>

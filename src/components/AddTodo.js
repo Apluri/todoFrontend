@@ -9,7 +9,7 @@ const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
   // description
   const [dCurrInput, setDCurrInput] = useState("");
   // folder
-  const [taskFolderId, setTaskFolderId] = useState(1);
+  const [taskFolderId, setTaskFolderId] = useState(null);
   const [folderCurrInput, setFolderCurrInput] = useState("");
   // calendar
   const [value, onChange] = useState(null);
@@ -36,8 +36,11 @@ const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
     };
   }, [isActive]);
 
-  // wrapper function for closing dropdown and creating a folder when adding a folder
-  const addFolderWrapper = () => {
+  // wrapper function for closing dropdown
+  // creating a folder or selecting existing
+  const addFolderWrapper = (id) => {
+    isNaN(id) ? console.log("create new folder") : setTaskFolderId(id);
+    console.log("in:" + folderCurrInput + " id:" + id);
     setIsActive(false);
   };
 
@@ -132,6 +135,13 @@ const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
                 <button onClick={addFolderWrapper}>Add</button>
               </li>
               <div>
+                {folders.map((folder) => (
+                  <li key={folder.id}>
+                    <button onClick={() => addFolderWrapper(folder.id)}>
+                      {folder.name}
+                    </button>
+                  </li>
+                ))}
                 <FolderList folders={folders} />
               </div>
             </ul>

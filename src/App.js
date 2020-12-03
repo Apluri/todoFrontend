@@ -15,7 +15,7 @@ import LeftNav from "./components/LeftNav";
 const App = () => {
   // simulates tasklist fetched from backend
   let url = "";
-  const useLocalHost = true; // change this to true if u want to use localHost, make sure to start your localhost server then
+  const useLocalHost = false; // change this to true if u want to use localHost, make sure to start your localhost server then
   useLocalHost
     ? (url = "http://localhost:8080/api/")
     : (url = "https://tamk-4a00ez62-3001-group04.herokuapp.com/api/");

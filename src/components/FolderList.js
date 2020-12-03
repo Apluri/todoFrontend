@@ -23,7 +23,7 @@ const FolderList = () => {
     <div className="folders-list">
       {folders.map((folder) => (
         <div className="folder" key={folder.id}>
-          <div className="folder-list-item">{folder.name}</div>
+          <li className="folder-list-item">{folder.name}</li>
         </div>
       ))}
     </div>

@@ -1,5 +1,5 @@
 // useState to replace need for props usage
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom"; // import { Link } from "react-router-dom";
 
 const LeftNav = ({ navSize, handleNavSizeChange }) => {
@@ -7,11 +7,7 @@ const LeftNav = ({ navSize, handleNavSizeChange }) => {
     <div>
       <div className="left-sidebar" style={{ width: navSize }}>
         <nav className="navbar">
-          <NavLink
-            to={"/home"}
-            className="navlink-home"
-            activeClassName={"active"}
-          >
+          <NavLink to={"/"} className="navlink-home" activeClassName={"active"}>
             Home
           </NavLink>
           <NavLink

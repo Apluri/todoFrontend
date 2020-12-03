@@ -1,6 +1,6 @@
 import "./App.scss";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import axios from "axios";
 
@@ -11,6 +11,7 @@ import Folders from "./components/Folders";
 import Settings from "./components/Settings";
 import AddTodo from "./components/AddTodo";
 import LeftNav from "./components/LeftNav";
+import Layout from "./components/Layout";
 
 const App = () => {
   // simulates tasklist fetched from backend
@@ -101,19 +102,12 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Header handleNavSizeChange={HandleNavSizeChange} />
+      <Header />
       <LeftNav navSize={navSize} handleNavSizeChange={HandleNavSizeChange} />
-
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-
-        <Route
-          path="/home"
-          render={(props) => (
+      <Layout navSize={navSize}>
+        <Switch>
+          <Route exact path="/">
             <Home
-              {...props}
               todos={todos}
               folders={folders}
               handleDelete={handleDelete}
@@ -121,14 +115,10 @@ const App = () => {
               navSize={navSize}
               postTaskHandler={postTaskHandler}
             />
-          )}
-        />
+          </Route>
 
-        <Route
-          path="/folders"
-          render={(props) => (
+          <Route path="/folders">
             <Folders
-              {...props}
               todos={todos}
               folders={folders}
               handleDelete={handleDelete}
@@ -136,24 +126,21 @@ const App = () => {
               navSize={navSize}
               postTaskHandler={postTaskHandler}
             />
-          )}
-        />
-
-        <Route path={"/settings"} component={Settings} />
-        <Route
-          path="/add"
-          render={(props) => (
+          </Route>
+          <Route path="/settings">
+            <Settings />
+          </Route>
+          <Route path="/add">
             <AddTodo
-              {...props}
               todos={todos}
               folders={folders}
               setTodos={setTodos}
               navSize={navSize}
               postTaskHandler={postTaskHandler}
             />
-          )}
-        />
-      </Switch>
+          </Route>
+        </Switch>
+      </Layout>
     </BrowserRouter>
   );
 };

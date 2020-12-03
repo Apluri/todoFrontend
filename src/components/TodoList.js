@@ -45,7 +45,7 @@ const TodoList = ({
   };
   */
   return (
-    <div>
+    <>
       <h1 className="todo-items">Things to do:</h1>
       {todos.map(
         (todo) =>
@@ -67,7 +67,7 @@ const TodoList = ({
             </div>
           )
       )}
-    </div>
+    </>
   );
 };
 

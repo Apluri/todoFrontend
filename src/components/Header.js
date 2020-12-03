@@ -2,10 +2,7 @@
 import React from "react";
 import TitleComponent from "./TitleComponent";
 
-// Navlink vs Link = NavLink enables the usage of activeClassName
-// activeClassname for dynamic css styling
-
-const Header = ({ handleNavSizeChange }) => {
+const Header = () => {
   return (
     <div className="header">
       <TitleComponent />

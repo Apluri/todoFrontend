@@ -3,7 +3,14 @@ import { useHistory } from "react-router-dom";
 import Calendar from "react-calendar";
 import FolderList from "./FolderList";
 
-const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
+const AddTodo = ({
+  todos,
+  setTodos,
+  folders,
+  navSize,
+  postTaskHandler,
+  postFolderHandler,
+}) => {
   // title
   const [currInput, setCurrInput] = useState("");
   // description
@@ -39,8 +46,7 @@ const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
   // wrapper function for closing dropdown
   // creating a folder or selecting existing
   const addFolderWrapper = (id) => {
-    isNaN(id) ? console.log("create new folder") : setTaskFolderId(id);
-    console.log("in:" + folderCurrInput + " id:" + id);
+    isNaN(id) ? submitFolder() : setTaskFolderId(id);
     setIsActive(false);
   };
 
@@ -84,6 +90,13 @@ const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
     history.push("/");
   };
 
+  // handles folder creation & post
+  const submitFolder = () => {
+    const newFolder = {
+      name: folderCurrInput,
+    };
+    postFolderHandler(newFolder);
+  };
   return (
     <>
       <div className="add-todo">

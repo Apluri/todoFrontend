@@ -68,7 +68,7 @@ const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
       title: currInput,
       description: dCurrInput, // add logic here
       deadline: value === null ? null : tzoffset(value),
-      folder: "Default", // add logic here
+      folder_id: 1,
     };
     postTaskHandler(newTodo);
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Checkbox } from "@material-ui/core";
 
-const TodoList = ({ todos, handleDelete, postTaskHandler }) => {
+const TodoList = ({ todos, folders, handleDelete, postTaskHandler }) => {
   const handleChange = (event, task) => {
     // post check
     const editedTask = { ...task };
@@ -30,6 +30,12 @@ const TodoList = ({ todos, handleDelete, postTaskHandler }) => {
       {todos.map((todo) => (
         <div className="todo-item" key={todo.id}>
           <div className={todo.isDone ? "task-done" : ""}> {todo.title} </div>
+          <div>
+            {folders[0] !== undefined
+              ? folders[folders.map((item) => item.id).indexOf(todo.folder_id)]
+                  .name
+              : "still loading stuff"}
+          </div>
           <div> {sqlDateToDateString(todo.deadline)} </div>
           <div>
             <Checkbox

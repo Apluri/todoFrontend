@@ -3,7 +3,14 @@ import React from "react";
 import TodoList from "./TodoList";
 import { useHistory } from "react-router-dom";
 
-const Home = ({ todos, handleDelete, closeNav, navSize, postTaskHandler }) => {
+const Home = ({
+  todos,
+  folders,
+  handleDelete,
+  closeNav,
+  navSize,
+  postTaskHandler,
+}) => {
   let history = useHistory();
   let wrapperFunction = () => {
     closeNav();
@@ -14,6 +21,7 @@ const Home = ({ todos, handleDelete, closeNav, navSize, postTaskHandler }) => {
       <div className={navSize === "100%" ? "blur" : ""}>
         <TodoList
           todos={todos}
+          folders={folders}
           handleDelete={handleDelete}
           postTaskHandler={postTaskHandler}
         />

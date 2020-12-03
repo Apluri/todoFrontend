@@ -76,6 +76,16 @@ const App = () => {
     }
   };
 
+  const postFolderHandler = async (folder) => {
+    try {
+      await axios.post(url + `/folders`, { ...folder });
+      fetchFolders();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const handleFolderDelete = async (id) => {};
+
   const handleDelete = async (id) => {
     const res = await axios.delete(url + "/tasks/" + id);
     // 204 = ok no content
@@ -137,6 +147,7 @@ const App = () => {
               setTodos={setTodos}
               navSize={navSize}
               postTaskHandler={postTaskHandler}
+              postFolderHandler={postFolderHandler}
             />
           </Route>
         </Switch>

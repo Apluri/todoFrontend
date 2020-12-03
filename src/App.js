@@ -15,6 +15,7 @@ import LeftNav from "./components/LeftNav";
 const App = () => {
   // simulates tasklist fetched from backend
   let url = "";
+  const [loadingDone, setLoadinDone] = useState(false);
   const useLocalHost = false; // change this to true if u want to use localHost, make sure to start your localhost server then
   useLocalHost
     ? (url = "http://localhost:8080/api")
@@ -33,6 +34,8 @@ const App = () => {
       setTodos(response.data);
       response = await axios.get(url + "/folders");
       setFolders(response.data);
+      // set this as last to indicate loading is done
+      setLoadinDone(true);
     } catch (e) {
       console.log(e);
     }
@@ -85,40 +88,61 @@ const App = () => {
       <Header handleNavSizeChange={HandleNavSizeChange} />
       <LeftNav navSize={navSize} handleNavSizeChange={HandleNavSizeChange} />
 
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
+      {loadingDone ? (
+        <Switch>
+          <Route exact path="/">
+            <Redirect to="/home" />
+          </Route>
 
-        <Route
-          path="/home"
-          render={(props) => (
-            <Home
-              {...props}
-              todos={todos}
-              folders={folders}
-              handleDelete={handleDelete}
-              closeNav={CloseNav}
-              navSize={navSize}
-              postTaskHandler={postTaskHandler}
-            />
-          )}
-        />
-        <Route path={"/folders"} component={Folders} />
-        <Route path={"/settings"} component={Settings} />
-        <Route
-          path="/add"
-          render={(props) => (
-            <AddTodo
-              {...props}
-              todos={todos}
-              setTodos={setTodos}
-              navSize={navSize}
-              postTaskHandler={postTaskHandler}
-            />
-          )}
-        />
-      </Switch>
+          <Route
+            path="/home"
+            render={(props) => (
+              <Home
+                {...props}
+                todos={todos}
+                folders={folders}
+                handleDelete={handleDelete}
+                closeNav={CloseNav}
+                navSize={navSize}
+                postTaskHandler={postTaskHandler}
+              />
+            )}
+          />
+
+          <Route
+            path="/folders"
+            render={(props) => (
+              <Folders
+                {...props}
+                todos={todos}
+                folders={folders}
+                handleDelete={handleDelete}
+                closeNav={CloseNav}
+                navSize={navSize}
+                postTaskHandler={postTaskHandler}
+              />
+            )}
+          />
+
+          <Route path={"/settings"} component={Settings} />
+          <Route
+            path="/add"
+            render={(props) => (
+              <AddTodo
+                {...props}
+                todos={todos}
+                setTodos={setTodos}
+                navSize={navSize}
+                postTaskHandler={postTaskHandler}
+              />
+            )}
+          />
+        </Switch>
+      ) : (
+        <div className="loading">
+          <h1> loading...</h1>
+        </div>
+      )}
     </BrowserRouter>
   );
 };

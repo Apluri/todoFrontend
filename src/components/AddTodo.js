@@ -9,7 +9,7 @@ const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
   // description
   const [dCurrInput, setDCurrInput] = useState(null);
   // folder
-  const [taskFolderId, setTaskFolderId] = useState(null);
+  const [taskFolderId, setTaskFolderId] = useState(1);
   const [folderCurrInput, setFolderCurrInput] = useState(null);
   // calendar
   const [value, onChange] = useState(null);

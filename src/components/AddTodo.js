@@ -9,7 +9,8 @@ const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
   // description
   const [dCurrInput, setDCurrInput] = useState(null);
   // folder
-  // ---
+  const [taskFolderId, setTaskFolderId] = useState(null);
+  const [folderCurrInput, setFolderCurrInput] = useState(null);
   // calendar
   const [value, onChange] = useState(null);
   // dropdown
@@ -68,7 +69,7 @@ const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
       title: currInput,
       description: dCurrInput, // add logic here
       deadline: value === null ? null : tzoffset(value),
-      folder_id: 1,
+      folder_id: taskFolderId,
     };
     postTaskHandler(newTodo);
 
@@ -121,12 +122,19 @@ const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
               <ul>
                 <li>
                   Create Folder
-                  <input type="text" placeholder="Folder title"></input>
+                  <form onSubmit={handleSubmit}>
+                    <input
+                      type="text"
+                      placeholder="Folder title"
+                      value={folderCurrInput}
+                      onChange={(e) => setFolderCurrInput(e.target.value)}
+                    ></input>
+                  </form>
                   <button onClick={addFolderWrapper}>Add</button>
                 </li>
                 <div>
                   <FolderList folders={folders} />
-                </div>{" "}
+                </div>
               </ul>
             </nav>
           </div>

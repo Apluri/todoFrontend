@@ -1,18 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Calendar from "react-calendar";
+import FolderList from "./FolderList";
 
-const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
+const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
   // title
   const [currInput, setCurrInput] = useState("");
   // description
   const [dCurrInput, setDCurrInput] = useState(null);
+  // folder
+  // ---
   // calendar
   const [value, onChange] = useState(null);
   // dropdown
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
-  const onClick = () => setIsActive(!isActive);
+
   // handle clicks when clicked outside select folder
   const closeFolder = useRef();
   useEffect(() => {
@@ -22,16 +25,19 @@ const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
     return () => {
       document.removeEventListener("mousedown", handleClick);
     };
-  }, []);
+  }, [isActive]);
   const handleClick = (e) => {
-    if (closeFolder.current.contains(e.target)) {
-      // inside click
-      return;
-    }
     // outside click
-    if (isActive) {
-      setIsActive(!isActive);
+    if (!closeFolder.current.contains(e.target)) {
+      if (isActive) {
+        setIsActive(!isActive);
+      }
     }
+  };
+
+  // wrapper function for closing dropdown and creating a folder when adding a folder
+  const addFolderWrapper = () => {
+    setIsActive(false);
   };
 
   // for redirecting
@@ -101,7 +107,10 @@ const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
         <div className="dropdown-menu-container" ref={closeFolder}>
           Folder selected:
           <br />
-          <button onClick={onClick} className="folder-button-trigger">
+          <button
+            onClick={() => setIsActive(!isActive)}
+            className="folder-button-trigger"
+          >
             Select folder
           </button>
           <div className="folders">
@@ -113,8 +122,11 @@ const AddTodo = ({ todos, setTodos, navSize, postTaskHandler }) => {
                 <li>
                   Create Folder
                   <input type="text" placeholder="Folder title"></input>
+                  <button onClick={addFolderWrapper}>Add</button>
                 </li>
-                <li>example</li>
+                <div>
+                  <FolderList folders={folders} />
+                </div>{" "}
               </ul>
             </nav>
           </div>

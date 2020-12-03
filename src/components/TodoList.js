@@ -38,35 +38,34 @@ const TodoList = ({
     }
   };
 
+  /*
+  const renderFolder = (id) => {
+    if (folders.length === 0) return null;
+    return folders[folders.map((item) => item.id).indexOf(id)].name;
+  };
+  */
   return (
     <div>
       <h1 className="todo-items">Things to do:</h1>
-      {todos.map((todo) =>
-        checkIfPrint(todo.folder_id) ? (
-          <div className="todo-item" key={todo.id}>
-            <div className={todo.isDone ? "task-done" : ""}> {todo.title} </div>
-            <div>
-              {
-                folders[folders.map((item) => item.id).indexOf(todo.folder_id)]
-                  .name
-              }
+      {todos.map(
+        (todo) =>
+          checkIfPrint(todo.folder_id) && (
+            <div className="todo-item" key={todo.id}>
+              <div className={todo.isDone ? "task-done" : ""}>{todo.title}</div>
+              <div> {sqlDateToDateString(todo.deadline)} </div>
+              <div>
+                <Checkbox
+                  checked={Boolean(todo.isDone)}
+                  onChange={(e) => handleChange(e, todo)}
+                  color="default"
+                  inputProps={{ "aria-label": "checkbox with default color" }}
+                />
+              </div>
+              <div>
+                <button onClick={() => handleDelete(todo.id)}>Delete</button>
+              </div>
             </div>
-            <div> {sqlDateToDateString(todo.deadline)} </div>
-            <div>
-              <Checkbox
-                checked={Boolean(todo.isDone)}
-                onChange={(e) => handleChange(e, todo)}
-                color="default"
-                inputProps={{ "aria-label": "checkbox with default color" }}
-              />
-            </div>
-            <div>
-              <button onClick={() => handleDelete(todo.id)}>Delete</button>
-            </div>
-          </div>
-        ) : (
-          <></>
-        )
+          )
       )}
     </div>
   );

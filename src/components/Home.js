@@ -20,6 +20,7 @@ const Home = ({
     <div className="content">
       <div className={navSize === "100%" ? "blur" : ""}>
         <TodoList
+          selectFolder={null}
           todos={todos}
           folders={folders}
           handleDelete={handleDelete}

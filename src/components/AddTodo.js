@@ -7,10 +7,10 @@ const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
   // title
   const [currInput, setCurrInput] = useState("");
   // description
-  const [dCurrInput, setDCurrInput] = useState(null);
+  const [dCurrInput, setDCurrInput] = useState("");
   // folder
   const [taskFolderId, setTaskFolderId] = useState(1);
-  const [folderCurrInput, setFolderCurrInput] = useState(null);
+  const [folderCurrInput, setFolderCurrInput] = useState("");
   // calendar
   const [value, onChange] = useState(null);
   // dropdown
@@ -20,6 +20,14 @@ const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
   // handle clicks when clicked outside select folder
   const closeFolder = useRef();
   useEffect(() => {
+    const handleClick = (e) => {
+      // outside click
+      if (!closeFolder.current.contains(e.target)) {
+        if (isActive) {
+          setIsActive(!isActive);
+        }
+      }
+    };
     // add when mounted
     document.addEventListener("mousedown", handleClick);
     // return function to be called when unmounted
@@ -27,14 +35,6 @@ const AddTodo = ({ todos, setTodos, folders, navSize, postTaskHandler }) => {
       document.removeEventListener("mousedown", handleClick);
     };
   }, [isActive]);
-  const handleClick = (e) => {
-    // outside click
-    if (!closeFolder.current.contains(e.target)) {
-      if (isActive) {
-        setIsActive(!isActive);
-      }
-    }
-  };
 
   // wrapper function for closing dropdown and creating a folder when adding a folder
   const addFolderWrapper = () => {

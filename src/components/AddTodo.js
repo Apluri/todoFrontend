@@ -18,6 +18,8 @@ const AddTodo = ({
   // folder
   const [taskFolderId, setTaskFolderId] = useState(null);
   const [folderCurrInput, setFolderCurrInput] = useState("");
+  // for showing currently selected folder
+  const [folderNamePrint, setFolderNamePrint] = useState("");
   // calendar
   const [value, onChange] = useState(null);
   // dropdown
@@ -45,8 +47,9 @@ const AddTodo = ({
 
   // wrapper function for closing dropdown
   // creating a folder or selecting existing
-  const addFolderWrapper = (id) => {
-    isNaN(id) ? submitFolder() : setTaskFolderId(id);
+  const addFolderWrapper = (folder) => {
+    isNaN(folder.id) ? submitFolder() : setTaskFolderId(folder.id);
+    setFolderNamePrint(folder.name);
     setIsActive(false);
   };
 
@@ -121,7 +124,7 @@ const AddTodo = ({
         </form>
       </div>
       <div className="dropdown-menu-container" ref={closeFolder}>
-        Folder selected:
+        Folder selected: {folderNamePrint}
         <br />
         <button
           onClick={() => setIsActive(!isActive)}
@@ -150,7 +153,7 @@ const AddTodo = ({
               <div>
                 {folders.map((folder) => (
                   <li key={folder.id}>
-                    <button onClick={() => addFolderWrapper(folder.id)}>
+                    <button onClick={() => addFolderWrapper(folder)}>
                       {folder.name}
                     </button>
                   </li>

@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Calendar from "react-calendar";
-import FolderList from "./FolderList";
 
 const AddTodo = ({
   todos,
@@ -158,7 +157,6 @@ const AddTodo = ({
                     </button>
                   </li>
                 ))}
-                <FolderList folders={folders} />
               </div>
             </ul>
           </nav>

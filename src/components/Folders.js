@@ -1,15 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import TodoList from "./TodoList";
 
 const Folders = ({ todos, folders, handleDelete, postTaskHandler }) => {
   const [selectedFolder, setSelectedFolder] = useState(null);
+  //dropdown
+  const dropdownRef = useRef(null);
+  const [folderListActive, setFolderListActive] = useState(false);
+  // handle outside clicks
+  const closeFolderList = useRef();
+  useEffect(() => {
+    const handleClick = (e) => {
+      // outside click
+      if (!closeFolderList.current.contains(e.target)) {
+        if (folderListActive) {
+          setFolderListActive(!folderListActive);
+        }
+      }
+    };
+    // add when mounted
+    document.addEventListener("mousedown", handleClick);
+    // return function to be called when unmounted
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, [folderListActive]);
+
   return (
     <>
-      {folders.map((folder) => (
-        <button key={folder.id} onClick={() => setSelectedFolder(folder.id)}>
-          {folder.name}
+      <div className="dropdown-menu-container" ref={closeFolderList}>
+        Folder selected: "Null"
+        <br />
+        <button
+          onClick={() => setFolderListActive(!folderListActive)}
+          className="folder-button-trigger"
+        >
+          Select folder
         </button>
-      ))}
+        <div className="folders">
+          <nav
+            ref={dropdownRef}
+            className={`menu ${folderListActive ? "active" : "inactive"}`}
+          >
+            <ul>
+              <div>
+                {folders.map((folder) => (
+                  <li key={folder.id}>
+                    <button onClick={() => setSelectedFolder(folder.id)}>
+                      {folder.name}
+                    </button>
+                  </li>
+                ))}
+              </div>
+            </ul>
+          </nav>
+        </div>
+      </div>
       <TodoList
         selectFolder={selectedFolder}
         todos={todos}

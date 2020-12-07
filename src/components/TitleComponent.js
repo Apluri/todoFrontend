@@ -13,7 +13,7 @@ const TitleComponent = () => {
       case "/settings":
         return "Settings";
       case "/add":
-        return "Add folder";
+        return "Add task";
       default:
         return "Something went wrong :)";
     }

@@ -12,6 +12,7 @@ import Settings from "./components/Settings";
 import AddTodo from "./components/AddTodo";
 import LeftNav from "./components/LeftNav";
 import Layout from "./components/Layout";
+import TaskView from "./components/TaskView";
 
 const App = () => {
   // simulates tasklist fetched from backend

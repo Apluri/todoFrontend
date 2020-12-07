@@ -14,6 +14,8 @@ const TitleComponent = () => {
         return "Settings";
       case "/add":
         return "Add task";
+      case "/task":
+        return "Task description";
       default:
         return "Something went wrong :)";
     }

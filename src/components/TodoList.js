@@ -1,5 +1,6 @@
 import React from "react";
 import { Checkbox } from "@material-ui/core";
+import TaskView from "./TaskView";
 
 const TodoList = ({
   selectFolder,
@@ -52,7 +53,12 @@ const TodoList = ({
           checkIfPrint(todo.folder_id) && (
             <div className="todo-item" key={todo.id}>
               <div className={todo.isDone ? "task-done" : ""}>
-                <button className="todo-title-button">{todo.title}</button>
+                <button
+                  className="todo-title-button"
+                  onClick={() => console.log(todo.description)}
+                >
+                  {todo.title}
+                </button>
               </div>
               <div> {sqlDateToDateString(todo.deadline)} </div>
               <div>

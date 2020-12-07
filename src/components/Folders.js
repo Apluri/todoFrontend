@@ -45,7 +45,10 @@ const Folders = ({ todos, folders, handleDelete, postTaskHandler }) => {
               <div>
                 {folders.map((folder) => (
                   <li key={folder.id}>
-                    <button onClick={() => setSelectedFolder(folder.id)}>
+                    <button
+                      className="folders-btn"
+                      onClick={() => setSelectedFolder(folder.id)}
+                    >
                       {folder.name}
                     </button>
                   </li>

@@ -196,3 +196,20 @@ a:visited {
 .folder-list-item {
   color: black;
 }
+
+// all button stylings (some look better just as text and some are replaced with images like burger, add etc..
+.add-btn {
+  padding: 0;
+  border: none;
+  background: none;
+}
+.burger-btn {
+  padding: 0;
+  border: none;
+  background: none;
+}
+.folders-btn {
+  padding: 0;
+  border: none;
+  background: none;
+}

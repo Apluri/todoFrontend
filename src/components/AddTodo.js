@@ -152,7 +152,10 @@ const AddTodo = ({
               <div>
                 {folders.map((folder) => (
                   <li key={folder.id}>
-                    <button onClick={() => addFolderWrapper(folder)}>
+                    <button
+                      className="folders-btn"
+                      onClick={() => addFolderWrapper(folder)}
+                    >
                       {folder.name}
                     </button>
                   </li>

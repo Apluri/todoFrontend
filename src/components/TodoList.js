@@ -51,7 +51,9 @@ const TodoList = ({
         (todo) =>
           checkIfPrint(todo.folder_id) && (
             <div className="todo-item" key={todo.id}>
-              <div className={todo.isDone ? "task-done" : ""}>{todo.title}</div>
+              <div className={todo.isDone ? "task-done" : ""}>
+                <button className="todo-title-button">{todo.title}</button>
+              </div>
               <div> {sqlDateToDateString(todo.deadline)} </div>
               <div>
                 <Checkbox

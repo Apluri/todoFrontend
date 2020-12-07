@@ -213,3 +213,16 @@ a:visited {
   border: none;
   background: none;
 }
+.todo-title-button {
+  padding: 0;
+  border: none;
+  background: none;
+  color: white;
+}
+.task-done {
+  color: red;
+  text-decoration: line-through;
+  .todo-title-button {
+    color: red;
+  }
+}

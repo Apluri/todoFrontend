@@ -24,6 +24,10 @@ const App = () => {
 
   const [todos, setTodos] = useState([]);
   const [folders, setFolders] = useState([]);
+  const [selectedTask, setSelectedTask] = useState(null);
+  const taskSelection = (todo) => {
+    setSelectedTask(todo);
+  };
 
   useEffect(() => {
     fetchData();
@@ -108,6 +112,7 @@ const App = () => {
               closeNav={CloseNav}
               navSize={navSize}
               postTaskHandler={postTaskHandler}
+              taskSelection={taskSelection}
             />
           </Route>
 
@@ -135,7 +140,7 @@ const App = () => {
             />
           </Route>
           <Route path="/task">
-            <TaskView />
+            <TaskView folders={folders} selectedTask={selectedTask} />
           </Route>
         </Switch>
       </Layout>

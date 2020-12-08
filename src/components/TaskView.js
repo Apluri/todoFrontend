@@ -1,26 +1,44 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 const TaskView = ({ folders, selectedTask }) => {
-  console.log(selectedTask);
-  console.log(folders);
-  const checkIfNull = () => {
-    return selectedTask === null ? "" : selectedTask;
+  const history = useHistory();
+  const redirect = () => {
+    history.push("/");
   };
-  return (
+  const checkIfNull = (argument) => {
+    return argument === null ? true : false;
+  };
+  let sqlDateToDateString = (d) => {
+    if (d !== null) {
+      let temp = new Date(d);
+      let dateFormat = `${("0" + temp.getDate()).slice(-2)} - ${(
+        "0" +
+        (temp.getMonth() + 1)
+      ).slice(-2)}`;
+      return dateFormat;
+    } else {
+      return "";
+    }
+  };
+
+  return checkIfNull(selectedTask) ? (
+    <> {redirect()}</>
+  ) : (
     <>
-      <h2>{checkIfNull().title}</h2>
+      <h2>{selectedTask.title}</h2>
       <form>
         <div className="description-box">
-          <textarea type="text" value={checkIfNull().description} />
+          <textarea type="text" value={selectedTask.description} />
         </div>
       </form>
       <button>save</button>
       <br />
       <>
         Task deadline:{" "}
-        {checkIfNull().deadline === null
+        {checkIfNull(selectedTask.deadline)
           ? "No date selected"
-          : checkIfNull().deadline}
+          : sqlDateToDateString(selectedTask.deadline)}
       </>
       <button>edit</button>
     </>

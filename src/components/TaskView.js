@@ -29,7 +29,17 @@ const TaskView = ({ folders, selectedTask }) => {
       <h2>{selectedTask.title}</h2>
       <form>
         <div className="description-box">
-          <textarea type="text" value={selectedTask.description} />
+          <textarea
+            type="text"
+            placeholder={
+              checkIfNull(selectedTask.description) ? "enter description" : ""
+            }
+            value={
+              checkIfNull(selectedTask.description)
+                ? ""
+                : selectedTask.description
+            }
+          />
         </div>
       </form>
       <button>save</button>

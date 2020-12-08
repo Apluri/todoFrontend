@@ -13,7 +13,7 @@ const AddTodo = ({
   // title
   const [currInput, setCurrInput] = useState("");
   // description
-  const [dCurrInput, setDCurrInput] = useState("");
+  const [dCurrInput, setDCurrInput] = useState(null);
   // folder
   const [taskFolderId, setTaskFolderId] = useState(null);
   const [folderCurrInput, setFolderCurrInput] = useState("");

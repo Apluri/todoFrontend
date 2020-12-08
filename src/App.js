@@ -134,6 +134,9 @@ const App = () => {
               postFolderHandler={postFolderHandler}
             />
           </Route>
+          <Route path="/task">
+            <TaskView />
+          </Route>
         </Switch>
       </Layout>
     </BrowserRouter>

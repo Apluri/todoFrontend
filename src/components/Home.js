@@ -3,7 +3,14 @@ import React from "react";
 import TodoList from "./TodoList";
 import { useHistory } from "react-router-dom";
 
-const Home = ({ todos, folders, handleDelete, closeNav, postTaskHandler }) => {
+const Home = ({
+  todos,
+  folders,
+  handleDelete,
+  closeNav,
+  postTaskHandler,
+  taskSelection,
+}) => {
   let history = useHistory();
   let wrapperFunction = () => {
     closeNav();
@@ -17,6 +24,7 @@ const Home = ({ todos, folders, handleDelete, closeNav, postTaskHandler }) => {
         folders={folders}
         handleDelete={handleDelete}
         postTaskHandler={postTaskHandler}
+        taskSelection={taskSelection}
       />
 
       <button className="add-btn" onClick={() => wrapperFunction()}>

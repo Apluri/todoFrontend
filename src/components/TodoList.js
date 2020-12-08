@@ -1,6 +1,7 @@
 import React from "react";
 import { Checkbox } from "@material-ui/core";
 import TaskView from "./TaskView";
+import { useHistory } from "react-router-dom";
 
 const TodoList = ({
   selectedFolder,
@@ -9,6 +10,11 @@ const TodoList = ({
   handleDelete,
   postTaskHandler,
 }) => {
+  // for redirecting into taskview.js
+  let history = useHistory();
+  let wrapperFunction = () => {
+    history.push("/task");
+  };
   // pass value here to print spesific folder
   const checkIfPrint = (id) => {
     return selectedFolder === null || selectedFolder === undefined
@@ -55,7 +61,7 @@ const TodoList = ({
               <div className={todo.isDone ? "task-done" : ""}>
                 <button
                   className="todo-title-button"
-                  onClick={() => console.log(todo.description)}
+                  onClick={() => wrapperFunction()}
                 >
                   {todo.title}
                 </button>

@@ -143,6 +143,7 @@ a:visited {
     width: 100px;
     bottom: 10%;
     right: 20%;
+    color: black;
   }
 }
 
@@ -153,6 +154,10 @@ a:visited {
     width: 40px;
     top: 5px;
     right: 5px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: white;
   }
 }
 
@@ -199,14 +204,12 @@ a:visited {
 
 // all button stylings (some look better just as text and some are replaced with images like burger, add etc..
 .add-btn {
-  padding: 0;
-  border: none;
-  background: none;
 }
 .burger-btn {
   padding: 0;
   border: none;
   background: none;
+  color: white;
 }
 .folders-btn {
   padding: 0;

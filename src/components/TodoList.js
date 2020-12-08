@@ -3,7 +3,7 @@ import { Checkbox } from "@material-ui/core";
 import TaskView from "./TaskView";
 
 const TodoList = ({
-  selectFolder,
+  selectedFolder,
   todos,
   folders,
   handleDelete,
@@ -11,9 +11,9 @@ const TodoList = ({
 }) => {
   // pass value here to print spesific folder
   const checkIfPrint = (id) => {
-    return selectFolder === null || selectFolder === undefined
+    return selectedFolder === null || selectedFolder === undefined
       ? true
-      : selectFolder === id
+      : selectedFolder.id === id
       ? true
       : false;
   };

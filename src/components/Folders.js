@@ -28,7 +28,10 @@ const Folders = ({ todos, folders, handleDelete, postTaskHandler }) => {
   return (
     <>
       <div className="dropdown-menu-container" ref={closeFolderList}>
-        Folder selected: "Null"
+        Folder selected:
+        {selectedFolder !== null
+          ? ` ${selectedFolder.name}`
+          : " No folder selected"}
         <br />
         <button
           onClick={() => setFolderListActive(!folderListActive)}
@@ -42,24 +45,22 @@ const Folders = ({ todos, folders, handleDelete, postTaskHandler }) => {
             className={`menu ${folderListActive ? "active" : "inactive"}`}
           >
             <ul>
-              <div>
-                {folders.map((folder) => (
-                  <li key={folder.id}>
-                    <button
-                      className="folders-btn"
-                      onClick={() => setSelectedFolder(folder.id)}
-                    >
-                      {folder.name}
-                    </button>
-                  </li>
-                ))}
-              </div>
+              {folders.map((folder) => (
+                <li key={folder.id}>
+                  <button
+                    className="folders-btn"
+                    onClick={() => setSelectedFolder(folder)}
+                  >
+                    {folder.name}
+                  </button>
+                </li>
+              ))}
             </ul>
           </nav>
         </div>
       </div>
       <TodoList
-        selectFolder={selectedFolder}
+        selectedFolder={selectedFolder}
         todos={todos}
         folders={folders}
         handleDelete={handleDelete}

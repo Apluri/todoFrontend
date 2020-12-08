@@ -31,32 +31,17 @@ const App = () => {
   }, []);
 
   const fetchData = () => {
-    Promise.all([fetchTodos(), fetchFolders()])
+    const fetchTable = async (table) => {
+      const response = await axios.get(url + "/" + table);
+      return response.data;
+    };
+
+    Promise.all([fetchTable("tasks"), fetchTable("folders")])
       .then((data) => {
         setTodos(data[0]);
         setFolders(data[1]);
       })
       .catch((e) => console.log(e));
-  };
-  const fetchTodos = async () => {
-    const response = await axios.get(url + "/tasks");
-    return response.data;
-    /*
-    try {
-      let response = await axios.get(url + "/tasks");
-      setTodos(response.data);
-      response = await axios.get(url + "/folders");
-      setFolders(response.data);
-      // set this as last to indicate loading is done
-      setLoadinDone(true);
-    } catch (e) {
-      console.log(e);
-    }
-    */
-  };
-  const fetchFolders = async () => {
-    const response = await axios.get(url + "/folders");
-    return response.data;
   };
 
   const postTaskHandler = async (task) => {
@@ -80,7 +65,7 @@ const App = () => {
   const postFolderHandler = async (folder) => {
     try {
       await axios.post(url + `/folders`, { ...folder });
-      fetchFolders();
+      fetchData();
     } catch (e) {
       console.log(e);
     }
@@ -108,8 +93,6 @@ const App = () => {
       ? setNavSize(navSize === "100%" ? "0%" : "100%")
       : setNavSize(navSize === "300px" ? "0px" : "300px");
   };
-  // deletes task by given id from state
-  // TODO change this to delete from sql server
 
   return (
     <BrowserRouter>

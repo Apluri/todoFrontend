@@ -32,7 +32,9 @@ const TaskView = ({ folders, selectedTask }) => {
           <textarea
             type="text"
             placeholder={
-              checkIfNull(selectedTask.description) ? "enter description" : ""
+              checkIfNull(selectedTask.description)
+                ? "Task description (optional)"
+                : ""
             }
             value={
               checkIfNull(selectedTask.description)
@@ -44,12 +46,12 @@ const TaskView = ({ folders, selectedTask }) => {
       </form>
       <button>save</button>
       <br />
-      <>
+      <div>
         Task deadline:{" "}
         {checkIfNull(selectedTask.deadline)
           ? "No date selected"
           : sqlDateToDateString(selectedTask.deadline)}
-      </>
+      </div>
       <button>edit</button>
     </>
   );

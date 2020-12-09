@@ -1,7 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import TodoList from "./TodoList";
 
-const Folders = ({ todos, folders, handleDelete, postTaskHandler }) => {
+const Folders = ({
+  todos,
+  folders,
+  handleDelete,
+  postTaskHandler,
+  setSelectedTask,
+}) => {
   const [selectedFolder, setSelectedFolder] = useState(null);
   //dropdown
   const dropdownRef = useRef(null);
@@ -65,6 +71,7 @@ const Folders = ({ todos, folders, handleDelete, postTaskHandler }) => {
         folders={folders}
         handleDelete={handleDelete}
         postTaskHandler={postTaskHandler}
+        setSelectedTask={setSelectedTask}
       />
     </>
   );

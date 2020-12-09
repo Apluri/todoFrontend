@@ -9,13 +9,13 @@ const TodoList = ({
   folders,
   handleDelete,
   postTaskHandler,
-  taskSelection,
+  setSelectedTask,
 }) => {
   // for redirecting into taskview.js
   //const [selectedTask, setSelectedTask] = useState(null);
   let history = useHistory();
   let wrapperFunction = (todo) => {
-    taskSelection(todo);
+    setSelectedTask(todo);
 
     history.push("/task");
   };

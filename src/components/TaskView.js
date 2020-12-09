@@ -6,9 +6,12 @@ const TaskView = ({ folders, selectedTask }) => {
   const redirect = () => {
     history.push("/");
   };
+
+  /* :DD
   const checkIfNull = (argument) => {
     return argument === null ? true : false;
   };
+  */
   let sqlDateToDateString = (d) => {
     if (d !== null) {
       let temp = new Date(d);
@@ -22,7 +25,7 @@ const TaskView = ({ folders, selectedTask }) => {
     }
   };
 
-  return checkIfNull(selectedTask) ? (
+  return !selectedTask ? (
     <> {redirect()}</>
   ) : (
     <>
@@ -31,24 +34,17 @@ const TaskView = ({ folders, selectedTask }) => {
         <div className="description-box">
           <textarea
             type="text"
-            placeholder={
-              checkIfNull(selectedTask.description)
-                ? "Task description (optional)"
-                : ""
-            }
-            value={
-              checkIfNull(selectedTask.description)
-                ? ""
-                : selectedTask.description
-            }
+            placeholder="Task description (optional)"
+            value={selectedTask.description ? selectedTask.description : ""}
+            onChange={(e) => console.log(e)}
           />
         </div>
       </form>
       <button>save</button>
       <br />
       <div>
-        Task deadline:{" "}
-        {checkIfNull(selectedTask.deadline)
+        Task deadline:
+        {!selectedTask.deadline
           ? "No date selected"
           : sqlDateToDateString(selectedTask.deadline)}
       </div>

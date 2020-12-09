@@ -25,9 +25,6 @@ const App = () => {
   const [todos, setTodos] = useState([]);
   const [folders, setFolders] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
-  const taskSelection = (todo) => {
-    setSelectedTask(todo);
-  };
 
   useEffect(() => {
     fetchData();
@@ -74,7 +71,8 @@ const App = () => {
       console.log(e);
     }
   };
-  const handleFolderDelete = async (id) => {};
+
+  // const handleFolderDelete = async (id) => {};
 
   const handleDelete = async (id) => {
     const res = await axios.delete(url + "/tasks/" + id);
@@ -112,7 +110,7 @@ const App = () => {
               closeNav={CloseNav}
               navSize={navSize}
               postTaskHandler={postTaskHandler}
-              taskSelection={taskSelection}
+              setSelectedTask={setSelectedTask}
             />
           </Route>
 
@@ -124,6 +122,7 @@ const App = () => {
               closeNav={CloseNav}
               navSize={navSize}
               postTaskHandler={postTaskHandler}
+              setSelectedTask={setSelectedTask}
             />
           </Route>
           <Route path="/settings">

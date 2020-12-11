@@ -20,14 +20,7 @@ const App = () => {
   const [sorted, setSorted] = useState("?sorted=asc&by=title");
   const sortAscending = useRef(true);
 
-  const changeSort = (table) => {
-    let order;
-    console.log(sortAscending.current);
-    sortAscending.current ? (order = "asc") : (order = "desc");
-    sortAscending.current = !sortAscending.current;
-    setSorted(`?sorted=${order}&by=${table}`);
-  };
-  const useLocalHost = true; // change this to true if u want to use localHost, make sure to start your localhost server then
+  const useLocalHost = false; // change this to true if u want to use localHost, make sure to start your localhost server then
   useLocalHost
     ? (url = "http://localhost:8080/api")
     : (url = "https://tamk-4a00ez62-3001-group04.herokuapp.com/api");
@@ -41,6 +34,13 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorted]);
 
+  const changeSort = (table) => {
+    let order;
+    console.log(sortAscending.current);
+    sortAscending.current ? (order = "asc") : (order = "desc");
+    sortAscending.current = !sortAscending.current;
+    setSorted(`?sorted=${order}&by=${table}`);
+  };
   const fetchData = () => {
     const fetchTable = async (table, queryArgs = "") => {
       const response = await axios.get(url + "/" + table + queryArgs);

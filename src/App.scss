@@ -69,6 +69,18 @@ a:visited {
   .MuiCheckbox-root {
     color: white;
   }
+
+  // temporary stuff, to test sort function
+  .task-title {
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+    li {
+      display: inline;
+      padding: 20px;
+    }
+  }
+
   .todo-item {
     display: flex;
     min-width: 400px;

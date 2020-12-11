@@ -10,6 +10,7 @@ const TodoList = ({
   handleDelete,
   postTaskHandler,
   setSelectedTask,
+  changeSort,
 }) => {
   // for redirecting into taskview.js
   //const [selectedTask, setSelectedTask] = useState(null);
@@ -32,6 +33,7 @@ const TodoList = ({
     const editedTask = { ...task };
     editedTask.isDone = !editedTask.isDone;
     postTaskHandler(editedTask);
+
     //setChecked(event.target.checked);
   };
 
@@ -57,7 +59,15 @@ const TodoList = ({
   */
   return (
     <>
-      <h1 className="todo-items">Things to do:</h1>
+      <h1>Things to do:</h1>
+      <div className="task-title">
+        <ul>
+          <li onClick={(e) => changeSort("title")}> title </li>
+          <li onClick={(e) => changeSort("deadline")}> date </li>
+          <li onClick={(e) => changeSort("isDone")}> status </li>
+          <li> delete </li>
+        </ul>
+      </div>
       {todos.map(
         (todo) =>
           checkIfPrint(todo.folder_id) && (

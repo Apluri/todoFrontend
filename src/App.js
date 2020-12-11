@@ -1,5 +1,5 @@
 import "./App.scss";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import axios from "axios";
@@ -17,7 +17,17 @@ import TaskView from "./components/TaskView";
 const App = () => {
   // simulates tasklist fetched from backend
   let url = "";
-  const useLocalHost = false; // change this to true if u want to use localHost, make sure to start your localhost server then
+  const [sorted, setSorted] = useState("?sorted=asc&by=title");
+  const sortAscending = useRef(true);
+
+  const changeSort = (table) => {
+    let order;
+    console.log(sortAscending.current);
+    sortAscending.current ? (order = "asc") : (order = "desc");
+    sortAscending.current = !sortAscending.current;
+    setSorted(`?sorted=${order}&by=${table}`);
+  };
+  const useLocalHost = true; // change this to true if u want to use localHost, make sure to start your localhost server then
   useLocalHost
     ? (url = "http://localhost:8080/api")
     : (url = "https://tamk-4a00ez62-3001-group04.herokuapp.com/api");
@@ -29,15 +39,15 @@ const App = () => {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sorted]);
 
   const fetchData = () => {
-    const fetchTable = async (table) => {
-      const response = await axios.get(url + "/" + table);
+    const fetchTable = async (table, queryArgs = "") => {
+      const response = await axios.get(url + "/" + table + queryArgs);
       return response.data;
     };
 
-    Promise.all([fetchTable("tasks"), fetchTable("folders")])
+    Promise.all([fetchTable("tasks", sorted), fetchTable("folders")])
       .then((data) => {
         setTodos(data[0]);
         setFolders(data[1]);
@@ -111,6 +121,7 @@ const App = () => {
               navSize={navSize}
               postTaskHandler={postTaskHandler}
               setSelectedTask={setSelectedTask}
+              changeSort={changeSort}
             />
           </Route>
 
@@ -123,6 +134,7 @@ const App = () => {
               navSize={navSize}
               postTaskHandler={postTaskHandler}
               setSelectedTask={setSelectedTask}
+              changeSort={changeSort}
             />
           </Route>
           <Route path="/settings">

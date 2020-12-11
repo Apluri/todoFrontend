@@ -7,6 +7,7 @@ const Folders = ({
   handleDelete,
   postTaskHandler,
   setSelectedTask,
+  changeSort,
 }) => {
   const [selectedFolder, setSelectedFolder] = useState(null);
   //dropdown
@@ -72,6 +73,7 @@ const Folders = ({
         handleDelete={handleDelete}
         postTaskHandler={postTaskHandler}
         setSelectedTask={setSelectedTask}
+        changeSort={changeSort}
       />
     </>
   );

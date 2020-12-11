@@ -8,7 +8,11 @@ const TaskViewShow = ({ folders, selectedTask }) => {
       <br />
       {selectedTask.description}
       <br />
-      {selectedTask.deadline}
+      {selectedTask.deadline === null
+        ? ""
+        : new Date(selectedTask.deadline).toDateString()}
+      <br />
+      <button>Delete task</button>
     </>
   );
 };

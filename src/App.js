@@ -139,7 +139,11 @@ const App = () => {
             />
           </Route>
           <Route path="/task">
-            <TaskView folders={folders} selectedTask={selectedTask} />
+            <TaskView
+              folders={folders}
+              selectedTask={selectedTask}
+              postTaskHandler={postTaskHandler}
+            />
           </Route>
         </Switch>
       </Layout>

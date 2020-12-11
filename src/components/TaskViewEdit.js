@@ -1,8 +1,19 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 
-const TaskViewEdit = ({ folders, selectedTask }) => {
-  const [value, setValue] = useState(null);
+const TaskViewEdit = ({ folders, selectedTask, postTaskHandler }) => {
+  // title
+  const [currInput, setCurrInput] = useState(selectedTask.title);
+
+  // description
+  const [dCurrInput, setDCurrInput] = useState(selectedTask.description);
+
+  // calendar
+  const [calendarValue, setCalendarValue] = useState(
+    selectedTask.deadline === null ? null : new Date(selectedTask.deadline)
+  );
+
+  //folder
 
   return (
     <>
@@ -10,7 +21,8 @@ const TaskViewEdit = ({ folders, selectedTask }) => {
         <input
           type="text"
           placeholder="Task title"
-          value={selectedTask.title}
+          value={currInput}
+          onChange={(e) => setCurrInput(e.target.value)}
         />
       </form>
       <br />
@@ -19,20 +31,27 @@ const TaskViewEdit = ({ folders, selectedTask }) => {
           <textarea
             type="text"
             placeholder="Task description (optional)"
-            value={selectedTask.description ? selectedTask.description : ""}
+            value={dCurrInput}
+            onChange={(e) => setDCurrInput(e.target.value)}
           />
         </div>
       </form>
       <br />
+      Folder selected: <br />
       Date selected:{" "}
-      {value === null && selectedTask.deadline === null
+      {calendarValue === null && selectedTask.deadline === null
         ? "nothing"
-        : value === null && selectedTask.deadline !== null
+        : calendarValue === null && selectedTask.deadline !== null
         ? new Date(selectedTask.deadline).toDateString()
-        : value.toDateString()}
+        : calendarValue.toDateString()}
       <div className="calendar-container">
-        <Calendar value={null} locale={"en-EN"} onChange={setValue} />
+        <Calendar
+          value={calendarValue}
+          locale={"en-EN"}
+          onChange={setCalendarValue}
+        />
       </div>
+      <button>Delete task</button>
     </>
   );
 };

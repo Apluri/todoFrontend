@@ -163,6 +163,7 @@ const App = () => {
               postTaskHandler={postTaskHandler}
               postFolderHandler={postFolderHandler}
               todos={todos}
+              handleDelete={handleDelete}
             />
           </Route>
         </Switch>

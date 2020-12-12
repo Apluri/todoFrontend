@@ -154,7 +154,10 @@ const App = () => {
             <TaskView
               folders={folders}
               selectedTask={selectedTask}
+              setSelectedTask={setSelectedTask}
               postTaskHandler={postTaskHandler}
+              postFolderHandler={postFolderHandler}
+              todos={todos}
             />
           </Route>
         </Switch>

@@ -3,17 +3,19 @@ import { useHistory } from "react-router-dom";
 import TaskViewEdit from "./TaskViewEdit";
 import TaskViewShow from "./TaskViewShow";
 
-const TaskView = ({ folders, selectedTask, postTaskHandler }) => {
+const TaskView = ({
+  folders,
+  selectedTask,
+  setSelectedTask,
+  postTaskHandler,
+  postFolderHandler,
+}) => {
   const history = useHistory();
   const redirect = () => {
     history.push("/");
   };
   const [editMode, setEditMode] = useState(false);
-
-  const wrapperFunction = () => {
-    if (editMode) {
-      console.log("update function here");
-    }
+  const toggleMode = () => {
     setEditMode(!editMode);
   };
 
@@ -21,19 +23,24 @@ const TaskView = ({ folders, selectedTask, postTaskHandler }) => {
     <> {redirect()}</>
   ) : editMode ? (
     <>
-      <button onClick={() => wrapperFunction()}>save</button>
       <br />
       <TaskViewEdit
         folders={folders}
         selectedTask={selectedTask}
+        setSelectedTask={setSelectedTask}
         postTaskHandler={postTaskHandler}
+        postFolderHandler={postFolderHandler}
+        toggleMode={toggleMode}
       />
     </>
   ) : (
     <>
-      <button onClick={() => wrapperFunction()}>edit</button>
       <br />
-      <TaskViewShow folders={folders} selectedTask={selectedTask} />
+      <TaskViewShow
+        folders={folders}
+        selectedTask={selectedTask}
+        toggleMode={toggleMode}
+      />
     </>
   );
 };

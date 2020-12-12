@@ -17,21 +17,29 @@ const TaskViewShow = ({
     return folders[folders.map((item) => item.id).indexOf(id)].name;
   };
   return (
-    <>
+    <div className="show-container">
       <button onClick={() => toggleMode()}>edit</button>
-      {selectedTask.folder_id === null
-        ? ""
-        : renderFolder(selectedTask.folder_id)}
-      {selectedTask.title}
-      <br />
-      {selectedTask.description}
-      <br />
-      {selectedTask.deadline === null
-        ? ""
-        : new Date(selectedTask.deadline).toDateString()}
-      <br />
+      <div className="show-folder">Folder:</div>
+      <div className="show-folder-content">
+        {selectedTask.folder_id === null
+          ? ""
+          : renderFolder(selectedTask.folder_id)}
+        <div className="show-title">Title</div>
+        <div className="show-title-content">{selectedTask.title}</div>
+      </div>
+
+      <div className="show-description">Description:</div>
+      <div className="show-description-content">{selectedTask.description}</div>
+      <div className="show-deadline">Deadline:</div>
+      <div className="show-deadline-content">
+        {" "}
+        {selectedTask.deadline === null
+          ? ""
+          : new Date(selectedTask.deadline).toDateString()}
+      </div>
+
       <button onClick={() => deleteWrapper()}>Delete task</button>
-    </>
+    </div>
   );
 };
 

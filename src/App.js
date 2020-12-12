@@ -17,7 +17,7 @@ import TaskView from "./components/TaskView";
 const App = () => {
   // simulates tasklist fetched from backend
   let url = "";
-  const [sorted, setSorted] = useState("?sorted=asc&by=title");
+  const [queryArgs, setQueryArgs] = useState("?sorted=asc&by=title");
   const sortAscending = useRef(true);
 
   const useLocalHost = false; // change this to true if u want to use localHost, make sure to start your localhost server then
@@ -32,22 +32,27 @@ const App = () => {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sorted]);
+  }, [queryArgs]);
 
+  const searchData = async (str) => {
+    // fetch all in case of null
+    str === null ? setQueryArgs("") : setQueryArgs(`?search=${str}`);
+  };
   const changeSort = (table) => {
     let order;
     console.log(sortAscending.current);
     sortAscending.current ? (order = "asc") : (order = "desc");
     sortAscending.current = !sortAscending.current;
-    setSorted(`?sorted=${order}&by=${table}`);
+    setQueryArgs(`?sorted=${order}&by=${table}`);
   };
   const fetchData = () => {
-    const fetchTable = async (table, queryArgs = "") => {
-      const response = await axios.get(url + "/" + table + queryArgs);
+    const fetchTable = async (table, query = "") => {
+      const response = await axios.get(url + "/" + table + query);
+      //console.log(response.data);
       return response.data;
     };
 
-    Promise.all([fetchTable("tasks", sorted), fetchTable("folders")])
+    Promise.all([fetchTable("tasks", queryArgs), fetchTable("folders")])
       .then((data) => {
         setTodos(data[0]);
         setFolders(data[1]);
@@ -108,7 +113,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header searchData={searchData} />
       <LeftNav navSize={navSize} handleNavSizeChange={HandleNavSizeChange} />
       <Layout navSize={navSize}>
         <Switch>

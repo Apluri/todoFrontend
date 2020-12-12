@@ -8,6 +8,8 @@ const TaskViewEdit = ({
   postTaskHandler,
   postFolderHandler,
   toggleMode,
+  handleDelete,
+  redirect,
 }) => {
   // title
   const [currInput, setCurrInput] = useState(selectedTask.title);
@@ -101,6 +103,10 @@ const TaskViewEdit = ({
     handleSubmit();
     toggleMode();
   };
+  const deleteWrapper = () => {
+    handleDelete(selectedTask.id);
+    redirect();
+  };
   return (
     <>
       <button onClick={() => wrapper()}>save</button>
@@ -181,7 +187,7 @@ const TaskViewEdit = ({
           onChange={setCalendarValue}
         />
       </div>
-      <button>Delete task</button>
+      <button onClick={() => deleteWrapper()}>Delete task</button>
     </>
   );
 };

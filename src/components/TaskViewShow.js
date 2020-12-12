@@ -1,7 +1,17 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const TaskViewShow = ({ folders, selectedTask, toggleMode }) => {
+const TaskViewShow = ({
+  folders,
+  selectedTask,
+  toggleMode,
+  handleDelete,
+  redirect,
+}) => {
+  const deleteWrapper = () => {
+    handleDelete(selectedTask.id);
+    redirect();
+  };
   return (
     <>
       <button onClick={() => toggleMode()}>edit</button>
@@ -13,7 +23,7 @@ const TaskViewShow = ({ folders, selectedTask, toggleMode }) => {
         ? ""
         : new Date(selectedTask.deadline).toDateString()}
       <br />
-      <button>Delete task</button>
+      <button onClick={() => deleteWrapper()}>Delete task</button>
     </>
   );
 };

@@ -9,6 +9,7 @@ const TaskView = ({
   setSelectedTask,
   postTaskHandler,
   postFolderHandler,
+  handleDelete,
 }) => {
   const history = useHistory();
   const redirect = () => {
@@ -31,6 +32,8 @@ const TaskView = ({
         postTaskHandler={postTaskHandler}
         postFolderHandler={postFolderHandler}
         toggleMode={toggleMode}
+        handleDelete={handleDelete}
+        redirect={redirect}
       />
     </>
   ) : (
@@ -40,6 +43,8 @@ const TaskView = ({
         folders={folders}
         selectedTask={selectedTask}
         toggleMode={toggleMode}
+        handleDelete={handleDelete}
+        redirect={redirect}
       />
     </>
   );

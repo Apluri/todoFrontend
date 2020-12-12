@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const TaskViewShow = ({ folders, selectedTask }) => {
+const TaskViewShow = ({ folders, selectedTask, toggleMode }) => {
   return (
     <>
+      <button onClick={() => toggleMode()}>edit</button>
       {selectedTask.title}
       <br />
       {selectedTask.description}

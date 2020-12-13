@@ -87,11 +87,17 @@ const App = () => {
     }
   };
 
-  // const handleFolderDelete = async (id) => {};
-
   const handleDelete = async (id) => {
     const res = await axios.delete(url + "/tasks/" + id);
     // 204 = ok no content
+    if (res.status !== 204) {
+      console.log("error while deleting");
+      console.log(res);
+    }
+    fetchData();
+  };
+  const handleFolderDelete = async (id) => {
+    const res = await axios.delete(url + "/folders/" + id);
     if (res.status !== 204) {
       console.log("error while deleting");
       console.log(res);
@@ -140,6 +146,7 @@ const App = () => {
               postTaskHandler={postTaskHandler}
               setSelectedTask={setSelectedTask}
               changeSort={changeSort}
+              handleFolderDelete={handleFolderDelete}
             />
           </Route>
           <Route path="/settings">

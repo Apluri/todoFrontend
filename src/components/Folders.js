@@ -8,6 +8,7 @@ const Folders = ({
   postTaskHandler,
   setSelectedTask,
   changeSort,
+  handleFolderDelete,
 }) => {
   const [selectedFolder, setSelectedFolder] = useState(null);
   //dropdown
@@ -59,6 +60,9 @@ const Folders = ({
                     onClick={() => setSelectedFolder(folder)}
                   >
                     {folder.name}
+                  </button>
+                  <button onClick={() => handleFolderDelete(folder.id)}>
+                    delete
                   </button>
                 </li>
               ))}

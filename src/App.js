@@ -130,6 +130,23 @@ const App = () => {
     }
     fetchData();
   };
+  const deleteAllTasks = async () => {
+    const res = await axios.delete(url + "/tasks/");
+    if (res.status !== 204) {
+      console.log("error while deleting");
+      console.log(res);
+    }
+    fetchData();
+  };
+
+  const deleteAllFolders = async () => {
+    const res = await axios.delete(url + "/folders/");
+    if (res.status !== 204) {
+      console.log("error while deleting");
+      console.log(res);
+    }
+    fetchData();
+  };
   const [navSize, setNavSize] = useState("0px");
   let smallScreen = useMediaQuery({ query: "(max-width: 900px)" });
   const CloseNav = () => {
@@ -176,7 +193,10 @@ const App = () => {
             />
           </Route>
           <Route path="/settings">
-            <Settings />
+            <Settings
+              deleteAllTasks={deleteAllTasks}
+              deleteAllFolders={deleteAllFolders}
+            />
           </Route>
           <Route path="/add">
             <AddTodo

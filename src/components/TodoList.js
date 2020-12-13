@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Checkbox } from "@material-ui/core";
-import TaskView from "./TaskView";
 import { useHistory } from "react-router-dom";
 
 const TodoList = ({
   selectedFolder,
   todos,
+  sortTodosHandler,
   folders,
   handleDelete,
   postTaskHandler,
   setSelectedTask,
-  changeSort,
 }) => {
   // for redirecting into taskview.js
   //const [selectedTask, setSelectedTask] = useState(null);
@@ -62,10 +61,43 @@ const TodoList = ({
       <h1>Things to do:</h1>
       <div className="task-title">
         <ul>
-          <li onClick={(e) => changeSort("title")}> title </li>
-          <li onClick={(e) => changeSort("deadline")}> date </li>
-          <li onClick={(e) => changeSort("isDone")}> status </li>
-          <li> delete </li>
+          <li> Sort By: </li>
+          <li>
+            <button
+              onClick={(e) => {
+                sortTodosHandler("title");
+              }}
+            >
+              title
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={(e) => {
+                sortTodosHandler("deadline");
+              }}
+            >
+              date
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={(e) => {
+                sortTodosHandler("isDone");
+              }}
+            >
+              status
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={(e) => {
+                sortTodosHandler("timeCreated");
+              }}
+            >
+              time created
+            </button>
+          </li>
         </ul>
       </div>
       {todos.map(

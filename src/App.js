@@ -17,8 +17,9 @@ import TaskView from "./components/TaskView";
 const App = () => {
   // simulates tasklist fetched from backend
   let url = "";
-  const [queryArgs, setQueryArgs] = useState("?sorted=asc&by=title");
+  const [queryArgs, setQueryArgs] = useState("");
   const sortAscending = useRef(true);
+  const [currSort, setCurrSort] = useState("timeCreated"); // default when loading page
 
   const useLocalHost = false; // change this to true if u want to use localHost, make sure to start your localhost server then
   useLocalHost
@@ -38,13 +39,39 @@ const App = () => {
     // fetch all in case of null
     str === null ? setQueryArgs("") : setQueryArgs(`?search=${str}`);
   };
-  const changeSort = (table) => {
-    let order;
-    console.log(sortAscending.current);
-    sortAscending.current ? (order = "asc") : (order = "desc");
-    sortAscending.current = !sortAscending.current;
-    setQueryArgs(`?sorted=${order}&by=${table}`);
+
+  // sort todoArray without changing rules for sorting
+  const sortTodos = (tasks, table) => {
+    let arr = [...tasks];
+
+    const sortFunc = (a, b) => {
+      if (a[table] > b[table]) {
+        return 1;
+      } else if (a[table] < b[table]) {
+        return -1;
+      } else if (a[table] === null) {
+        return -1;
+      } else {
+        return 0;
+      }
+    };
+    sortAscending.current
+      ? arr.sort((a, b) => sortFunc(a, b))
+      : arr.sort((b, a) => sortFunc(a, b));
+
+    return arr;
   };
+
+  // used to trigger sort and change direction of sorting, also saves new save rule for table
+  const sortTodosHandler = (table) => {
+    if (table !== currSort) {
+      setCurrSort(table);
+    }
+    sortAscending.current = !sortAscending.current;
+
+    setTodos(sortTodos(todos, table));
+  };
+
   const fetchData = () => {
     const fetchTable = async (table, query = "") => {
       const response = await axios.get(url + "/" + table + query);
@@ -54,7 +81,8 @@ const App = () => {
 
     Promise.all([fetchTable("tasks", queryArgs), fetchTable("folders")])
       .then((data) => {
-        setTodos(data[0]);
+        const temp = sortTodos(data[0], currSort);
+        setTodos(temp);
         setFolders(data[1]);
       })
       .catch((e) => console.log(e));
@@ -71,13 +99,11 @@ const App = () => {
           ...task,
         });
       }
-
       fetchData(); // Fetch tasks again after a successful post request
     } catch (e) {
       console.log(e);
     }
   };
-
   const postFolderHandler = async (folder) => {
     try {
       await axios.post(url + `/folders`, { ...folder });
@@ -132,7 +158,7 @@ const App = () => {
               navSize={navSize}
               postTaskHandler={postTaskHandler}
               setSelectedTask={setSelectedTask}
-              changeSort={changeSort}
+              sortTodosHandler={sortTodosHandler}
             />
           </Route>
 
@@ -145,7 +171,7 @@ const App = () => {
               navSize={navSize}
               postTaskHandler={postTaskHandler}
               setSelectedTask={setSelectedTask}
-              changeSort={changeSort}
+              sortTodosHandler={sortTodosHandler}
               handleFolderDelete={handleFolderDelete}
             />
           </Route>

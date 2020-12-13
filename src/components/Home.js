@@ -10,7 +10,7 @@ const Home = ({
   closeNav,
   postTaskHandler,
   setSelectedTask,
-  changeSort = { changeSort },
+  sortTodosHandler,
 }) => {
   let history = useHistory();
   let wrapperFunction = () => {
@@ -26,7 +26,7 @@ const Home = ({
         handleDelete={handleDelete}
         postTaskHandler={postTaskHandler}
         setSelectedTask={setSelectedTask}
-        changeSort={changeSort}
+        sortTodosHandler={sortTodosHandler}
       />
 
       <button className="add-btn" onClick={() => wrapperFunction()}>

@@ -7,7 +7,7 @@ const Folders = ({
   handleDelete,
   postTaskHandler,
   setSelectedTask,
-  changeSort,
+  sortTodosHandler,
   handleFolderDelete,
 }) => {
   const [selectedFolder, setSelectedFolder] = useState(null);
@@ -77,7 +77,7 @@ const Folders = ({
         handleDelete={handleDelete}
         postTaskHandler={postTaskHandler}
         setSelectedTask={setSelectedTask}
-        changeSort={changeSort}
+        sortTodosHandler={sortTodosHandler}
       />
     </>
   );

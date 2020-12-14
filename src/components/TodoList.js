@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Checkbox } from "@material-ui/core";
+import { Checkbox, Icon } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 const TodoList = ({
@@ -12,7 +12,7 @@ const TodoList = ({
   setSelectedTask,
 }) => {
   // numbers represents indexes of todo tasks
-  const [itemsToPrint, setItemsToPrint] = useState([1, 2, 5, 3]);
+  const [itemsToPrint, setItemsToPrint] = useState([3, 1, 5]);
   let history = useHistory();
   let wrapperFunction = (todo) => {
     setSelectedTask(todo);
@@ -88,11 +88,11 @@ const TodoList = ({
           {itemsToPrint.map((index) => {
             switch (index) {
               case 1:
-                return <> {renderTitle(todo)}</>;
+                return renderTitle(todo);
               case 2:
                 return <div> {renderDescription(todo)}</div>;
-              case 3:
-                return <div>{renderIsDone(todo)}</div>;
+              //case 3:
+              //  return <div>{renderIsDone(todo)}</div>;
               case 4:
                 return <div> {todo.timeCreated}</div>; // should not be used outside testing
               case 5:
@@ -109,10 +109,7 @@ const TodoList = ({
     };
     const renderTitle = (todo) => {
       return (
-        <div
-          className={todo.isDone ? "task-done" : ""}
-          onClick={() => wrapperFunction(todo)}
-        >
+        <div className={todo.isDone ? "task-done" : "task-test"}>
           {todo.title}
         </div>
       );
@@ -122,6 +119,18 @@ const TodoList = ({
     };
     const renderDeadLine = (todo) => {
       return <> {sqlDateToDateString(todo.deadline)} </>;
+    };
+
+    const renderFolder = (id) => {
+      if (folders.length === 0 || id === null) return null;
+      return folders[folders.map((item) => item.id).indexOf(id)].name;
+    };
+    const renderDeleteButton = (todo) => {
+      return (
+        <>
+          <Icon className="fa fa-trash" onClick={() => handleDelete(todo.id)} />
+        </>
+      );
     };
     const renderIsDone = (todo) => {
       return (
@@ -135,17 +144,6 @@ const TodoList = ({
         </>
       );
     };
-    const renderFolder = (id) => {
-      if (folders.length === 0 || id === null) return null;
-      return folders[folders.map((item) => item.id).indexOf(id)].name;
-    };
-    const renderDeleteButton = (todo) => {
-      return (
-        <>
-          <button onClick={() => handleDelete(todo.id)}>Delete</button>
-        </>
-      );
-    };
 
     return (
       <>
@@ -153,8 +151,14 @@ const TodoList = ({
           (todo) =>
             checkIfPrint(todo.folder_id) && (
               <div className="todo-item" key={todo.id}>
-                {renderColumns(todo)}
-                {renderDeleteButton(todo)}
+                <div>{renderIsDone(todo)} </div>
+                <div
+                  className="clickable-area"
+                  onClick={() => wrapperFunction(todo)}
+                >
+                  {renderColumns(todo)}
+                </div>
+                <div>{renderDeleteButton(todo)}</div>
               </div>
             )
         )}
@@ -164,8 +168,7 @@ const TodoList = ({
 
   return (
     <>
-      <h1>Things to do:</h1>
-      <div className="task-title">{printTitles()}</div>
+      <h1>Things to do</h1>
       <div className="todos"> {printTodos()}</div>
     </>
   );

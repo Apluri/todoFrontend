@@ -2,6 +2,7 @@
 import React from "react";
 import TodoList from "./TodoList";
 import { useHistory } from "react-router-dom";
+import { Icon } from "@material-ui/core";
 
 const Home = ({
   todos,
@@ -29,9 +30,14 @@ const Home = ({
         sortTodosHandler={sortTodosHandler}
       />
 
-      <button className="add-btn" onClick={() => wrapperFunction()}>
-        Add task
-      </button>
+      <div className="add-btn">
+        <Icon
+          classes
+          className="fa fa-plus-circle"
+          style={{ fontSize: 100 }}
+          onClick={() => wrapperFunction()}
+        />
+      </div>
     </>
   );
 };

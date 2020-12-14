@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Checkbox } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
@@ -11,8 +11,8 @@ const TodoList = ({
   postTaskHandler,
   setSelectedTask,
 }) => {
-  // for redirecting into taskview.js
-  //const [selectedTask, setSelectedTask] = useState(null);
+  // numbers represents indexes of todo tasks
+  const [itemsToPrint, setItemsToPrint] = useState([1, 2, 5, 3]);
   let history = useHistory();
   let wrapperFunction = (todo) => {
     setSelectedTask(todo);
@@ -40,93 +40,133 @@ const TodoList = ({
   let sqlDateToDateString = (d) => {
     if (d !== null) {
       let temp = new Date(d);
-      let dateFormat = `${("0" + temp.getDate()).slice(-2)} - ${(
+      let dateFormat = `${("0" + temp.getDate()).slice(-2)}.${(
         "0" +
         (temp.getMonth() + 1)
-      ).slice(-2)}`;
+      ).slice(-2)}.`;
       return dateFormat;
     } else {
       return "";
     }
   };
 
-  /*
-  const renderFolder = (id) => {
-    if (folders.length === 0) return null;
-    return folders[folders.map((item) => item.id).indexOf(id)].name;
+  // prints sql table names as titles
+  const printTitles = () => {
+    let arr;
+    todos[0] !== undefined ? (arr = [...Object.keys(todos[0])]) : (arr = null);
+    if (arr) {
+      return (
+        <ul>
+          {itemsToPrint.map((index) => {
+            switch (index) {
+              case 1:
+                return <li> Title</li>;
+              case 2:
+                return <li> Description</li>;
+              case 3:
+                return <li> Status</li>;
+              case 4:
+                return <li> Creation time</li>;
+              case 5:
+                return <li> Deadline</li>;
+              case 6:
+                return <li> Folder</li>;
+              default:
+                return <li>{arr[index]}</li>;
+            }
+          })}
+        </ul>
+      );
+    }
+    return <li>Missing titles</li>;
   };
-  */
+
+  const printTodos = () => {
+    const renderColumns = (todo) => {
+      return (
+        <>
+          {itemsToPrint.map((index) => {
+            switch (index) {
+              case 1:
+                return <> {renderTitle(todo)}</>;
+              case 2:
+                return <div> {renderDescription(todo)}</div>;
+              case 3:
+                return <div>{renderIsDone(todo)}</div>;
+              case 4:
+                return <div> {todo.timeCreated}</div>; // should not be used outside testing
+              case 5:
+                return <div>{renderDeadLine(todo)}</div>;
+
+              case 6:
+                return <div> {renderFolder(todo.folder_id)}</div>;
+              default:
+                return <> </>;
+            }
+          })}
+        </>
+      );
+    };
+    const renderTitle = (todo) => {
+      return (
+        <div
+          className={todo.isDone ? "task-done" : ""}
+          onClick={() => wrapperFunction(todo)}
+        >
+          {todo.title}
+        </div>
+      );
+    };
+    const renderDescription = (todo) => {
+      return <>{todo.description} </>;
+    };
+    const renderDeadLine = (todo) => {
+      return <> {sqlDateToDateString(todo.deadline)} </>;
+    };
+    const renderIsDone = (todo) => {
+      return (
+        <>
+          <Checkbox
+            checked={Boolean(todo.isDone)}
+            onChange={(e) => handleChange(e, todo)}
+            color="default"
+            inputProps={{ "aria-label": "checkbox with default color" }}
+          />
+        </>
+      );
+    };
+    const renderFolder = (id) => {
+      if (folders.length === 0 || id === null) return null;
+      return folders[folders.map((item) => item.id).indexOf(id)].name;
+    };
+    const renderDeleteButton = (todo) => {
+      return (
+        <>
+          <button onClick={() => handleDelete(todo.id)}>Delete</button>
+        </>
+      );
+    };
+
+    return (
+      <>
+        {todos.map(
+          (todo) =>
+            checkIfPrint(todo.folder_id) && (
+              <div className="todo-item" key={todo.id}>
+                {renderColumns(todo)}
+                {renderDeleteButton(todo)}
+              </div>
+            )
+        )}
+      </>
+    );
+  };
+
   return (
     <>
       <h1>Things to do:</h1>
-      <div className="task-title">
-        <ul>
-          <li> Sort By: </li>
-          <li>
-            <button
-              onClick={(e) => {
-                sortTodosHandler("title");
-              }}
-            >
-              title
-            </button>
-          </li>
-          <li>
-            <button
-              onClick={(e) => {
-                sortTodosHandler("deadline");
-              }}
-            >
-              date
-            </button>
-          </li>
-          <li>
-            <button
-              onClick={(e) => {
-                sortTodosHandler("isDone");
-              }}
-            >
-              status
-            </button>
-          </li>
-          <li>
-            <button
-              onClick={(e) => {
-                sortTodosHandler("timeCreated");
-              }}
-            >
-              time created
-            </button>
-          </li>
-        </ul>
-      </div>
-      {todos.map(
-        (todo) =>
-          checkIfPrint(todo.folder_id) && (
-            <div className="todo-item" key={todo.id}>
-              <div className={todo.isDone ? "task-done" : ""}>
-                <button
-                  className="todo-title-button"
-                  onClick={() => wrapperFunction(todo)}
-                >
-                  {todo.title}
-                </button>
-              </div>
-              <div> {sqlDateToDateString(todo.deadline)} </div>
-              <div>
-                <Checkbox
-                  checked={Boolean(todo.isDone)}
-                  onChange={(e) => handleChange(e, todo)}
-                  color="default"
-                  inputProps={{ "aria-label": "checkbox with default color" }}
-                />
-              </div>
-              <div>
-                <button onClick={() => handleDelete(todo.id)}>Delete</button>
-              </div>
-            </div>
-          )
-      )}
+      <div className="task-title">{printTitles()}</div>
+      <div className="todos"> {printTodos()}</div>
     </>
   );
 };

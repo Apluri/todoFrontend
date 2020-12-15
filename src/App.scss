@@ -24,7 +24,8 @@ body {
 }
 .calendar-container {
   display: flex;
-  width: 200px;
+  color: black;
+  width: 300px;
 }
 
 .blur > * {
@@ -139,7 +140,6 @@ a:visited {
     position: fixed;
     z-index: 2;
     text-align: center;
-    padding-top: 20px;
   }
 }
 
@@ -192,18 +192,35 @@ a:visited {
     color: black;
   }
 }
+.folders {
+  .fa-plus-square {
+    color: black;
+  }
+}
+.burger-btn {
+  top: 5px;
+  left: 15px;
+  .fa-bars {
+    font-size: 45px;
+  }
+}
+.navbar {
+  .fa-home,
+  .fa-folder-open,
+  .fa-cog {
+    font-size: 40px;
+  }
+}
 
 // for mobile screen
 @media only screen and (max-width: 900px) {
   .add-btn {
-    height: 40px;
-    width: 40px;
     top: 5px;
-    right: 5px;
-    padding: 0;
-    border: none;
-    background: none;
-    color: white;
+    right: 15px;
+
+    .fa-plus-square {
+      font-size: 45px;
+    }
   }
 }
 
@@ -219,7 +236,7 @@ a:visited {
 .menu {
   background: #ffffff;
   position: absolute;
-  width: 200px;
+
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 0;
   visibility: hidden;
@@ -248,9 +265,6 @@ a:visited {
   color: black;
 }
 
-// all button stylings (some look better just as text and some are replaced with images like burger, add etc..
-.add-btn {
-}
 .burger-btn {
   padding: 0;
   border: none;
@@ -267,4 +281,7 @@ a:visited {
   border: none;
   background: none;
   color: white;
+}
+.fa-trash {
+  font-size: 400px;
 }

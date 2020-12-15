@@ -18,7 +18,13 @@ const Header = ({ searchData }) => {
   return (
     <div className="header">
       <TitleComponent />
-      <form onSubmit={(e) => handleSubmit(e)}>
+    </div>
+  );
+};
+export default Header;
+
+/*
+<form onSubmit={(e) => handleSubmit(e)}>
         <input
           type="text"
           placeholder="title, description, deadline"
@@ -27,7 +33,4 @@ const Header = ({ searchData }) => {
         />
         <button>Search</button>
       </form>
-    </div>
-  );
-};
-export default Header;
+*/

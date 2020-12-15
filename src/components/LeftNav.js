@@ -1,13 +1,20 @@
 // useState to replace need for props usage
 import React from "react";
 import { NavLink } from "react-router-dom"; // import { Link } from "react-router-dom";
+import { Icon } from "@material-ui/core";
 
 const LeftNav = ({ navSize, handleNavSizeChange }) => {
   return (
     <div>
       <div className="left-sidebar" style={{ width: navSize }}>
         <nav className="navbar">
-          <NavLink to={"/"} className="navlink-home" activeClassName={"active"}>
+          <NavLink
+            exact
+            to={"/"}
+            className="navlink-home"
+            activeClassName={"active"}
+          >
+            <Icon classes className="fa fa-home" />
             Home
           </NavLink>
           <NavLink
@@ -15,6 +22,7 @@ const LeftNav = ({ navSize, handleNavSizeChange }) => {
             className="navlink"
             activeClassName={"active"}
           >
+            <Icon classes className="fa fa-folder-open" />
             Folders
           </NavLink>
           <NavLink
@@ -22,13 +30,18 @@ const LeftNav = ({ navSize, handleNavSizeChange }) => {
             className="navlink"
             activeClassName={"active"}
           >
+            <Icon classes className="fa fa-cog" />
             Settings
           </NavLink>
         </nav>
       </div>
-      <button className="burger-btn" onClick={() => handleNavSizeChange()}>
-        Burg
-      </button>
+      <div className="burger-btn">
+        <Icon
+          classes
+          className="fa fa-bars"
+          onClick={() => handleNavSizeChange()}
+        />
+      </div>
     </div>
   );
 };

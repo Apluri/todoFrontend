@@ -190,6 +190,7 @@ const App = () => {
               setSelectedTask={setSelectedTask}
               sortTodosHandler={sortTodosHandler}
               handleFolderDelete={handleFolderDelete}
+              postFolderHandler={postFolderHandler}
             />
           </Route>
           <Route path="/settings">

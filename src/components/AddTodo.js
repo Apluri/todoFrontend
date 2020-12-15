@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Calendar from "react-calendar";
+import { Icon } from "@material-ui/core";
 
 const AddTodo = ({
   todos,
@@ -23,16 +24,31 @@ const AddTodo = ({
   const [value, onChange] = useState(null);
   // dropdown
   const dropdownRef = useRef(null);
+
   const [isActive, setIsActive] = useState(false);
+  //calendar dropdown
+  const [calendarActive, setCalendarActive] = useState(false);
 
   // handle clicks when clicked outside select folder
   const closeFolder = useRef();
+  const calendarRef = useRef();
+  const folderWrapper = () => {
+    if (calendarActive) {
+      setCalendarActive(!calendarActive);
+    }
+    setIsActive(!isActive);
+  };
   useEffect(() => {
     const handleClick = (e) => {
       // outside click
       if (!closeFolder.current.contains(e.target)) {
         if (isActive) {
           setIsActive(!isActive);
+        }
+      }
+      if (!calendarRef.current.contains(e.target)) {
+        if (calendarActive) {
+          setCalendarActive(!calendarActive);
         }
       }
     };
@@ -42,7 +58,7 @@ const AddTodo = ({
     return () => {
       document.removeEventListener("mousedown", handleClick);
     };
-  }, [isActive]);
+  }, [isActive, calendarActive]);
 
   // wrapper function for closing dropdown
   // creating a folder or selecting existing
@@ -123,14 +139,14 @@ const AddTodo = ({
         </form>
       </div>
       <div className="dropdown-menu-container" ref={closeFolder}>
-        Folder selected: {folderNamePrint}
-        <br />
-        <button
-          onClick={() => setIsActive(!isActive)}
-          className="folder-button-trigger"
-        >
-          Select folder
-        </button>
+        <div>
+          <Icon
+            classes
+            className="fa fa-folder-open"
+            onClick={() => folderWrapper()}
+          />
+          {folderNamePrint == "" ? "No folder selected" : folderNamePrint}
+        </div>
         <div className="folders">
           <nav
             ref={dropdownRef}
@@ -147,7 +163,10 @@ const AddTodo = ({
                     onChange={(e) => setFolderCurrInput(e.target.value)}
                   ></input>
                 </form>
-                <button onClick={addFolderWrapper}>Add</button>
+                <Icon
+                  className="fa fa-plus-square"
+                  onClick={() => submitFolder()}
+                />
               </li>
               <div>
                 {folders.map((folder) => (
@@ -164,15 +183,38 @@ const AddTodo = ({
             </ul>
           </nav>
         </div>
-      </div>
-      <div className="date-selection-show">
-        Date selected: {value === null ? "nothing" : value.toDateString()}
-      </div>
-      <div className="calendar-container">
-        <Calendar value={null} locale={"en-EN"} onChange={onChange} />
+        <div className="date-selection-show">
+          <Icon
+            className="fa fa-calendar"
+            onClick={() => setCalendarActive(!calendarActive)}
+          />
+          {value === null ? "No date selected" : value.toDateString()}
+        </div>
+        <div className="calendar-container" ref={calendarRef}>
+          <nav
+            ref={calendarRef}
+            className={`menu ${calendarActive ? "active" : "inactive"}`}
+          >
+            <Calendar value={null} locale={"en-EN"} onChange={onChange} />
+          </nav>
+        </div>
       </div>
     </>
   );
 };
 
 export default AddTodo;
+/*
+<div className="date-selection-show">
+        <Icon
+          className="fa fa-calendar"
+          onClick={setCalendarActive(!calendarActive)}
+        />
+        {value === null ? "No date selected" : value.toDateString()}
+      </div>
+      <div className="calendar-container" ref={calendarRef}>
+        <div className={`menu ${calendarActive ? "active" : "inactive"}`}>
+          <Calendar value={null} locale={"en-EN"} onChange={onChange} />
+        </div>
+      </div>
+*/

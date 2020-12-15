@@ -9,6 +9,7 @@ const Folders = ({
   setSelectedTask,
   sortTodosHandler,
   handleFolderDelete,
+  postFolderHandler,
 }) => {
   const [selectedFolder, setSelectedFolder] = useState(null);
   //dropdown
@@ -16,6 +17,9 @@ const Folders = ({
   const [folderListActive, setFolderListActive] = useState(false);
   // handle outside clicks
   const closeFolderList = useRef();
+  const [folderCurrInput, setFolderCurrInput] = useState("");
+
+  const [isActive, setIsActive] = useState(false);
   useEffect(() => {
     const handleClick = (e) => {
       // outside click
@@ -32,7 +36,16 @@ const Folders = ({
       document.removeEventListener("mousedown", handleClick);
     };
   }, [folderListActive]);
-
+  const addFolderWrapper = (folder) => {
+    submitFolder();
+    setIsActive(false);
+  };
+  const submitFolder = () => {
+    const newFolder = {
+      name: folderCurrInput,
+    };
+    postFolderHandler(newFolder);
+  };
   return (
     <>
       <div className="dropdown-menu-container" ref={closeFolderList}>
@@ -53,19 +66,33 @@ const Folders = ({
             className={`menu ${folderListActive ? "active" : "inactive"}`}
           >
             <ul>
-              {folders.map((folder) => (
-                <li key={folder.id}>
-                  <button
-                    className="folders-btn"
-                    onClick={() => setSelectedFolder(folder)}
-                  >
-                    {folder.name}
-                  </button>
-                  <button onClick={() => handleFolderDelete(folder.id)}>
-                    delete
-                  </button>
-                </li>
-              ))}
+              <li>
+                Create Folder
+                <form>
+                  <input
+                    type="text"
+                    placeholder="Folder title"
+                    value={folderCurrInput}
+                    onChange={(e) => setFolderCurrInput(e.target.value)}
+                  ></input>
+                </form>
+                <button onClick={addFolderWrapper}>Add</button>
+              </li>
+              <div>
+                {folders.map((folder) => (
+                  <li key={folder.id}>
+                    <button
+                      className="folders-btn"
+                      onClick={() => setSelectedFolder(folder)}
+                    >
+                      {folder.name}
+                    </button>
+                    <button onClick={() => handleFolderDelete(folder.id)}>
+                      delete
+                    </button>
+                  </li>
+                ))}
+              </div>
             </ul>
           </nav>
         </div>

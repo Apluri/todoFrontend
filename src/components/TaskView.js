@@ -23,7 +23,7 @@ const TaskView = ({
   return !selectedTask ? (
     <> {redirect()}</>
   ) : editMode ? (
-    <>
+    <div className="content">
       <br />
       <TaskViewEdit
         folders={folders}
@@ -35,9 +35,9 @@ const TaskView = ({
         handleDelete={handleDelete}
         redirect={redirect}
       />
-    </>
+    </div>
   ) : (
-    <>
+    <div className="content">
       <br />
       <TaskViewShow
         folders={folders}
@@ -46,7 +46,7 @@ const TaskView = ({
         handleDelete={handleDelete}
         redirect={redirect}
       />
-    </>
+    </div>
   );
 };
 

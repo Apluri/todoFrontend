@@ -174,6 +174,10 @@ const App = () => {
               postTaskHandler={postTaskHandler}
               setSelectedTask={setSelectedTask}
               sortTodosHandler={sortTodosHandler}
+              searchData={searchData}
+              sortAscending={sortAscending}
+              setSortAscending={setSortAscending}
+              currSort={currSort}
             />
           </Route>
 
@@ -195,11 +199,6 @@ const App = () => {
             <Settings
               deleteAllTasks={deleteAllTasks}
               deleteAllFolders={deleteAllFolders}
-              sortAscending={sortAscending}
-              setSortAscending={setSortAscending}
-              sortTodosHandler={sortTodosHandler}
-              currSort={currSort}
-              setCurrSort={setCurrSort}
             />
           </Route>
           <Route exact path="/add">

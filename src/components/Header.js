@@ -1,20 +1,7 @@
-// useState to replace need for props usage
-import React, { useState } from "react";
+import React from "react";
 import TitleComponent from "./TitleComponent";
 
-const Header = ({ searchData }) => {
-  const [currInput, setCurrInput] = useState("");
-  const handleSubmit = (e) => {
-    // prevent reload?
-    e.preventDefault();
-    if (currInput.length > 0) {
-      searchData(currInput);
-      setCurrInput("");
-    } else {
-      // null means fetchAll
-      searchData(null);
-    }
-  };
+const Header = () => {
   return (
     <div className="header">
       <TitleComponent />
@@ -22,15 +9,3 @@ const Header = ({ searchData }) => {
   );
 };
 export default Header;
-
-/*
-<form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          type="text"
-          placeholder="title, description, deadline"
-          value={currInput}
-          onChange={(e) => setCurrInput(e.target.value)}
-        />
-        <button>Search</button>
-      </form>
-*/

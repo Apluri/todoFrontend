@@ -47,7 +47,7 @@ const Folders = ({
     postFolderHandler(newFolder);
   };
   return (
-    <>
+    <div className="content">
       <div className="dropdown-menu-container" ref={closeFolderList}>
         Folder selected:
         {selectedFolder !== null
@@ -106,7 +106,7 @@ const Folders = ({
         setSelectedTask={setSelectedTask}
         sortTodosHandler={sortTodosHandler}
       />
-    </>
+    </div>
   );
 };
 

@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 const TodoList = ({
   selectedFolder,
   todos,
-  sortTodosHandler,
   folders,
   handleDelete,
   postTaskHandler,
@@ -166,12 +165,7 @@ const TodoList = ({
     );
   };
 
-  return (
-    <>
-      <h1>Things to do</h1>
-      <div className="todos"> {printTodos()}</div>
-    </>
-  );
+  return <div className="todos"> {printTodos()}</div>;
 };
 
 export default TodoList;

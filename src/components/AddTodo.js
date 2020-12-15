@@ -116,7 +116,7 @@ const AddTodo = ({
     postFolderHandler(newFolder);
   };
   return (
-    <>
+    <div className="content">
       <div className="add-todo">
         <form onSubmit={handleSubmit}>
           <input
@@ -199,7 +199,7 @@ const AddTodo = ({
           </nav>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -20,6 +20,14 @@ const Home = ({
   };
   return (
     <>
+      {" "}
+      <div className="add-btn">
+        <Icon
+          classes
+          className="fa fa-plus-square"
+          onClick={() => wrapperFunction()}
+        />
+      </div>
       <TodoList
         selectFolder={null}
         todos={todos}
@@ -29,15 +37,6 @@ const Home = ({
         setSelectedTask={setSelectedTask}
         sortTodosHandler={sortTodosHandler}
       />
-
-      <div className="add-btn">
-        <Icon
-          classes
-          className="fa fa-plus-circle"
-          style={{ fontSize: 100 }}
-          onClick={() => wrapperFunction()}
-        />
-      </div>
     </>
   );
 };

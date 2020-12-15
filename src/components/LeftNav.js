@@ -14,7 +14,7 @@ const LeftNav = ({ navSize, handleNavSizeChange }) => {
             className="navlink-home"
             activeClassName={"active"}
           >
-            <Icon classes className="fa fa-home" />
+            <Icon className="fa fa-home" />
             Home
           </NavLink>
           <NavLink
@@ -22,7 +22,7 @@ const LeftNav = ({ navSize, handleNavSizeChange }) => {
             className="navlink"
             activeClassName={"active"}
           >
-            <Icon classes className="fa fa-folder-open" />
+            <Icon className="fa fa-folder-open" />
             Folders
           </NavLink>
           <NavLink
@@ -30,17 +30,13 @@ const LeftNav = ({ navSize, handleNavSizeChange }) => {
             className="navlink"
             activeClassName={"active"}
           >
-            <Icon classes className="fa fa-cog" />
+            <Icon className="fa fa-cog" />
             Settings
           </NavLink>
         </nav>
       </div>
       <div className="burger-btn">
-        <Icon
-          classes
-          className="fa fa-bars"
-          onClick={() => handleNavSizeChange()}
-        />
+        <Icon className="fa fa-bars" onClick={() => handleNavSizeChange()} />
       </div>
     </div>
   );

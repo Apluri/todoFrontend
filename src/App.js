@@ -1,5 +1,5 @@
 import "./App.scss";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import axios from "axios";
@@ -18,7 +18,7 @@ const App = () => {
   // simulates tasklist fetched from backend
   let url = "";
   const [queryArgs, setQueryArgs] = useState("");
-  const sortAscending = useRef(true);
+  const [sortAscending, setSortAscending] = useState(false);
   const [currSort, setCurrSort] = useState("timeCreated"); // default when loading page
 
   const useLocalHost = false; // change this to true if u want to use localHost, make sure to start your localhost server then
@@ -55,7 +55,7 @@ const App = () => {
         return 0;
       }
     };
-    sortAscending.current
+    sortAscending
       ? arr.sort((a, b) => sortFunc(a, b))
       : arr.sort((b, a) => sortFunc(a, b));
 
@@ -67,8 +67,6 @@ const App = () => {
     if (table !== currSort) {
       setCurrSort(table);
     }
-    sortAscending.current = !sortAscending.current;
-
     setTodos(sortTodos(todos, table));
   };
 
@@ -179,7 +177,7 @@ const App = () => {
             />
           </Route>
 
-          <Route path="/folders">
+          <Route exact path="/folders">
             <Folders
               todos={todos}
               folders={folders}
@@ -193,13 +191,18 @@ const App = () => {
               postFolderHandler={postFolderHandler}
             />
           </Route>
-          <Route path="/settings">
+          <Route exact path="/settings">
             <Settings
               deleteAllTasks={deleteAllTasks}
               deleteAllFolders={deleteAllFolders}
+              sortAscending={sortAscending}
+              setSortAscending={setSortAscending}
+              sortTodosHandler={sortTodosHandler}
+              currSort={currSort}
+              setCurrSort={setCurrSort}
             />
           </Route>
-          <Route path="/add">
+          <Route exact path="/add">
             <AddTodo
               todos={todos}
               folders={folders}
@@ -209,7 +212,7 @@ const App = () => {
               postFolderHandler={postFolderHandler}
             />
           </Route>
-          <Route path="/task">
+          <Route exact path="/task">
             <TaskView
               folders={folders}
               selectedTask={selectedTask}

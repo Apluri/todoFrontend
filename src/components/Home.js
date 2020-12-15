@@ -20,13 +20,8 @@ const Home = ({
   };
   return (
     <>
-      {" "}
       <div className="add-btn">
-        <Icon
-          classes
-          className="fa fa-plus-square"
-          onClick={() => wrapperFunction()}
-        />
+        <Icon className="fa fa-plus-square" onClick={() => wrapperFunction()} />
       </div>
       <TodoList
         selectFolder={null}

@@ -23,7 +23,6 @@ const AddTodo = ({
   // calendar
   const [value, onChange] = useState(null);
   // dropdown
-  const dropdownRef = useRef(null);
 
   const [isActive, setIsActive] = useState(false);
   //calendar dropdown
@@ -32,6 +31,8 @@ const AddTodo = ({
   // handle clicks when clicked outside select folder
   const closeFolder = useRef(null);
   const calendarRef = useRef(null);
+  const dropdownRef = useRef(null);
+
   const folderWrapper = () => {
     if (calendarActive) {
       setCalendarActive(!calendarActive);

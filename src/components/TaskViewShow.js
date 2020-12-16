@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Icon } from "@material-ui/core";
 
 const TaskViewShow = ({
   folders,
@@ -18,27 +18,28 @@ const TaskViewShow = ({
   };
   return (
     <div className="show-container">
-      <button onClick={() => toggleMode()}>edit</button>
-      <div className="show-folder">Folder:</div>
-      <div className="show-folder-content">
+      <Icon className="fa fa-trash" onClick={() => deleteWrapper()} />
+      <button onClick={() => deleteWrapper()}>Delete</button>
+      <Icon className="fa fa-edit" onClick={() => toggleMode()} />
+      <button onClick={() => toggleMode()}>Edit</button>
+
+      <div className="show-title">
+        <h2>{selectedTask.title}</h2>
+      </div>
+      <div className="show-description">{selectedTask.description}</div>
+      <Icon className="fa fa-folder-open" />
+      <div className="show-folder">
         {selectedTask.folder_id === null
           ? ""
           : renderFolder(selectedTask.folder_id)}
-        <div className="show-title">Title</div>
-        <div className="show-title-content">{selectedTask.title}</div>
       </div>
-
-      <div className="show-description">Description:</div>
-      <div className="show-description-content">{selectedTask.description}</div>
-      <div className="show-deadline">Deadline:</div>
-      <div className="show-deadline-content">
+      <Icon className="fa fa-calendar" />
+      <div className="show-deadline">
         {" "}
         {selectedTask.deadline === null
           ? ""
           : new Date(selectedTask.deadline).toDateString()}
       </div>
-
-      <button onClick={() => deleteWrapper()}>Delete task</button>
     </div>
   );
 };

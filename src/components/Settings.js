@@ -8,12 +8,14 @@ const Settings = ({ deleteAllTasks, deleteAllFolders }) => {
   };
 
   return (
-    <div className="settings">
-      <button onClick={() => deleteAllTasks()}>Delete all tasks</button>
-      <br />
-      <button onClick={() => deleteAllFolders()}>Delete all folders</button>
-      <br />
-      <button onClick={() => wrapper()}>Full reset</button>
+    <div className="content">
+      <div className="settings">
+        <button onClick={() => deleteAllTasks()}>Delete all tasks</button>
+        <br />
+        <button onClick={() => deleteAllFolders()}>Delete all folders</button>
+        <br />
+        <button onClick={() => wrapper()}>Full reset</button>
+      </div>
     </div>
   );
 };

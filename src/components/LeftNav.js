@@ -15,7 +15,7 @@ const LeftNav = ({ navSize, handleNavSizeChange }) => {
             activeClassName={"active"}
           >
             <Icon className="fa fa-home" />
-            Home
+            Tasks
           </NavLink>
           <NavLink
             to={"/folders"}

@@ -117,6 +117,7 @@ const AddTodo = ({
   return (
     <div className="content">
       <div className="add-todo">
+        <Icon className="fa fa-check-circle" onClick={handleSubmit} />
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -124,7 +125,6 @@ const AddTodo = ({
             value={currInput}
             onChange={(e) => setCurrInput(e.target.value)}
           />
-          <button>Add</button>
         </form>
         <form onSubmit={handleSubmit}>
           <div className="description-box">
@@ -139,11 +139,7 @@ const AddTodo = ({
       </div>
       <div className="dropdown-menu-container" ref={closeFolder}>
         <div>
-          <Icon
-            classes
-            className="fa fa-folder-open"
-            onClick={() => folderWrapper()}
-          />
+          <Icon className="fa fa-folder-open" onClick={() => folderWrapper()} />
           {folderNamePrint == "" ? "No folder selected" : folderNamePrint}
         </div>
         <div className="folders">

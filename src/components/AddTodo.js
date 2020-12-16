@@ -30,14 +30,15 @@ const AddTodo = ({
   const [calendarActive, setCalendarActive] = useState(false);
 
   // handle clicks when clicked outside select folder
-  const closeFolder = useRef();
-  const calendarRef = useRef();
+  const closeFolder = useRef(null);
+  const calendarRef = useRef(null);
   const folderWrapper = () => {
     if (calendarActive) {
       setCalendarActive(!calendarActive);
     }
     setIsActive(!isActive);
   };
+
   useEffect(() => {
     const handleClick = (e) => {
       // outside click
@@ -45,8 +46,6 @@ const AddTodo = ({
         if (isActive) {
           setIsActive(!isActive);
         }
-      }
-      if (!calendarRef.current.contains(e.target)) {
         if (calendarActive) {
           setCalendarActive(!calendarActive);
         }
@@ -190,7 +189,7 @@ const AddTodo = ({
           />
           {value === null ? "No date selected" : value.toDateString()}
         </div>
-        <div className="calendar-container" ref={calendarRef}>
+        <div className="calendar-container">
           <nav
             ref={calendarRef}
             className={`menu ${calendarActive ? "active" : "inactive"}`}
@@ -204,17 +203,3 @@ const AddTodo = ({
 };
 
 export default AddTodo;
-/*
-<div className="date-selection-show">
-        <Icon
-          className="fa fa-calendar"
-          onClick={setCalendarActive(!calendarActive)}
-        />
-        {value === null ? "No date selected" : value.toDateString()}
-      </div>
-      <div className="calendar-container" ref={calendarRef}>
-        <div className={`menu ${calendarActive ? "active" : "inactive"}`}>
-          <Calendar value={null} locale={"en-EN"} onChange={onChange} />
-        </div>
-      </div>
-*/

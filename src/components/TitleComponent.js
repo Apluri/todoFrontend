@@ -7,17 +7,17 @@ const TitleComponent = () => {
   const getTitle = () => {
     switch (url.pathname) {
       case "/":
-        return "Home";
+        return "Tasks";
       case "/folders":
         return "Folders";
       case "/settings":
         return "Settings";
       case "/add":
-        return "Add task";
+        return "New task";
       case "/task":
-        return "Task description";
+        return "Task";
       default:
-        return "Something went wrong :)";
+        return "Something went wrong :>";
     }
   };
 

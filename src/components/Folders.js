@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import TodoList from "./TodoList";
+import { Icon } from "@material-ui/core";
 
 const Folders = ({
   todos,
@@ -38,7 +39,7 @@ const Folders = ({
   }, [folderListActive]);
   const addFolderWrapper = (folder) => {
     submitFolder();
-    setIsActive(false);
+    setIsActive(!isActive);
   };
   const submitFolder = () => {
     const newFolder = {
@@ -49,17 +50,15 @@ const Folders = ({
   return (
     <div className="content">
       <div className="dropdown-menu-container" ref={closeFolderList}>
-        Folder selected:
+        <Icon
+          className="fa fa-folder-open"
+          onClick={() => setFolderListActive(!folderListActive)}
+        />
         {selectedFolder !== null
           ? ` ${selectedFolder.name}`
           : " No folder selected"}
         <br />
-        <button
-          onClick={() => setFolderListActive(!folderListActive)}
-          className="folder-button-trigger"
-        >
-          Select folder
-        </button>
+
         <div className="folders">
           <nav
             ref={dropdownRef}
@@ -76,7 +75,10 @@ const Folders = ({
                     onChange={(e) => setFolderCurrInput(e.target.value)}
                   ></input>
                 </form>
-                <button onClick={addFolderWrapper}>Add</button>
+                <Icon
+                  className="fa fa-plus-square"
+                  onClick={() => addFolderWrapper()}
+                />
               </li>
               <div>
                 {folders.map((folder) => (
@@ -87,9 +89,12 @@ const Folders = ({
                     >
                       {folder.name}
                     </button>
-                    <button onClick={() => handleFolderDelete(folder.id)}>
-                      delete
-                    </button>
+                    <div className="folders-trash">
+                      <Icon
+                        className="fa fa-trash"
+                        onClick={() => handleFolderDelete(folder.id)}
+                      />
+                    </div>
                   </li>
                 ))}
               </div>

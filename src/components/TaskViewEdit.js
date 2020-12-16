@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Calendar from "react-calendar";
+import { Icon } from "@material-ui/core";
 
 const TaskViewEdit = ({
   folders,
@@ -11,6 +12,16 @@ const TaskViewEdit = ({
   handleDelete,
   redirect,
 }) => {
+  // date conversion to sql
+  let tzoffset = (v) => {
+    let offSet = v.getTimezoneOffset() / 60;
+    if (offSet < 0) {
+      offSet = offSet - offSet * 2;
+    }
+    v.setHours(offSet);
+    v = v.toISOString().split("T")[0];
+    return v;
+  };
   // title
   const [currInput, setCurrInput] = useState(selectedTask.title);
 
@@ -22,32 +33,26 @@ const TaskViewEdit = ({
     selectedTask.deadline === null ? null : new Date(selectedTask.deadline)
   );
 
-  // date conversion to sql
-  let tzoffset = (v) => {
-    let offSet = v.getTimezoneOffset() / 60;
-    if (offSet < 0) {
-      offSet = offSet - offSet * 2;
-    }
-    v.setHours(offSet);
-    v = v.toISOString().split("T")[0];
-    return v;
-  };
-
   //folder
   const [taskFolderId, setTaskFolderId] = useState(selectedTask.folder_id);
   const [folderCurrInput, setFolderCurrInput] = useState("");
   // dropdown
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useState(false);
 
+  const [isActive, setIsActive] = useState(false);
+  const [calendarActive, setCalendarActive] = useState(false);
   // handle clicks when clicked outside select folder
-  const closeFolder = useRef();
+  const closeFolder = useRef(null);
+  const calendarRef = useRef(null);
+  const dropdownRef = useRef(null);
   useEffect(() => {
     const handleClick = (e) => {
       // outside click
       if (!closeFolder.current.contains(e.target)) {
         if (isActive) {
           setIsActive(!isActive);
+        }
+        if (calendarActive) {
+          setCalendarActive(!calendarActive);
         }
       }
     };
@@ -57,13 +62,19 @@ const TaskViewEdit = ({
     return () => {
       document.removeEventListener("mousedown", handleClick);
     };
-  }, [isActive]);
+  }, [isActive, calendarActive]);
 
   // wrapper function for closing dropdown
   // creating a folder or selecting existing
   const addFolderWrapper = (folder) => {
     isNaN(folder.id) ? submitFolder() : setTaskFolderId(folder.id);
     setIsActive(false);
+  };
+  const folderWrapper = () => {
+    if (calendarActive) {
+      setCalendarActive(!calendarActive);
+    }
+    setIsActive(!isActive);
   };
   const handleSubmit = () => {
     // prevent reload?
@@ -108,8 +119,11 @@ const TaskViewEdit = ({
     redirect();
   };
   return (
-    <>
-      <button onClick={() => wrapper()}>save</button>
+    <div className="edit-container">
+      <Icon className="fa fa-trash" onClick={() => deleteWrapper()} />
+      <button onClick={() => deleteWrapper()}>Delete</button>
+      <Icon className="fa fa-save" onClick={() => wrapper()} />
+      <button onClick={() => wrapper()}>Save</button>
       <form>
         <input
           type="text"
@@ -131,15 +145,9 @@ const TaskViewEdit = ({
       </form>
       <br />
       <div className="dropdown-menu-container" ref={closeFolder}>
-        Folder selected:{" "}
+        <Icon className="fa fa-folder-open" onClick={() => folderWrapper()} />
         {taskFolderId == null ? "nothing" : renderFolder(taskFolderId)}
         <br />
-        <button
-          onClick={() => setIsActive(!isActive)}
-          className="folder-button-trigger"
-        >
-          Select folder
-        </button>
         <div className="folders">
           <nav
             ref={dropdownRef}
@@ -173,22 +181,30 @@ const TaskViewEdit = ({
             </ul>
           </nav>
         </div>
-      </div>
-      Date selected:{" "}
-      {calendarValue === null && selectedTask.deadline === null
-        ? "nothing"
-        : calendarValue === null && selectedTask.deadline !== null
-        ? new Date(selectedTask.deadline).toDateString()
-        : calendarValue.toDateString()}
-      <div className="calendar-container">
-        <Calendar
-          value={calendarValue}
-          locale={"en-EN"}
-          onChange={setCalendarValue}
+
+        <Icon
+          className="fa fa-calendar"
+          onClick={() => setCalendarActive(!calendarActive)}
         />
+        {calendarValue === null && selectedTask.deadline === null
+          ? "No date selected"
+          : calendarValue === null && selectedTask.deadline !== null
+          ? new Date(selectedTask.deadline).toDateString()
+          : calendarValue.toDateString()}
+        <div className="calendar-container">
+          <nav
+            ref={calendarRef}
+            className={`menu ${calendarActive ? "active" : "inactive"}`}
+          >
+            <Calendar
+              value={calendarValue}
+              locale={"en-EN"}
+              onChange={setCalendarValue}
+            />
+          </nav>
+        </div>
       </div>
-      <button onClick={() => deleteWrapper()}>Delete task</button>
-    </>
+    </div>
   );
 };
 

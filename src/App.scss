@@ -332,6 +332,7 @@ hr {
     .sort-and-search {
       display: flex;
       flex-direction: row;
+      margin-left: 30px;
       .sort {
         display: flex;
         flex-direction: row;
@@ -403,30 +404,11 @@ hr {
         }
       }
       .search-bar {
-        padding-left: 10px;
-        margin-top: 4px;
-        @keyframes sizeChangeRevert {
-          from {
-            width: 200px;
-          }
-          to {
-            width: 120px;
-          }
-        }
+        margin-left: 10px;
+        margin-top: -1px;
+        padding-bottom: 20px;
         input {
           width: 120px;
-          //animation-name: sizeChangeRevert;
-          //animation-duration: 0.5s;
-        }
-        .search-button button {
-          padding-left: 6px;
-          border: none;
-          background: none;
-          outline: none;
-          .fa-search {
-            margin-top: -18px;
-            color: $text;
-          }
         }
       }
     }

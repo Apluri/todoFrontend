@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Icon } from "@material-ui/core";
 
 const SearchBar = ({ searchData }) => {
   const [currInput, setCurrInput] = useState("");
@@ -25,10 +24,6 @@ const SearchBar = ({ searchData }) => {
             value={currInput}
             onChange={(e) => setCurrInput(e.target.value)}
           />
-
-          <button type="submit">
-            <Icon className="fa fa-search"></Icon>
-          </button>
         </div>
       </form>
     );

@@ -1,18 +1,21 @@
-$bk-primary: grey;
-$bk-secondary: rgba(126, 126, 126, 0.329);
-$header-color: rgb(22, 22, 22);
-$icon-primary: white;
-$icon-active: rgba(126, 126, 126, 0.329);
-$text-primary: white;
+$background: #0b0c10;
+
+$bk-secondary: pink;
+$header-color: cyan;
+$icon-primary: orange;
+$icon-active: rgb(189, 123, 1);
+$text-primary: #66fcf1;
 $text-secondary: #a1a1a1;
-$dropdown-primary: #a1a1a1;
-$dropdown-secondary: #e7e7e7;
-$fuc-bar-height: 100px;
-$bk-list: grey;
-$mobile-side-padding: 0;
-$mobile-top-padding: 0;
-$pc-side-padding: 0;
-$pc-top-padding: 0;
+$dropdown-primary: blue;
+$dropdown-secondary: rgb(77, 77, 255);
+
+.strikingandsimple {
+  color: #0b0c10;
+  color: #1f2833;
+  color: #c5c6c7;
+  color: #66fcf1;
+  color: #45a29e;
+}
 
 //------------------------------------
 // ____ for global (mobile & pc) ____
@@ -22,8 +25,17 @@ $pc-top-padding: 0;
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: $bk-primary;
+  background-color: $background;
   color: $text-primary;
+}
+::placeholder {
+  color: blue;
+}
+::-ms-input-placeholder {
+  color: blue;
+}
+:-ms-input-placeholder {
+  color: blue;
 }
 // remove styling from list items
 ul,
@@ -121,7 +133,7 @@ a {
   display: block;
 }
 li {
-  background-color: $bk-list;
+  //background-color: $bk-list;
 }
 
 .folder-list-item {
@@ -147,16 +159,13 @@ li {
     color: red;
   }
   button {
-    //border: none;
     background: none;
     outline: none;
-
     color: white;
   }
 }
 .content {
   button {
-    //border: none;
     background: none;
     outline: none;
 
@@ -182,19 +191,16 @@ li {
 }
 input[type="text"],
 textarea {
-  background-color: $bk-primary;
+  background-color: $background;
 }
 .folders {
   button {
-    //border: none;
     background: none;
     outline: none;
-
     color: white;
   }
 }
 hr {
-  //display: block;
   border: 1px inset black;
   opacity: 0.2;
 }
@@ -278,7 +284,7 @@ hr {
 
         /* Dropdown Button */
         .dropbtn {
-          background-color: $bk-primary;
+          background-color: $background;
           border-color: #e7e7e7;
           color: $text-primary;
           padding: 5px;
@@ -407,9 +413,7 @@ hr {
 //------------------------------------
 // ____ for pc screen only ____
 //------------------------------------
-div {
-  border: 1px solid blue;
-}
+
 @media only screen and (min-width: 900px) {
   //change position
   .add-btn {
@@ -421,7 +425,6 @@ div {
     }
   }
   .content {
-    border: 5px solid red;
     justify-content: center;
     display: flex;
     //flex-direction: row;
@@ -443,7 +446,6 @@ div {
         font-size: 50px;
       }
       .icons {
-        border: 1px solid red;
         display: flex;
         .fa-edit,
         .fa-save {
@@ -452,9 +454,7 @@ div {
       }
     }
     .edit-container {
-      border: 1px solid blue;
       .dropdown-menu-container {
-        border: 1px solid blue;
         margin-top: 10px;
       }
     }
@@ -463,7 +463,6 @@ div {
       margin-top: 100px;
       display: flex;
       flex-direction: column;
-      border: 1px solid orange;
     }
     .add-todo {
       margin-top: 100px;
@@ -472,7 +471,6 @@ div {
       //position: fixed;
       display: flex;
       flex-direction: column;
-      border: 1px solid blue;
       margin .dropdown-menu-container {
         margin-top: 100px;
       }
@@ -497,7 +495,6 @@ div {
     }
 
     .sort-and-search {
-      border: 1px solid black;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -508,8 +505,6 @@ div {
         //width: 208px;
         display: flex;
         flex-direction: row;
-        border: 1px solid black;
-
         div {
           padding: 0px 3px 0px 3px;
         }
@@ -519,7 +514,7 @@ div {
 
         /* Dropdown Button */
         .dropbtn {
-          background-color: $bk-primary;
+          background-color: $background;
           border-color: #e7e7e7;
           color: $text-primary;
           padding: 5px;
@@ -575,7 +570,6 @@ div {
       }
       .search-bar {
         margin-top: -3px;
-        border: 1px solid black;
 
         @keyframes sizeChangeRevert {
           from {
@@ -587,12 +581,9 @@ div {
         }
         input {
           width: 120px;
-          //animation-name: sizeChangeRevert;
-          //animation-duration: 0.5s;
         }
         .search-button {
           display: flex;
-          //padding-left: 100px;
         }
         .search-button button {
           padding-left: 6px;
@@ -608,7 +599,6 @@ div {
     // display all todos in a column
 
     .todos {
-      border: 1px solid black;
       display: flex;
       flex-direction: column;
       //individual todo-info displayed in a row
@@ -650,5 +640,3 @@ div {
     }
   }
 }
-
-// border: 1px solid black;

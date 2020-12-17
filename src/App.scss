@@ -79,7 +79,7 @@ a {
   height: 100%;
   transition: 0.4s;
   overflow-x: hidden;
-  background-color: $bk-secondary;
+  background-color: rgba(255, 255, 255, 0.13);
   z-index: 3;
   .navbar {
     display: flex;
@@ -162,7 +162,7 @@ li {
   button {
     background: none;
     outline: none;
-    color: white;
+    color: blue;
   }
 }
 .content {
@@ -170,7 +170,7 @@ li {
     background: none;
     outline: none;
 
-    color: white;
+    color: blue;
   }
 }
 // underlining for navlink elements to indicate selected navlink
@@ -518,7 +518,7 @@ hr {
         /* Dropdown Button */
         .dropbtn {
           background-color: $background;
-          border-color: #e7e7e7;
+          border-color: blue;
           color: $text-primary;
           padding: 5px;
           font-size: 16px;
@@ -574,14 +574,6 @@ hr {
       .search-bar {
         margin-top: -3px;
 
-        @keyframes sizeChangeRevert {
-          from {
-            width: 200px;
-          }
-          to {
-            width: 120px;
-          }
-        }
         input {
           width: 120px;
         }
@@ -594,7 +586,7 @@ hr {
           background: none;
           outline: none;
           .fa-search {
-            color: white;
+            color: blue;
           }
         }
       }

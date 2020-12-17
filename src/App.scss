@@ -37,6 +37,7 @@ body {
 :-ms-input-placeholder {
   color: blue;
 }
+
 // remove styling from list items
 ul,
 li {
@@ -191,6 +192,8 @@ li {
 }
 input[type="text"],
 textarea {
+  color: blue;
+  border-color: blue;
   background-color: $background;
 }
 .folders {

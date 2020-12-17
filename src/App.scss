@@ -3,18 +3,23 @@ $text: #d1e8e2;
 $text-placeholder: #116466;
 $task-complete: #116466;
 $trash: #d9b08c;
-//$trash: #ffcb9a;
 $confirm-button: cyan;
 $top: #116466;
 $side: cyan;
 $icon: cyan;
-$date: #ffcb9a;
-//$date: #d9b08c;
+$date: #d9b08c;
 p,
 h1,
 h2,
 h3 {
   color: $text;
+}
+.fa-edit,
+.fa-save {
+  color: $confirm-button;
+}
+.fa-trash {
+  color: $trash;
 }
 .colorSchemes {
   .coolandfresh {
@@ -297,7 +302,7 @@ hr {
         color: $confirm-button;
         position: fixed;
         font-size: 100px;
-        right: 60px;
+        right: 10px;
         top: 70px;
       }
     }
@@ -398,7 +403,7 @@ hr {
         }
       }
       .search-bar {
-        padding-left: 30px;
+        padding-left: 10px;
         margin-top: 4px;
         @keyframes sizeChangeRevert {
           from {
@@ -420,7 +425,7 @@ hr {
           outline: none;
           .fa-search {
             margin-top: -18px;
-            color: $icon;
+            color: $text;
           }
         }
       }

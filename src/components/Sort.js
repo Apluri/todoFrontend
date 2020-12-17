@@ -25,7 +25,7 @@ const Sort = ({
 
   return (
     <div className="sort">
-      Sort by
+      Sort
       <div className="dropdown">
         <button className="dropbtn">
           {printPrettierSelectedSort(currSort)}

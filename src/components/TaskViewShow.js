@@ -31,21 +31,26 @@ const TaskViewShow = ({
         <div className="show-description">{selectedTask.description}</div>
         <hr />
         <div className="icon-and-name">
-          <Icon className="fa fa-folder-open" />
-          <div className="show-folder">
-            {selectedTask.folder_id === null
-              ? "No folder selected"
-              : renderFolder(selectedTask.folder_id)}
+          <div className="show-folder-icon">
+            <Icon className="fa fa-folder-open" />
+
+            <div className="show-folder">
+              {selectedTask.folder_id === null
+                ? "No folder selected"
+                : renderFolder(selectedTask.folder_id)}
+            </div>
           </div>
         </div>
         <hr />
         <div className="icon-and-name">
-          <Icon className="fa fa-calendar" />
-          <div className="show-deadline">
-            {" "}
-            {selectedTask.deadline === null
-              ? "No date selected"
-              : new Date(selectedTask.deadline).toDateString()}
+          <div className="show-calendar-icon">
+            <Icon className="fa fa-calendar" />
+            <div className="show-deadline">
+              {" "}
+              {selectedTask.deadline === null
+                ? "No date selected"
+                : new Date(selectedTask.deadline).toDateString()}
+            </div>
           </div>
         </div>
       </div>

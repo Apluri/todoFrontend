@@ -3,7 +3,6 @@ $text: #d1e8e2;
 $text-placeholder: #116466;
 $task-complete: #116466;
 $trash: #d9b08c;
-$confirm-button: cyan;
 $top: #116466;
 $side: cyan;
 $icon: cyan;
@@ -16,11 +15,52 @@ h3 {
 }
 .fa-edit,
 .fa-save {
-  color: $confirm-button;
+  color: $icon;
 }
 .fa-trash {
   color: $trash;
 }
+.addtodo-folder-icon {
+  .fa-folder-open {
+    color: $icon;
+    font-size: 40px;
+  }
+}
+.addtodo-calendar-icon {
+  .fa-calendar {
+    color: $icon;
+    font-size: 40px;
+  }
+}
+.folders-folder-icon {
+  .fa-folder-open {
+    color: $icon;
+    font-size: 40px;
+  }
+}
+.show-folder-icon {
+  .fa-folder-open {
+    font-size: 40px;
+  }
+}
+.show-calendar-icon {
+  .fa-calendar {
+    font-size: 40px;
+  }
+}
+.edit-folder-icon {
+  .fa-folder-open {
+    font-size: 40px;
+    color: $icon;
+  }
+}
+.edit-calendar-icon {
+  .fa-calendar {
+    font-size: 40px;
+    color: $icon;
+  }
+}
+
 .colorSchemes {
   .coolandfresh {
     color: #05386b;
@@ -268,8 +308,6 @@ hr {
   border: 1px inset black;
   opacity: 0.2;
 }
-.fa-edit {
-}
 //------------------------------------
 // ____ for mobile screen only ____
 //------------------------------------
@@ -299,7 +337,7 @@ hr {
     justify-content: center;
     .add-todo {
       .fa-check-circle {
-        color: $confirm-button;
+        color: $icon;
         position: fixed;
         font-size: 100px;
         right: 10px;
@@ -326,6 +364,7 @@ hr {
         .fa-edit,
         .fa-save {
           margin-left: 70%;
+          color: $icon;
         }
       }
     }
@@ -491,11 +530,16 @@ hr {
       .fa-save {
         font-size: 50px;
       }
+      .fa-edit,
+      .fa-save {
+        color: $icon;
+      }
       .icons {
         display: flex;
         .fa-edit,
         .fa-save {
           margin-left: 80%;
+          color: $icon;
         }
       }
     }
@@ -525,7 +569,7 @@ hr {
         flex-direction: row;
       }
       .fa-check-circle {
-        color: $confirm-button;
+        color: $icon;
         position: fixed;
         font-size: 100px;
         right: 30%;

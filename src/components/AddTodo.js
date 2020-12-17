@@ -141,7 +141,7 @@ const AddTodo = ({
 
       <div className="dropdown-menu-container" ref={closeFolder}>
         <hr />
-        <div>
+        <div className="addtodo-folder-icon">
           <Icon className="fa fa-folder-open" onClick={() => folderWrapper()} />
           {folderNamePrint == "" ? "No folder selected" : folderNamePrint}
         </div>
@@ -185,11 +185,13 @@ const AddTodo = ({
         </div>
         <hr />
         <div className="date-selection-show">
-          <Icon
-            className="fa fa-calendar"
-            onClick={() => setCalendarActive(!calendarActive)}
-          />
-          {value === null ? "No date selected" : value.toDateString()}
+          <div className="addtodo-calendar-icon">
+            <Icon
+              className="fa fa-calendar"
+              onClick={() => setCalendarActive(!calendarActive)}
+            />
+            {value === null ? "No date selected" : value.toDateString()}
+          </div>
         </div>
         <div className="calendar-container">
           <nav

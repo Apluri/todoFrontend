@@ -147,10 +147,16 @@ const TaskViewEdit = ({
         </form>
         <br />
         <div className="dropdown-menu-container" ref={closeFolder}>
-          <Icon className="fa fa-folder-open" onClick={() => folderWrapper()} />
-          {taskFolderId == null
-            ? "No folder selected"
-            : renderFolder(taskFolderId)}
+          <div className="edit-folder-icon">
+            <Icon
+              className="fa fa-folder-open"
+              onClick={() => folderWrapper()}
+            />
+            {taskFolderId == null
+              ? "No folder selected"
+              : renderFolder(taskFolderId)}
+          </div>
+
           <br />
           <div className="folders">
             <nav
@@ -191,15 +197,19 @@ const TaskViewEdit = ({
             </nav>
           </div>
           <hr />
-          <Icon
-            className="fa fa-calendar"
-            onClick={() => setCalendarActive(!calendarActive)}
-          />
-          {calendarValue === null && selectedTask.deadline === null
-            ? "No date selected"
-            : calendarValue === null && selectedTask.deadline !== null
-            ? new Date(selectedTask.deadline).toDateString()
-            : calendarValue.toDateString()}
+
+          <div className="edit-calendar-icon">
+            <Icon
+              className="fa fa-calendar"
+              onClick={() => setCalendarActive(!calendarActive)}
+            />
+            {calendarValue === null && selectedTask.deadline === null
+              ? "No date selected"
+              : calendarValue === null && selectedTask.deadline !== null
+              ? new Date(selectedTask.deadline).toDateString()
+              : calendarValue.toDateString()}
+          </div>
+
           <div className="calendar-container">
             <nav
               ref={calendarRef}

@@ -50,13 +50,15 @@ const Folders = ({
   return (
     <div className="content">
       <div className="dropdown-menu-container" ref={closeFolderList}>
-        <Icon
-          className="fa fa-folder-open"
-          onClick={() => setFolderListActive(!folderListActive)}
-        />
-        {selectedFolder !== null
-          ? ` ${selectedFolder.name}`
-          : " No folder selected"}
+        <div className="folders-folder-icon">
+          <Icon
+            className="fa fa-folder-open"
+            onClick={() => setFolderListActive(!folderListActive)}
+          />
+          {selectedFolder !== null
+            ? ` ${selectedFolder.name}`
+            : " No folder selected"}
+        </div>
 
         <br />
 
@@ -67,7 +69,7 @@ const Folders = ({
           >
             <ul>
               <li>
-                Create Folder
+                <p>Create Folder</p>
                 <div className="folder-title-and-icon">
                   <form>
                     <input

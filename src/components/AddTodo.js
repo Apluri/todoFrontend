@@ -152,7 +152,7 @@ const AddTodo = ({
           >
             <ul>
               <li>
-                Create Folder
+                <p>Create folder</p>{" "}
                 <div className="folder-title-and-icon">
                   <form onSubmit={handleSubmit}>
                     <input

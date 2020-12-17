@@ -159,16 +159,21 @@ const TaskViewEdit = ({
             >
               <ul>
                 <li>
-                  Create Folder
-                  <form onSubmit={handleSubmit}>
-                    <input
-                      type="text"
-                      placeholder="Folder title"
-                      value={folderCurrInput}
-                      onChange={(e) => setFolderCurrInput(e.target.value)}
-                    ></input>
-                  </form>
-                  <button onClick={addFolderWrapper}>Add</button>
+                  <p>Create folder</p>
+                  <div className="folder-title-and-icon">
+                    <form onSubmit={handleSubmit}>
+                      <input
+                        type="text"
+                        placeholder="Folder title"
+                        value={folderCurrInput}
+                        onChange={(e) => setFolderCurrInput(e.target.value)}
+                      ></input>
+                    </form>
+                    <Icon
+                      className="fa fa-plus-square"
+                      onClick={() => addFolderWrapper()}
+                    />
+                  </div>
                 </li>
                 <div>
                   {folders.map((folder) => (

@@ -1,14 +1,21 @@
-$background: #0b0c10;
-
-$bk-secondary: pink;
-$header-color: cyan;
-$icon-primary: orange;
-$icon-active: rgb(189, 123, 1);
-$text-primary: #66fcf1;
-$text-secondary: #a1a1a1;
-$dropdown-primary: blue;
-$dropdown-secondary: rgb(77, 77, 255);
-
+$background: #2c3531;
+$text: #d1e8e2;
+$text-placeholder: #116466;
+$task-complete: #116466;
+$trash: #d9b08c;
+//$trash: #ffcb9a;
+$confirm-button: cyan;
+$top: #116466;
+$side: cyan;
+$icon: cyan;
+$date: #ffcb9a;
+//$date: #d9b08c;
+p,
+h1,
+h2,
+h3 {
+  color: $text;
+}
 .colorSchemes {
   .coolandfresh {
     color: #05386b;
@@ -72,16 +79,16 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: $background;
-  color: $text-primary;
+  color: $text;
 }
 ::placeholder {
-  color: blue;
+  color: $text-placeholder;
 }
 ::-ms-input-placeholder {
-  color: blue;
+  color: $text-placeholder;
 }
 :-ms-input-placeholder {
-  color: blue;
+  color: $text-placeholder;
 }
 
 // remove styling from list items
@@ -100,7 +107,7 @@ a {
   position: fixed;
   width: 100%;
   height: 50px;
-  background-color: $header-color;
+  background-color: $top;
   z-index: 2;
   h1 {
     margin-top: -5px;
@@ -125,7 +132,7 @@ a {
   height: 100%;
   transition: 0.4s;
   overflow-x: hidden;
-  background-color: rgba(255, 255, 255, 0.13);
+  background-color: rgba($side, 0.1);
   z-index: 3;
   .navbar {
     display: flex;
@@ -154,7 +161,7 @@ a {
 .menu {
   background: #a5a5a5;
   position: absolute;
-
+  //---------------------------------------------------------------
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 0;
   visibility: hidden;
@@ -164,6 +171,7 @@ a {
 .menu.active {
   opacity: 1;
   visibility: visible;
+  //-------------------------------------------------------
   background-color: #333333;
   transform: translateY(0);
 }
@@ -173,18 +181,17 @@ a {
   margin: 0;
 }
 .menu li {
+  //----------------------------------------------------------
   border-bottom: 1px solid #dddddd;
   text-decoration: none;
+  //-----------------------------------------------------------
   color: #333333;
   padding: 15px 20px;
   display: block;
 }
-li {
-  //background-color: $bk-list;
-}
 
 .folder-list-item {
-  color: black;
+  color: $text;
 }
 .folder-title-and-icon {
   display: flex;
@@ -192,7 +199,7 @@ li {
   .fa-plus-square {
     font-size: 30px;
     margin-top: -2px;
-    color: green;
+    color: $icon;
   }
 }
 
@@ -203,12 +210,12 @@ li {
   .fa-trash {
     font-size: 30px;
     margin-top: -2px;
-    color: red;
+    color: $icon;
   }
   button {
     background: none;
     outline: none;
-    color: blue;
+    color: $icon;
   }
 }
 .content {
@@ -216,7 +223,7 @@ li {
     background: none;
     outline: none;
 
-    color: blue;
+    color: $icon;
   }
 }
 // underlining for navlink elements to indicate selected navlink
@@ -238,16 +245,19 @@ li {
 }
 input[type="text"],
 textarea {
-  color: blue;
-  border-color: blue;
+  color: $text;
+  border-color: $text;
   background-color: $background;
 }
 .folders {
   button {
     background: none;
     outline: none;
-    color: white;
+    color: $text;
   }
+}
+button {
+  border-color: $text-placeholder;
 }
 hr {
   border: 1px inset black;
@@ -284,7 +294,7 @@ hr {
     justify-content: center;
     .add-todo {
       .fa-check-circle {
-        color: green;
+        color: $confirm-button;
         position: fixed;
         font-size: 100px;
         right: 60px;
@@ -334,8 +344,8 @@ hr {
         /* Dropdown Button */
         .dropbtn {
           background-color: $background;
-          border-color: #e7e7e7;
-          color: $text-primary;
+          border-color: $text;
+          color: $text;
           padding: 5px;
           font-size: 16px;
           border-radius: 5px;
@@ -383,7 +393,7 @@ hr {
 
         /* Change the background color of the dropdown button when the dropdown content is shown */
         .dropdown:hover .dropbtn {
-          background-color: $dropdown-secondary;
+          background-color: grey;
           color: black;
         }
       }
@@ -410,7 +420,7 @@ hr {
           outline: none;
           .fa-search {
             margin-top: -18px;
-            color: white;
+            color: $icon;
           }
         }
       }
@@ -422,7 +432,7 @@ hr {
       //individual todo-info displayed in a row
 
       .title-done {
-        color: red;
+        color: $task-complete;
       }
       .todo-item {
         display: flex;
@@ -434,25 +444,25 @@ hr {
         .clickable-area {
           flex-grow: 2;
           .task {
-            color: black;
+            color: $text;
           }
           .task-done {
-            color: red;
+            color: $task-complete;
             text-decoration: line-through;
           }
 
           .dead-line {
-            color: blue;
+            color: $date;
           }
         }
 
         .check-box {
-          color: green;
+          color: $icon;
           z-index: 1;
           margin-top: -8px;
         }
         .fa-trash {
-          color: orange;
+          color: $trash;
         }
       }
     }
@@ -528,7 +538,7 @@ hr {
         flex-direction: row;
       }
       .fa-check-circle {
-        color: green;
+        color: $confirm-button;
         position: fixed;
         font-size: 100px;
         right: 30%;
@@ -564,8 +574,8 @@ hr {
         /* Dropdown Button */
         .dropbtn {
           background-color: $background;
-          border-color: blue;
-          color: $text-primary;
+          border-color: $text;
+          color: $text;
           padding: 5px;
           font-size: 16px;
           border-radius: 5px;
@@ -613,7 +623,7 @@ hr {
 
         /* Change the background color of the dropdown button when the dropdown content is shown */
         .dropdown:hover .dropbtn {
-          background-color: $dropdown-secondary;
+          background-color: grey;
           color: black;
         }
       }
@@ -632,7 +642,7 @@ hr {
           background: none;
           outline: none;
           .fa-search {
-            color: blue;
+            color: $text;
           }
         }
       }
@@ -645,7 +655,7 @@ hr {
       //individual todo-info displayed in a row
       //padding-top: 100px;
       .title-done {
-        color: red;
+        color: $task-complete;
       }
       .todo-item {
         display: flex;
@@ -657,25 +667,25 @@ hr {
         .clickable-area {
           flex-grow: 2;
           .task {
-            color: black;
+            color: $text;
           }
           .task-done {
-            color: red;
+            color: $task-complete;
             text-decoration: line-through;
           }
 
           .dead-line {
-            color: blue;
+            color: $date;
           }
         }
 
         .check-box {
-          color: green;
+          color: $icon;
           z-index: 1;
           margin-top: -8px;
         }
         .fa-trash {
-          color: orange;
+          color: $trash;
         }
       }
     }

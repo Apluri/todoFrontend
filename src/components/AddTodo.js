@@ -138,8 +138,9 @@ const AddTodo = ({
           </div>
         </form>
       </div>
-      <hr />
+
       <div className="dropdown-menu-container" ref={closeFolder}>
+        <hr />
         <div>
           <Icon className="fa fa-folder-open" onClick={() => folderWrapper()} />
           {folderNamePrint == "" ? "No folder selected" : folderNamePrint}

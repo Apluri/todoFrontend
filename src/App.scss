@@ -9,12 +9,58 @@ $text-secondary: #a1a1a1;
 $dropdown-primary: blue;
 $dropdown-secondary: rgb(77, 77, 255);
 
-.strikingandsimple {
-  color: #0b0c10;
-  color: #1f2833;
-  color: #c5c6c7;
-  color: #66fcf1;
-  color: #45a29e;
+.colorSchemes {
+  .coolandfresh {
+    color: #05386b;
+    color: #379683;
+    color: #5cdb95;
+    color: #8ee4af;
+    color: #edf5e1;
+  }
+
+  .stylishandsophisticated {
+    color: #5d5c61;
+    color: #379683;
+    color: #7395ae;
+    color: #557a95;
+    color: #b1a296;
+  }
+
+  .strikingandsimple {
+    color: #0b0c10;
+    color: #1f2833;
+    color: #c5c6c7;
+    color: #66fcf1;
+    color: #45a29e;
+  }
+  .sleekandfuturistic {
+    color: #2c3531;
+    color: #116466;
+    color: #d9b08c;
+    color: #ffcb9a;
+    color: #d1e8e2;
+  }
+  .gorgeouscontrast {
+    color: #61892f;
+    color: #86c232;
+    color: #222629;
+    color: #474b4f;
+    color: #6b6e70;
+  }
+  .strikingcitrus {
+    color: #1f2605;
+    color: #1f6521;
+    color: #53900f;
+    color: #a4a71e;
+    color: #d6ce15;
+  }
+  .accentpop {
+    color: #802bb1;
+    color: #2d283e;
+    color: #564f6f;
+    color: #4c495d;
+    color: #d1d7e0;
+  }
 }
 
 //------------------------------------

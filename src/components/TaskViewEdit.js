@@ -119,89 +119,94 @@ const TaskViewEdit = ({
     redirect();
   };
   return (
-    <div className="edit-container">
-      <Icon className="fa fa-trash" onClick={() => deleteWrapper()} />
-      <button onClick={() => deleteWrapper()}>Delete</button>
-      <Icon className="fa fa-save" onClick={() => wrapper()} />
-      <button onClick={() => wrapper()}>Save</button>
-      <form>
-        <input
-          type="text"
-          placeholder="Task title"
-          value={currInput}
-          onChange={(e) => setCurrInput(e.target.value)}
-        />
-      </form>
-      <br />
-      <form>
-        <div className="description-box">
-          <textarea
+    <div className="content">
+      <div className="edit-container">
+        <div className="icons">
+          <Icon className="fa fa-trash" onClick={() => deleteWrapper()} />
+          <Icon className="fa fa-save" onClick={() => wrapper()} />
+        </div>
+        <hr />
+        <form>
+          <input
             type="text"
-            placeholder="Task description (optional)"
-            value={dCurrInput}
-            onChange={(e) => setDCurrInput(e.target.value)}
+            placeholder="Task title"
+            value={currInput}
+            onChange={(e) => setCurrInput(e.target.value)}
           />
-        </div>
-      </form>
-      <br />
-      <div className="dropdown-menu-container" ref={closeFolder}>
-        <Icon className="fa fa-folder-open" onClick={() => folderWrapper()} />
-        {taskFolderId == null ? "nothing" : renderFolder(taskFolderId)}
-        <br />
-        <div className="folders">
-          <nav
-            ref={dropdownRef}
-            className={`menu ${isActive ? "active" : "inactive"}`}
-          >
-            <ul>
-              <li>
-                Create Folder
-                <form onSubmit={handleSubmit}>
-                  <input
-                    type="text"
-                    placeholder="Folder title"
-                    value={folderCurrInput}
-                    onChange={(e) => setFolderCurrInput(e.target.value)}
-                  ></input>
-                </form>
-                <button onClick={addFolderWrapper}>Add</button>
-              </li>
-              <div>
-                {folders.map((folder) => (
-                  <li key={folder.id}>
-                    <button
-                      className="folders-btn"
-                      onClick={() => addFolderWrapper(folder)}
-                    >
-                      {folder.name}
-                    </button>
-                  </li>
-                ))}
-              </div>
-            </ul>
-          </nav>
-        </div>
-
-        <Icon
-          className="fa fa-calendar"
-          onClick={() => setCalendarActive(!calendarActive)}
-        />
-        {calendarValue === null && selectedTask.deadline === null
-          ? "No date selected"
-          : calendarValue === null && selectedTask.deadline !== null
-          ? new Date(selectedTask.deadline).toDateString()
-          : calendarValue.toDateString()}
-        <div className="calendar-container">
-          <nav
-            ref={calendarRef}
-            className={`menu ${calendarActive ? "active" : "inactive"}`}
-          >
-            <Calendar
-              value={calendarValue}
-              locale={"en-EN"}
-              onChange={setCalendarValue}
+        </form>
+        <hr />
+        <form>
+          <div className="description-box">
+            <textarea
+              type="text"
+              placeholder="Task description (optional)"
+              value={dCurrInput}
+              onChange={(e) => setDCurrInput(e.target.value)}
             />
-          </nav>
+          </div>
+        </form>
+        <br />
+        <div className="dropdown-menu-container" ref={closeFolder}>
+          <Icon className="fa fa-folder-open" onClick={() => folderWrapper()} />
+          {taskFolderId == null
+            ? "No folder selected"
+            : renderFolder(taskFolderId)}
+          <br />
+          <div className="folders">
+            <nav
+              ref={dropdownRef}
+              className={`menu ${isActive ? "active" : "inactive"}`}
+            >
+              <ul>
+                <li>
+                  Create Folder
+                  <form onSubmit={handleSubmit}>
+                    <input
+                      type="text"
+                      placeholder="Folder title"
+                      value={folderCurrInput}
+                      onChange={(e) => setFolderCurrInput(e.target.value)}
+                    ></input>
+                  </form>
+                  <button onClick={addFolderWrapper}>Add</button>
+                </li>
+                <div>
+                  {folders.map((folder) => (
+                    <li key={folder.id}>
+                      <button
+                        className="folders-btn"
+                        onClick={() => addFolderWrapper(folder)}
+                      >
+                        {folder.name}
+                      </button>
+                    </li>
+                  ))}
+                </div>
+              </ul>
+            </nav>
+          </div>
+          <hr />
+          <Icon
+            className="fa fa-calendar"
+            onClick={() => setCalendarActive(!calendarActive)}
+          />
+          {calendarValue === null && selectedTask.deadline === null
+            ? "No date selected"
+            : calendarValue === null && selectedTask.deadline !== null
+            ? new Date(selectedTask.deadline).toDateString()
+            : calendarValue.toDateString()}
+          <div className="calendar-container">
+            <nav
+              ref={calendarRef}
+              className={`menu ${calendarActive ? "active" : "inactive"}`}
+            >
+              <Calendar
+                value={calendarValue}
+                locale={"en-EN"}
+                onChange={setCalendarValue}
+              />
+            </nav>
+          </div>
         </div>
       </div>
     </div>

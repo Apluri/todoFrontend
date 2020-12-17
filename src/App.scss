@@ -154,7 +154,15 @@ li {
     color: white;
   }
 }
+.content {
+  button {
+    //border: none;
+    background: none;
+    outline: none;
 
+    color: white;
+  }
+}
 // underlining for navlink elements to indicate selected navlink
 .active {
   text-decoration-line: underline;
@@ -167,6 +175,10 @@ li {
   .add-btn {
     z-index: 1;
   }
+}
+.content {
+  position: relative;
+  z-index: 1;
 }
 input[type="text"],
 textarea {
@@ -185,6 +197,8 @@ hr {
   //display: block;
   border: 1px inset black;
   opacity: 0.2;
+}
+.fa-edit {
 }
 //------------------------------------
 // ____ for mobile screen only ____
@@ -231,9 +245,18 @@ hr {
 
     .show-container,
     .edit-container {
+      margin-top: -50px;
       .fa-trash,
-      .fa-edit {
+      .fa-edit,
+      .fa-save {
         font-size: 50px;
+      }
+      .icons {
+        display: flex;
+        .fa-edit,
+        .fa-save {
+          margin-left: 70%;
+        }
       }
     }
     .sort-and-search {
@@ -384,7 +407,9 @@ hr {
 //------------------------------------
 // ____ for pc screen only ____
 //------------------------------------
-
+div {
+  border: 1px solid blue;
+}
 @media only screen and (min-width: 900px) {
   //change position
   .add-btn {
@@ -404,12 +429,41 @@ hr {
     padding-left: 30%;
     padding-right: 30%;
 
+    .show-container,
+    .edit-container {
+      margin-top: 100px;
+      width: 260%;
+      margin-left: -80%;
+      display: flex;
+      flex-direction: column;
+
+      .fa-trash,
+      .fa-edit,
+      .fa-save {
+        font-size: 50px;
+      }
+      .icons {
+        border: 1px solid red;
+        display: flex;
+        .fa-edit,
+        .fa-save {
+          margin-left: 80%;
+        }
+      }
+    }
+    .edit-container {
+      border: 1px solid blue;
+      .dropdown-menu-container {
+        border: 1px solid blue;
+        margin-top: 10px;
+      }
+    }
+
     .dropdown-menu-container {
       margin-top: 100px;
-      //margin-right: 300px;
-      display: inline-flex;
+      display: flex;
       flex-direction: column;
-      border: 1px solid blue;
+      border: 1px solid orange;
     }
     .add-todo {
       margin-top: 100px;
@@ -439,14 +493,9 @@ hr {
       flex-direction: column;
       justify-content: space-between;
       height: 200px;
+      margin-top: 100px;
     }
-    .show-container,
-    .edit-container {
-      .fa-trash,
-      .fa-edit {
-        font-size: 50px;
-      }
-    }
+
     .sort-and-search {
       border: 1px solid black;
       display: flex;

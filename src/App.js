@@ -155,13 +155,17 @@ const App = () => {
   const HandleNavSizeChange = () => {
     smallScreen
       ? setNavSize(navSize === "100%" ? "0%" : "100%")
-      : setNavSize(navSize === "300px" ? "0px" : "300px");
+      : setNavSize(navSize === "200px" ? "0px" : "200px");
   };
 
   return (
     <BrowserRouter>
       <Header searchData={searchData} />
-      <LeftNav navSize={navSize} handleNavSizeChange={HandleNavSizeChange} />
+      <LeftNav
+        navSize={navSize}
+        handleNavSizeChange={HandleNavSizeChange}
+        closeNav={CloseNav}
+      />
       <Layout navSize={navSize}>
         <Switch>
           <Route exact path="/">

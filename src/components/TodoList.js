@@ -87,7 +87,7 @@ const TodoList = ({
           {itemsToPrint.map((index) => {
             switch (index) {
               case 1:
-                return renderTitle(todo);
+                return <div>{renderTitle(todo)}</div>;
               case 2:
                 return <div> {renderDescription(todo)}</div>;
               //case 3:
@@ -108,16 +108,16 @@ const TodoList = ({
     };
     const renderTitle = (todo) => {
       return (
-        <div className={todo.isDone ? "task-done" : "task-test"}>
-          {todo.title}
-        </div>
+        <div className={todo.isDone ? "task-done" : "task"}>{todo.title}</div>
       );
     };
     const renderDescription = (todo) => {
       return <>{todo.description} </>;
     };
     const renderDeadLine = (todo) => {
-      return <> {sqlDateToDateString(todo.deadline)} </>;
+      return (
+        <div className="dead-line"> {sqlDateToDateString(todo.deadline)} </div>
+      );
     };
 
     const renderFolder = (id) => {
@@ -135,9 +135,9 @@ const TodoList = ({
       return (
         <>
           <Checkbox
+            className="check-box"
             checked={Boolean(todo.isDone)}
             onChange={(e) => handleChange(e, todo)}
-            color="default"
             inputProps={{ "aria-label": "checkbox with default color" }}
           />
         </>
@@ -149,16 +149,19 @@ const TodoList = ({
         {todos.map(
           (todo) =>
             checkIfPrint(todo.folder_id) && (
-              <div className="todo-item" key={todo.id}>
-                <div>{renderIsDone(todo)} </div>
-                <div
-                  className="clickable-area"
-                  onClick={() => wrapperFunction(todo)}
-                >
-                  {renderColumns(todo)}
+              <>
+                <hr />
+                <div className="todo-item" key={todo.id}>
+                  <div>{renderIsDone(todo)} </div>
+                  <div
+                    className="clickable-area"
+                    onClick={() => wrapperFunction(todo)}
+                  >
+                    {renderColumns(todo)}
+                  </div>
+                  <div>{renderDeleteButton(todo)}</div>
                 </div>
-                <div>{renderDeleteButton(todo)}</div>
-              </div>
+              </>
             )
         )}
       </>

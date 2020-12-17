@@ -57,6 +57,7 @@ const Folders = ({
         {selectedFolder !== null
           ? ` ${selectedFolder.name}`
           : " No folder selected"}
+
         <br />
 
         <div className="folders">
@@ -67,33 +68,37 @@ const Folders = ({
             <ul>
               <li>
                 Create Folder
-                <form>
-                  <input
-                    type="text"
-                    placeholder="Folder title"
-                    value={folderCurrInput}
-                    onChange={(e) => setFolderCurrInput(e.target.value)}
-                  ></input>
-                </form>
-                <Icon
-                  className="fa fa-plus-square"
-                  onClick={() => addFolderWrapper()}
-                />
+                <div className="folder-title-and-icon">
+                  <form>
+                    <input
+                      type="text"
+                      placeholder="Folder title"
+                      value={folderCurrInput}
+                      onChange={(e) => setFolderCurrInput(e.target.value)}
+                    ></input>
+                  </form>
+                  <Icon
+                    className="fa fa-plus-square"
+                    onClick={() => addFolderWrapper()}
+                  />
+                </div>
               </li>
               <div>
                 {folders.map((folder) => (
                   <li key={folder.id}>
-                    <button
-                      className="folders-btn"
-                      onClick={() => setSelectedFolder(folder)}
-                    >
-                      {folder.name}
-                    </button>
-                    <div className="folders-trash">
-                      <Icon
-                        className="fa fa-trash"
-                        onClick={() => handleFolderDelete(folder.id)}
-                      />
+                    <div className="folders-title-and-icon">
+                      <button
+                        className="folders-btn"
+                        onClick={() => setSelectedFolder(folder)}
+                      >
+                        {folder.name}
+                      </button>
+                      <div className="folders-trash">
+                        <Icon
+                          className="fa fa-trash"
+                          onClick={() => handleFolderDelete(folder.id)}
+                        />
+                      </div>
                     </div>
                   </li>
                 ))}

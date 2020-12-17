@@ -138,6 +138,7 @@ const AddTodo = ({
           </div>
         </form>
       </div>
+      <hr />
       <div className="dropdown-menu-container" ref={closeFolder}>
         <div>
           <Icon className="fa fa-folder-open" onClick={() => folderWrapper()} />
@@ -151,18 +152,20 @@ const AddTodo = ({
             <ul>
               <li>
                 Create Folder
-                <form onSubmit={handleSubmit}>
-                  <input
-                    type="text"
-                    placeholder="Folder title"
-                    value={folderCurrInput}
-                    onChange={(e) => setFolderCurrInput(e.target.value)}
-                  ></input>
-                </form>
-                <Icon
-                  className="fa fa-plus-square"
-                  onClick={() => submitFolder()}
-                />
+                <div className="folder-title-and-icon">
+                  <form onSubmit={handleSubmit}>
+                    <input
+                      type="text"
+                      placeholder="Folder title"
+                      value={folderCurrInput}
+                      onChange={(e) => setFolderCurrInput(e.target.value)}
+                    ></input>
+                  </form>
+                  <Icon
+                    className="fa fa-plus-square"
+                    onClick={() => submitFolder()}
+                  />
+                </div>
               </li>
               <div>
                 {folders.map((folder) => (
@@ -179,6 +182,7 @@ const AddTodo = ({
             </ul>
           </nav>
         </div>
+        <hr />
         <div className="date-selection-show">
           <Icon
             className="fa fa-calendar"

@@ -22,17 +22,20 @@ const TaskViewShow = ({
       <button onClick={() => deleteWrapper()}>Delete</button>
       <Icon className="fa fa-edit" onClick={() => toggleMode()} />
       <button onClick={() => toggleMode()}>Edit</button>
-
+      <hr />
       <div className="show-title">
         <h2>{selectedTask.title}</h2>
       </div>
+      <hr />
       <div className="show-description">{selectedTask.description}</div>
+      <hr />
       <Icon className="fa fa-folder-open" />
       <div className="show-folder">
         {selectedTask.folder_id === null
           ? ""
           : renderFolder(selectedTask.folder_id)}
       </div>
+      <hr />
       <Icon className="fa fa-calendar" />
       <div className="show-deadline">
         {" "}

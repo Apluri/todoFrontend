@@ -21,7 +21,7 @@ const SearchBar = ({ searchData }) => {
         <div className="search-button">
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search by title"
             value={currInput}
             onChange={(e) => setCurrInput(e.target.value)}
           />

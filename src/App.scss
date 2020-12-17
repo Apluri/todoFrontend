@@ -1,42 +1,31 @@
-// local styling always on (mobile & pc)
-$bk-primary: black;
+$bk-primary: grey;
 $bk-secondary: rgba(126, 126, 126, 0.329);
-
 $header-color: rgb(22, 22, 22);
-
 $icon-primary: white;
 $icon-active: rgba(126, 126, 126, 0.329);
-
 $text-primary: white;
 $text-secondary: #a1a1a1;
-
 $dropdown-primary: #a1a1a1;
 $dropdown-secondary: #e7e7e7;
-
 $fuc-bar-height: 100px;
+$bk-list: grey;
+$mobile-side-padding: 0;
+$mobile-top-padding: 0;
+$pc-side-padding: 0;
+$pc-top-padding: 0;
+
+//------------------------------------
+// ____ for global (mobile & pc) ____
+//------------------------------------
+
+// overall font used and colorings on body
 body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: $bk-primary;
   color: $text-primary;
-  font-weight: 500;
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
-
-.calendar-container {
-  display: flex;
-  color: black;
-  width: 300px;
-}
-
-.blur > * {
-  filter: blur(9px) opacity(80%) brightness(50%);
-}
-h1 {
-  //font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  //  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-family: "Comic Sans MS", "Comic Sans", cursive; // :)))
-
-  font-weight: 800;
-}
+// remove styling from list items
 ul,
 li {
   list-style-type: none;
@@ -44,218 +33,41 @@ li {
 a {
   text-decoration: none;
 }
-.active {
-  text-decoration-line: underline;
-}
-a:visited {
-}
-
-.burger-btn {
-  position: fixed;
-  left: 5px;
-  top: 5px;
-  width: 40px;
-  height: 40px;
-  z-index: 2;
-}
-
-// home section
-
-/*
-.content {
+// top header styling
+.header {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding-top: 50px;
-  width: 100%; // checkbox
-}
-*/
-.content {
-  display: flex;
-  flex-direction: column;
-  padding-top: 50px;
-  padding-left: 5%;
-  padding-right: 5%;
-  align-items: center;
-  .MuiCheckbox-root {
-    color: $icon-primary;
-  }
-
-  // delete icon
-  .MuiIcon-root {
-    color: $icon-primary;
-  }
-
-  .MuiIcon-root:active {
-    color: $icon-active;
-  }
-
-  .todos {
-    width: 600px;
-    // todo items inside content area
-    .todo-item {
-      display: flex;
-      padding-top: 10px;
-      align-items: center;
-      padding-bottom: 10px;
-    }
-    .todo-item > div:first-child {
-      flex: 5%;
-    }
-    .clickable-area {
-      display: flex;
-      flex: 90%;
-      width: 100%;
-      .task-done {
-        color: $text-secondary;
-        text-decoration: line-through;
-      }
-      div {
-        padding-left: 5px;
-        padding-right: 5px;
-      }
-      div:first-child {
-        flex: 80%;
-      }
-      div:last-child {
-        flex: 20%;
-      }
-    }
-    .clickable-area:hover {
-      background-color: $bk-secondary;
-    }
-    .todo-item > div:last-child {
-      display: flex;
-      flex: 5%;
-    }
-  }
-  .add-btn {
-    filter: none;
-    position: fixed;
-    z-index: 2;
-    text-align: center;
-  }
-
-  // searchbar, addbutton and sort
-  .list-functions {
-    display: flex;
-    width: 600px;
-    align-items: center;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    .search-bar {
-      display: flex;
-      flex: 50%;
-      height: 100%;
-      justify-content: flex-end;
-
-      @keyframes sizeChangeRevert {
-        from {
-          width: 200px;
-        }
-        to {
-          width: 120px;
-        }
-      }
-      input {
-        width: 120px;
-        animation-name: sizeChangeRevert;
-        animation-duration: 0.5s;
-      }
-      @keyframes sizeChange {
-        from {
-          width: 120px;
-        }
-        to {
-          width: 200px;
-        }
-      }
-
-      input:focus {
-        animation-name: sizeChange;
-        animation-duration: 0.5s;
-        width: 200px;
-      }
-    }
-    .sort {
-      display: flex;
-      flex: 50%;
-      flex-direction: row;
-      align-items: center;
-      padding-right: 10px;
-      p {
-        margin: 0;
-      }
-      div {
-        padding-right: 10px;
-      }
-      .arrow {
-        display: flex;
-        :first-child {
-        }
-      }
-    }
-    /* Dropdown Button */
-    .dropbtn {
-      background-color: $bk-primary;
-      border-color: #e7e7e7;
-      color: $text-primary;
-      padding: 5px;
-      font-size: 16px;
-      border-radius: 5px;
-      min-width: 120px;
-    }
-
-    /* The container <div> - needed to position the dropdown content */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    /* Dropdown Content (Hidden by Default) */
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f1f1f1;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-      z-index: 1;
-      /* Links inside the dropdown */
-      button {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        border: none;
-        width: 100%;
-      }
-      /* Change color of dropdown links on hover */
-      button:hover {
-        background-color: #ddd;
-      }
-    }
-
-    /* Show the dropdown menu on hover */
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    /* Change the background color of the dropdown button when the dropdown content is shown */
-    .dropdown:hover .dropbtn {
-      background-color: $dropdown-secondary;
-      color: black;
-    }
+  justify-content: space-evenly;
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  background-color: $header-color;
+  z-index: 2;
+  h1 {
+    margin-top: -5px;
   }
 }
+// button for toggling the left sidebar
+.burger-btn {
+  position: fixed;
+  top: 5px;
+  left: 15px;
+  z-index: 4;
+  .fa-bars {
+    font-size: 45px;
+  }
+}
+
+//left sidebar
 .left-sidebar {
   display: flex;
   position: fixed;
   flex-direction: column;
   height: 100%;
-  transition: 0.5s;
+  transition: 0.4s;
   overflow-x: hidden;
   background-color: $bk-secondary;
-  z-index: 1;
+  z-index: 3;
   .navbar {
     display: flex;
     flex-direction: column;
@@ -265,90 +77,23 @@ a:visited {
       padding-top: 20px;
       font-size: 35px;
     }
-    .navlink-home {
-      font-weight: bold;
-      padding-top: 20px;
-      font-size: 50px;
+    .fa-home,
+    .fa-folder-open,
+    .fa-cog {
+      font-size: 40px;
+      margin-bottom: -5px;
     }
   }
 }
 
-.header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  position: fixed;
-  width: 100%;
-  height: 50px;
-  background-color: $header-color;
-  h1 {
-    margin: 0;
-  }
-}
-
-// for pc screen
-@media only screen and (min-width: 900px) {
-  .add-btn {
-    height: 100px;
-    width: 100px;
-    bottom: 10%;
-    right: 20%;
-    color: black;
-  }
-}
-.folders {
-  .fa-plus-square {
-    color: black;
-  }
-}
-.burger-btn {
-  top: 5px;
-  left: 15px;
-  .fa-bars {
-    font-size: 45px;
-  }
-}
-.navbar {
-  .fa-home,
-  .fa-folder-open,
-  .fa-cog {
-    font-size: 40px;
-  }
-}
-
-// for mobile screen
-@media only screen and (max-width: 900px) {
-  .todos {
-    max-width: 100%;
-  }
-  .list-functions {
-    max-width: 100%;
-    flex-direction: column;
-    .search-bar {
-      padding-top: 10px;
-    }
-  }
-  .add-btn {
-    top: 5px;
-    right: 15px;
-
-    .fa-plus-square {
-      font-size: 45px;
-    }
-  }
-}
-
-.description-box > textarea {
-  height: 200px;
-  width: 200px;
-  resize: none;
-}
+// folder dropdown
 
 .dropdown-menu-container {
   position: relative;
+  z-index: 3;
 }
 .menu {
-  background: #ffffff;
+  background: #a5a5a5;
   position: absolute;
 
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
@@ -360,6 +105,7 @@ a:visited {
 .menu.active {
   opacity: 1;
   visibility: visible;
+  background-color: #333333;
   transform: translateY(0);
 }
 .menu ul {
@@ -374,45 +120,486 @@ a:visited {
   padding: 15px 20px;
   display: block;
 }
+li {
+  background-color: $bk-list;
+}
 
 .folder-list-item {
   color: black;
 }
-
-.burger-btn {
-  padding: 0;
-  border: none;
-  background: none;
-  color: white;
-}
-.folders-btn {
-  padding: 0;
-  border: none;
-  background: none;
-}
-.todo-title-button {
-  padding: 0;
-  border: none;
-  background: none;
-  color: white;
-}
-
-/* Settings */
-.settings {
+.folder-title-and-icon {
   display: flex;
-  flex-direction: column;
-  padding: 10px;
-  min-width: 400px;
-}
-
-.folders-trash {
-  .fa-trash {
-    color: black;
+  flex-direction: row;
+  .fa-plus-square {
+    font-size: 30px;
+    margin-top: -2px;
+    color: green;
   }
 }
-.search-button button {
-  padding: 0;
-  border: none;
-  background: none;
-  outline: none;
+
+.folders-title-and-icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .fa-trash {
+    font-size: 30px;
+    margin-top: -2px;
+    color: red;
+  }
+  button {
+    //border: none;
+    background: none;
+    outline: none;
+
+    color: white;
+  }
 }
+
+// underlining for navlink elements to indicate selected navlink
+.active {
+  text-decoration-line: underline;
+}
+
+.add-btn {
+  z-index: 4;
+}
+.add-todo {
+  .add-btn {
+    z-index: 1;
+  }
+}
+input[type="text"],
+textarea {
+  background-color: $bk-primary;
+}
+.folders {
+  button {
+    //border: none;
+    background: none;
+    outline: none;
+
+    color: white;
+  }
+}
+hr {
+  //display: block;
+  border: 1px inset black;
+  opacity: 0.2;
+}
+//------------------------------------
+// ____ for mobile screen only ____
+//------------------------------------
+
+@media only screen and (max-width: 900px) {
+  // blurs the .content when sidebar is open on mobile screen-size
+  .blur {
+    filter: blur(8px) opacity(65%) brightness(70%);
+  }
+
+  .add-btn {
+    position: fixed;
+    top: 5px;
+    right: 15px;
+    .fa-plus-square {
+      font-size: 45px;
+    }
+  }
+  .content {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    .add-todo {
+      .fa-check-circle {
+        color: green;
+        position: fixed;
+        font-size: 100px;
+        right: 60px;
+        top: 70px;
+      }
+    }
+    .settings {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 200px;
+    }
+
+    .show-container,
+    .edit-container {
+      .fa-trash,
+      .fa-edit {
+        font-size: 50px;
+      }
+    }
+    .sort-and-search {
+      display: flex;
+      flex-direction: row;
+      .sort {
+        display: flex;
+        flex-direction: row;
+        z-index: 1;
+        p {
+          margin-top: 6px;
+        }
+        div {
+          padding: 0px 3px 0px 3px;
+        }
+        .arrow {
+          margin-top: 6px;
+        }
+
+        /* Dropdown Button */
+        .dropbtn {
+          background-color: $bk-primary;
+          border-color: #e7e7e7;
+          color: $text-primary;
+          padding: 5px;
+          font-size: 16px;
+          border-radius: 5px;
+          min-width: 120px;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+        .dropdown {
+          margin-top: -5px;
+        }
+        .arrow {
+          margin-top: 2px;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f1f1f1;
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          z-index: 1;
+          /* Links inside the dropdown */
+          button {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border: none;
+            width: 100%;
+          }
+          /* Change color of dropdown links on hover */
+          button:hover {
+            background-color: #ddd;
+          }
+        }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+          background-color: $dropdown-secondary;
+          color: black;
+        }
+      }
+      .search-bar {
+        padding-left: 30px;
+        margin-top: 4px;
+        @keyframes sizeChangeRevert {
+          from {
+            width: 200px;
+          }
+          to {
+            width: 120px;
+          }
+        }
+        input {
+          width: 120px;
+          //animation-name: sizeChangeRevert;
+          //animation-duration: 0.5s;
+        }
+        .search-button button {
+          padding-left: 6px;
+          border: none;
+          background: none;
+          outline: none;
+          .fa-search {
+            margin-top: -18px;
+            color: white;
+          }
+        }
+      }
+    }
+    // display all todos in a column
+    .todos {
+      display: flex;
+      flex-direction: column;
+      //individual todo-info displayed in a row
+
+      .title-done {
+        color: red;
+      }
+      .todo-item {
+        display: flex;
+        flex-direction: row;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        justify-content: flex-start;
+        //title and date
+        .clickable-area {
+          flex-grow: 2;
+          .task {
+            color: black;
+          }
+          .task-done {
+            color: red;
+            text-decoration: line-through;
+          }
+
+          .dead-line {
+            color: blue;
+          }
+        }
+
+        .check-box {
+          color: green;
+          z-index: 1;
+          margin-top: -8px;
+        }
+        .fa-trash {
+          color: orange;
+        }
+      }
+    }
+  }
+}
+
+//------------------------------------
+// ____ for pc screen only ____
+//------------------------------------
+
+@media only screen and (min-width: 900px) {
+  //change position
+  .add-btn {
+    position: fixed;
+    top: 5px;
+    right: 15px;
+    .fa-plus-square {
+      font-size: 45px;
+    }
+  }
+  .content {
+    border: 5px solid red;
+    justify-content: center;
+    display: flex;
+    //flex-direction: row;
+    flex-direction: column;
+    padding-left: 30%;
+    padding-right: 30%;
+
+    .dropdown-menu-container {
+      margin-top: 100px;
+      //margin-right: 300px;
+      display: inline-flex;
+      flex-direction: column;
+      border: 1px solid blue;
+    }
+    .add-todo {
+      margin-top: 100px;
+      margin-bottom: -100px;
+      //margin-left: -300px;
+      //position: fixed;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid blue;
+      margin .dropdown-menu-container {
+        margin-top: 100px;
+      }
+      .add-todo-container {
+        display: flex;
+        flex-direction: row;
+      }
+      .fa-check-circle {
+        color: green;
+        position: fixed;
+        font-size: 100px;
+        right: 30%;
+        top: 100px;
+      }
+    }
+    .settings {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 200px;
+    }
+    .show-container,
+    .edit-container {
+      .fa-trash,
+      .fa-edit {
+        font-size: 50px;
+      }
+    }
+    .sort-and-search {
+      border: 1px solid black;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-top: 100px;
+      //padding-right: 30%;
+      //padding-left: 30%;
+      .sort {
+        //width: 208px;
+        display: flex;
+        flex-direction: row;
+        border: 1px solid black;
+
+        div {
+          padding: 0px 3px 0px 3px;
+        }
+        .arrow {
+          margin-top: 6px;
+        }
+
+        /* Dropdown Button */
+        .dropbtn {
+          background-color: $bk-primary;
+          border-color: #e7e7e7;
+          color: $text-primary;
+          padding: 5px;
+          font-size: 16px;
+          border-radius: 5px;
+          min-width: 120px;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+        .dropdown {
+          margin-top: -5px;
+        }
+        .arrow {
+          margin-top: 2px;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f1f1f1;
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          z-index: 1;
+          /* Links inside the dropdown */
+          button {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border: none;
+            width: 100%;
+          }
+          /* Change color of dropdown links on hover */
+          button:hover {
+            background-color: #ddd;
+          }
+        }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+          background-color: $dropdown-secondary;
+          color: black;
+        }
+      }
+      .search-bar {
+        margin-top: -3px;
+        border: 1px solid black;
+
+        @keyframes sizeChangeRevert {
+          from {
+            width: 200px;
+          }
+          to {
+            width: 120px;
+          }
+        }
+        input {
+          width: 120px;
+          //animation-name: sizeChangeRevert;
+          //animation-duration: 0.5s;
+        }
+        .search-button {
+          display: flex;
+          //padding-left: 100px;
+        }
+        .search-button button {
+          padding-left: 6px;
+          border: none;
+          background: none;
+          outline: none;
+          .fa-search {
+            color: white;
+          }
+        }
+      }
+    }
+    // display all todos in a column
+
+    .todos {
+      border: 1px solid black;
+      display: flex;
+      flex-direction: column;
+      //individual todo-info displayed in a row
+      //padding-top: 100px;
+      .title-done {
+        color: red;
+      }
+      .todo-item {
+        display: flex;
+        flex-direction: row;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        justify-content: flex-start;
+        //title and date
+        .clickable-area {
+          flex-grow: 2;
+          .task {
+            color: black;
+          }
+          .task-done {
+            color: red;
+            text-decoration: line-through;
+          }
+
+          .dead-line {
+            color: blue;
+          }
+        }
+
+        .check-box {
+          color: green;
+          z-index: 1;
+          margin-top: -8px;
+        }
+        .fa-trash {
+          color: orange;
+        }
+      }
+    }
+  }
+}
+
+// border: 1px solid black;

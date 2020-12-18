@@ -33,6 +33,9 @@ const AddTodo = ({
   const calendarRef = useRef(null);
   const dropdownRef = useRef(null);
 
+  const [displayError, setDisplayError] = useState(false);
+  const [errMsg, setErrMsg] = useState("Error!");
+
   const folderWrapper = () => {
     if (calendarActive) {
       setCalendarActive(!calendarActive);
@@ -90,22 +93,29 @@ const AddTodo = ({
   const handleSubmit = (e) => {
     // prevent reload?
     e.preventDefault();
+    if (currInput.length === 0) {
+      setErrMsg("Empty title not allowed");
+      setDisplayError(true);
+    } else if (currInput[0] === " ") {
+      setErrMsg("Leading whitespaces not allowed");
+      setDisplayError(true);
+    } else {
+      // create new task and post it
+      const newTodo = {
+        title: currInput,
+        description: dCurrInput, // add logic here
+        deadline: value === null ? null : tzoffset(value),
+        folder_id: taskFolderId,
+      };
+      postTaskHandler(newTodo);
 
-    // create new task and post it
-    const newTodo = {
-      title: currInput,
-      description: dCurrInput, // add logic here
-      deadline: value === null ? null : tzoffset(value),
-      folder_id: taskFolderId,
-    };
-    postTaskHandler(newTodo);
+      // set input to empty when submitting -is this needed? works without
+      setCurrInput("");
+      //setDCurrInput("");
 
-    // set input to empty when submitting -is this needed? works without
-    setCurrInput("");
-    //setDCurrInput("");
-
-    // redirect to homepage after submit
-    history.push("/");
+      // redirect to homepage after submit
+      history.push("/");
+    }
   };
 
   // handles folder creation & post
@@ -127,7 +137,8 @@ const AddTodo = ({
             onChange={(e) => setCurrInput(e.target.value)}
           />
         </form>
-        <form onSubmit={handleSubmit}>
+        {displayError && <p className="error-text">{errMsg}</p>}
+        <form>
           <div className="description-box">
             <textarea
               type="text"
@@ -143,7 +154,7 @@ const AddTodo = ({
         <hr />
         <div className="addtodo-folder-icon">
           <Icon className="fa fa-folder-open" onClick={() => folderWrapper()} />
-          {folderNamePrint == "" ? "No folder selected" : folderNamePrint}
+          {folderNamePrint === "" ? "No folder selected" : folderNamePrint}
         </div>
         <div className="folders">
           <nav

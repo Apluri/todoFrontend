@@ -308,6 +308,13 @@ hr {
   border: 1px inset black;
   opacity: 0.2;
 }
+.search-button {
+  input {
+    border-radius: 5px;
+    border: 2px solid;
+    padding: 5px;
+  }
+}
 //------------------------------------
 // ____ for mobile screen only ____
 //------------------------------------

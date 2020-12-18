@@ -135,6 +135,9 @@ body {
 :-ms-input-placeholder {
   color: $text-placeholder;
 }
+.error-text {
+  color: red;
+}
 
 // remove styling from list items
 ul,
@@ -308,6 +311,7 @@ hr {
   border: 1px inset black;
   opacity: 0.2;
 }
+
 .search-button {
   input {
     border-radius: 5px;
@@ -315,6 +319,7 @@ hr {
     padding: 5px;
   }
 }
+
 //------------------------------------
 // ____ for mobile screen only ____
 //------------------------------------

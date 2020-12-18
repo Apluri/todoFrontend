@@ -17,7 +17,6 @@ import TaskView from "./components/TaskView";
 const App = () => {
   // simulates tasklist fetched from backend
   let url = "";
-  const [queryArgs, setQueryArgs] = useState("");
   const [sortAscending, setSortAscending] = useState(false);
   const [currSort, setCurrSort] = useState("timeCreated"); // default when loading page
 
@@ -33,11 +32,11 @@ const App = () => {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queryArgs]);
+  }, []);
 
-  const searchData = async (str) => {
+  const searchData = (str) => {
     // fetch all in case of null
-    str === null ? setQueryArgs("") : setQueryArgs(`?search=${str}`);
+    str === null ? fetchData() : fetchData(`?search=${str}`);
   };
 
   // sort todoArray without changing rules for sorting
@@ -70,14 +69,14 @@ const App = () => {
     setTodos(sortTodos(todos, table));
   };
 
-  const fetchData = () => {
+  const fetchData = (search) => {
     const fetchTable = async (table, query = "") => {
       const response = await axios.get(url + "/" + table + query);
       //console.log(response.data);
       return response.data;
     };
 
-    Promise.all([fetchTable("tasks", queryArgs), fetchTable("folders")])
+    Promise.all([fetchTable("tasks", search), fetchTable("folders")])
       .then((data) => {
         const temp = sortTodos(data[0], currSort);
         setTodos(temp);

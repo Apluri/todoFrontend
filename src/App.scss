@@ -7,6 +7,11 @@ $top: #116466;
 $side: cyan;
 $icon: cyan;
 $date: #d9b08c;
+
+//------------------------------------
+// ____ for global (mobile & pc) ____
+//------------------------------------
+
 p,
 h1,
 h2,
@@ -19,6 +24,9 @@ h3 {
 }
 .fa-trash {
   color: $trash;
+}
+.dead-line {
+  color: $date;
 }
 .addtodo-folder-icon {
   .fa-folder-open {
@@ -61,65 +69,6 @@ h3 {
   }
 }
 
-.colorSchemes {
-  .coolandfresh {
-    color: #05386b;
-    color: #379683;
-    color: #5cdb95;
-    color: #8ee4af;
-    color: #edf5e1;
-  }
-
-  .stylishandsophisticated {
-    color: #5d5c61;
-    color: #379683;
-    color: #7395ae;
-    color: #557a95;
-    color: #b1a296;
-  }
-
-  .strikingandsimple {
-    color: #0b0c10;
-    color: #1f2833;
-    color: #c5c6c7;
-    color: #66fcf1;
-    color: #45a29e;
-  }
-  .sleekandfuturistic {
-    color: #2c3531;
-    color: #116466;
-    color: #d9b08c;
-    color: #ffcb9a;
-    color: #d1e8e2;
-  }
-  .gorgeouscontrast {
-    color: #61892f;
-    color: #86c232;
-    color: #222629;
-    color: #474b4f;
-    color: #6b6e70;
-  }
-  .strikingcitrus {
-    color: #1f2605;
-    color: #1f6521;
-    color: #53900f;
-    color: #a4a71e;
-    color: #d6ce15;
-  }
-  .accentpop {
-    color: #802bb1;
-    color: #2d283e;
-    color: #564f6f;
-    color: #4c495d;
-    color: #d1d7e0;
-  }
-}
-
-//------------------------------------
-// ____ for global (mobile & pc) ____
-//------------------------------------
-
-// overall font used and colorings on body
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -267,10 +216,11 @@ a {
   }
 }
 .content {
+  position: relative;
+  z-index: 1;
   button {
     background: none;
     outline: none;
-
     color: $icon;
   }
 }
@@ -287,10 +237,7 @@ a {
     z-index: 1;
   }
 }
-.content {
-  position: relative;
-  z-index: 1;
-}
+
 input[type="text"],
 textarea {
   color: $text;
@@ -456,7 +403,7 @@ hr {
       }
       .search-bar {
         margin-left: 10px;
-        margin-top: -1px;
+        margin-top: -4px;
         padding-bottom: 20px;
         input {
           width: 120px;
@@ -488,19 +435,12 @@ hr {
             color: $task-complete;
             text-decoration: line-through;
           }
-
-          .dead-line {
-            color: $date;
-          }
         }
 
         .check-box {
           color: $icon;
           z-index: 1;
           margin-top: -8px;
-        }
-        .fa-trash {
-          color: $trash;
         }
       }
     }
@@ -512,7 +452,6 @@ hr {
 //------------------------------------
 
 @media only screen and (min-width: 900px) {
-  //change position
   .add-btn {
     position: fixed;
     top: 5px;
@@ -524,7 +463,6 @@ hr {
   .content {
     justify-content: center;
     display: flex;
-    //flex-direction: row;
     flex-direction: column;
     padding-left: 30%;
     padding-right: 30%;
@@ -569,8 +507,6 @@ hr {
     .add-todo {
       margin-top: 100px;
       margin-bottom: -100px;
-      //margin-left: -300px;
-      //position: fixed;
       display: flex;
       flex-direction: column;
       margin .dropdown-menu-container {
@@ -601,10 +537,7 @@ hr {
       flex-direction: row;
       justify-content: space-between;
       padding-top: 100px;
-      //padding-right: 30%;
-      //padding-left: 30%;
       .sort {
-        //width: 208px;
         display: flex;
         flex-direction: row;
         div {
@@ -706,7 +639,6 @@ hr {
         padding-bottom: 10px;
         padding-top: 10px;
         justify-content: flex-start;
-        //title and date
         .clickable-area {
           flex-grow: 2;
           .task {
@@ -716,19 +648,12 @@ hr {
             color: $task-complete;
             text-decoration: line-through;
           }
-
-          .dead-line {
-            color: $date;
-          }
         }
 
         .check-box {
           color: $icon;
           z-index: 1;
           margin-top: -8px;
-        }
-        .fa-trash {
-          color: $trash;
         }
       }
     }

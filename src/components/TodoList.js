@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Checkbox, Icon } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
@@ -11,14 +11,12 @@ const TodoList = ({
   setSelectedTask,
 }) => {
   // numbers represents indexes of todo tasks
-  const [itemsToPrint, setItemsToPrint] = useState([3, 1, 5]);
   let history = useHistory();
   let wrapperFunction = (todo) => {
     setSelectedTask(todo);
-
     history.push("/task");
   };
-  // pass value here to print spesific folder
+  // pass value here to print spesific folder only
   const checkIfPrint = (id) => {
     return selectedFolder === null || selectedFolder === undefined
       ? true
@@ -26,7 +24,7 @@ const TodoList = ({
       ? true
       : false;
   };
-  const handleChange = (event, task) => {
+  const handleChange = (task) => {
     // post check
     const editedTask = { ...task };
     editedTask.isDone = !editedTask.isDone;
@@ -49,63 +47,7 @@ const TodoList = ({
     }
   };
 
-  // prints sql table names as titles
-  const printTitles = () => {
-    let arr;
-    todos[0] !== undefined ? (arr = [...Object.keys(todos[0])]) : (arr = null);
-    if (arr) {
-      return (
-        <ul>
-          {itemsToPrint.map((index) => {
-            switch (index) {
-              case 1:
-                return <li> Title</li>;
-              case 2:
-                return <li> Description</li>;
-              case 3:
-                return <li> Status</li>;
-              case 4:
-                return <li> Creation time</li>;
-              case 5:
-                return <li> Deadline</li>;
-              case 6:
-                return <li> Folder</li>;
-              default:
-                return <li>{arr[index]}</li>;
-            }
-          })}
-        </ul>
-      );
-    }
-    return <li>Missing titles</li>;
-  };
-
   const printTodos = () => {
-    const renderColumns = (todo) => {
-      return (
-        <>
-          {itemsToPrint.map((index) => {
-            switch (index) {
-              case 1:
-                return <div>{renderTitle(todo)}</div>;
-              case 2:
-                return <div> {renderDescription(todo)}</div>;
-              //case 3:
-              //  return <div>{renderIsDone(todo)}</div>;
-              case 4:
-                return <div> {todo.timeCreated}</div>; // should not be used outside testing
-              case 5:
-                return <div>{renderDeadLine(todo)}</div>;
-
-              case 6:
-                return <div> {renderFolder(todo.folder_id)}</div>;
-              default:
-                return <> </>;
-            }
-          })}
-        </>
-      );
-    };
     const renderTitle = (todo) => {
       return (
         <div className={todo.isDone ? "task-done" : "task"}>{todo.title}</div>
@@ -133,14 +75,12 @@ const TodoList = ({
     };
     const renderIsDone = (todo) => {
       return (
-        <>
-          <Checkbox
-            className="check-box"
-            checked={Boolean(todo.isDone)}
-            onChange={(e) => handleChange(e, todo)}
-            inputProps={{ "aria-label": "checkbox with default color" }}
-          />
-        </>
+        <Checkbox
+          className="check-box"
+          checked={Boolean(todo.isDone)}
+          onChange={(e) => handleChange(todo)}
+          inputProps={{ "aria-label": "checkbox with default color" }}
+        />
       );
     };
 
@@ -157,7 +97,8 @@ const TodoList = ({
                     className="clickable-area"
                     onClick={() => wrapperFunction(todo)}
                   >
-                    {renderColumns(todo)}
+                    {renderTitle(todo)}
+                    {renderDeadLine(todo)}
                   </div>
                   <div>{renderDeleteButton(todo)}</div>
                 </div>

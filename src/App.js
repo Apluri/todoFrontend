@@ -1,6 +1,6 @@
 import "./App.scss";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import axios from "axios";
 
@@ -11,36 +11,100 @@ import Folders from "./components/Folders";
 import Settings from "./components/Settings";
 import AddTodo from "./components/AddTodo";
 import LeftNav from "./components/LeftNav";
+import Layout from "./components/Layout";
+import TaskView from "./components/TaskView";
 
 const App = () => {
   // simulates tasklist fetched from backend
   let url = "";
+  const [sortAscending, setSortAscending] = useState(false);
+  const [currSort, setCurrSort] = useState("timeCreated"); // default when loading page
+
   const useLocalHost = false; // change this to true if u want to use localHost, make sure to start your localhost server then
   useLocalHost
-    ? (url = "http://localhost:8080/api/")
-    : (url = "https://tamk-4a00ez62-3001-group04.herokuapp.com/api/");
+    ? (url = "http://localhost:8080/api")
+    : (url = "https://tamk-4a00ez62-3001-group04.herokuapp.com/api");
 
   const [todos, setTodos] = useState([]);
+  const [folders, setFolders] = useState([]);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   useEffect(() => {
-    fetchTasks();
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const fetchTasks = async () => {
-    try {
-      const response = await axios.get(url + "/tasks");
-      setTodos(response.data);
-    } catch (e) {
-      console.log(e);
+  const searchData = (str) => {
+    // fetch all in case of null
+    str === null ? fetchData() : fetchData(`?search=${str}`);
+  };
+
+  // sort todoArray without changing rules for sorting
+  const sortTodos = (tasks, table) => {
+    let arr = [...tasks];
+
+    const sortFunc = (a, b) => {
+      if (a[table] > b[table]) {
+        return 1;
+      } else if (a[table] < b[table]) {
+        return -1;
+      } else if (a[table] === null) {
+        return -1;
+      } else {
+        return 0;
+      }
+    };
+    sortAscending
+      ? arr.sort((a, b) => sortFunc(a, b))
+      : arr.sort((b, a) => sortFunc(a, b));
+
+    return arr;
+  };
+
+  // used to trigger sort and change direction of sorting, also saves new save rule for table
+  const sortTodosHandler = (table) => {
+    if (table !== currSort) {
+      setCurrSort(table);
     }
+    setTodos(sortTodos(todos, table));
+  };
+
+  const fetchData = (search) => {
+    const fetchTable = async (table, query = "") => {
+      const response = await axios.get(url + "/" + table + query);
+      //console.log(response.data);
+      return response.data;
+    };
+
+    Promise.all([fetchTable("tasks", search), fetchTable("folders")])
+      .then((data) => {
+        const temp = sortTodos(data[0], currSort);
+        setTodos(temp);
+        setFolders(data[1]);
+      })
+      .catch((e) => console.log(e));
   };
 
   const postTaskHandler = async (task) => {
     try {
-      await axios.post(url + "/tasks", {
-        ...task,
-      });
-      fetchTasks(); // Fetch tasks again after a successful post request
+      if (task.id !== undefined) {
+        await axios.post(url + `/tasks/${task.id}`, {
+          ...task,
+        });
+      } else {
+        await axios.post(url + "/tasks", {
+          ...task,
+        });
+      }
+      fetchData(); // Fetch tasks again after a successful post request
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const postFolderHandler = async (folder) => {
+    try {
+      await axios.post(url + `/folders`, { ...folder });
+      fetchData();
     } catch (e) {
       console.log(e);
     }
@@ -53,7 +117,32 @@ const App = () => {
       console.log("error while deleting");
       console.log(res);
     }
-    fetchTasks();
+    fetchData();
+  };
+  const handleFolderDelete = async (id) => {
+    const res = await axios.delete(url + "/folders/" + id);
+    if (res.status !== 204) {
+      console.log("error while deleting");
+      console.log(res);
+    }
+    fetchData();
+  };
+  const deleteAllTasks = async () => {
+    const res = await axios.delete(url + "/tasks/");
+    if (res.status !== 204) {
+      console.log("error while deleting");
+      console.log(res);
+    }
+    fetchData();
+  };
+
+  const deleteAllFolders = async () => {
+    const res = await axios.delete(url + "/folders/");
+    if (res.status !== 204) {
+      console.log("error while deleting");
+      console.log(res);
+    }
+    fetchData();
   };
   const [navSize, setNavSize] = useState("0px");
   let smallScreen = useMediaQuery({ query: "(max-width: 900px)" });
@@ -65,49 +154,79 @@ const App = () => {
   const HandleNavSizeChange = () => {
     smallScreen
       ? setNavSize(navSize === "100%" ? "0%" : "100%")
-      : setNavSize(navSize === "300px" ? "0px" : "300px");
+      : setNavSize(navSize === "200px" ? "0px" : "200px");
   };
-  // deletes task by given id from state
-  // TODO change this to delete from sql server
 
   return (
     <BrowserRouter>
-      <Header handleNavSizeChange={HandleNavSizeChange} />
-      <LeftNav navSize={navSize} handleNavSizeChange={HandleNavSizeChange} />
-
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-
-        <Route
-          path="/home"
-          render={(props) => (
+      <Header searchData={searchData} />
+      <LeftNav
+        navSize={navSize}
+        handleNavSizeChange={HandleNavSizeChange}
+        closeNav={CloseNav}
+      />
+      <Layout navSize={navSize}>
+        <Switch>
+          <Route exact path="/">
             <Home
-              {...props}
               todos={todos}
+              folders={folders}
               handleDelete={handleDelete}
               closeNav={CloseNav}
               navSize={navSize}
               postTaskHandler={postTaskHandler}
+              setSelectedTask={setSelectedTask}
+              sortTodosHandler={sortTodosHandler}
+              searchData={searchData}
+              sortAscending={sortAscending}
+              setSortAscending={setSortAscending}
+              currSort={currSort}
             />
-          )}
-        />
-        <Route path={"/folders"} component={Folders} />
-        <Route path={"/settings"} component={Settings} />
-        <Route
-          path="/add"
-          render={(props) => (
-            <AddTodo
-              {...props}
+          </Route>
+
+          <Route exact path="/folders">
+            <Folders
               todos={todos}
+              folders={folders}
+              handleDelete={handleDelete}
+              closeNav={CloseNav}
+              navSize={navSize}
+              postTaskHandler={postTaskHandler}
+              setSelectedTask={setSelectedTask}
+              sortTodosHandler={sortTodosHandler}
+              handleFolderDelete={handleFolderDelete}
+              postFolderHandler={postFolderHandler}
+            />
+          </Route>
+          <Route exact path="/settings">
+            <Settings
+              deleteAllTasks={deleteAllTasks}
+              deleteAllFolders={deleteAllFolders}
+            />
+          </Route>
+          <Route exact path="/add">
+            <AddTodo
+              todos={todos}
+              folders={folders}
               setTodos={setTodos}
               navSize={navSize}
               postTaskHandler={postTaskHandler}
+              postFolderHandler={postFolderHandler}
             />
-          )}
-        />
-      </Switch>
+          </Route>
+          <Route exact path="/task">
+            <TaskView
+              folders={folders}
+              selectedTask={selectedTask}
+              setSelectedTask={setSelectedTask}
+              postTaskHandler={postTaskHandler}
+              postFolderHandler={postFolderHandler}
+              todos={todos}
+              handleDelete={handleDelete}
+            />
+          </Route>
+        </Switch>
+      </Layout>
     </BrowserRouter>
   );
 };

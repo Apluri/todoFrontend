@@ -1,28 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 
 const TitleComponent = () => {
-  const [title, setTitle] = useState("Default smths wrong here");
   const url = useLocation();
 
-  switch (url.pathname) {
-    case "/home":
-      if (title !== "Home") setTitle("Home");
-      break;
-    case "/folders":
-      if (title !== "Folders") setTitle("Folders");
-      break;
-    case "/settings":
-      if (title !== "Settings") setTitle("Settings");
-      break;
-    default:
-      if (title !== "Default") setTitle("Default"); // this should not be shown
-  }
-  return (
-    <div>
-      <h1>{title}</h1>
-    </div>
-  );
+  const getTitle = () => {
+    switch (url.pathname) {
+      case "/":
+        return "Tasks";
+      case "/folders":
+        return "Folders";
+      case "/settings":
+        return "Settings";
+      case "/add":
+        return "New task";
+      case "/task":
+        return "Task";
+      default:
+        return "Something went wrong :>";
+    }
+  };
+
+  return <h1>{getTitle()}</h1>;
 };
 
 export default TitleComponent;

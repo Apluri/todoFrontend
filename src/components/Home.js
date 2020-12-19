@@ -1,32 +1,41 @@
 // useState to replace need for props usage
 import React from "react";
 import TodoList from "./TodoList";
-import { useHistory } from "react-router-dom";
+import SearchBar from "./SearchBar";
+import Sort from "./Sort";
 
-const Home = ({ todos, handleDelete, closeNav, navSize, postTaskHandler }) => {
-  let history = useHistory();
-  let wrapperFunction = () => {
-    closeNav();
-    history.push("/add");
-  };
+const Home = ({
+  todos,
+  folders,
+  handleDelete,
+  postTaskHandler,
+  setSelectedTask,
+  sortTodosHandler,
+  searchData,
+  sortAscending,
+  setSortAscending,
+  currSort,
+}) => {
   return (
     <div className="content">
-      <div className={navSize === "100%" ? "blur" : ""}>
-        <TodoList
-          todos={todos}
-          handleDelete={handleDelete}
-          postTaskHandler={postTaskHandler}
+      <div className="sort-and-search">
+        <Sort
+          sortAscending={sortAscending}
+          sortTodosHandler={sortTodosHandler}
+          setSortAscending={setSortAscending}
+          currSort={currSort}
         />
+        <SearchBar searchData={searchData} />
       </div>
 
-      <button
-        className="add-btn"
-        style={{ backgroundColor: "red" }}
-        onClick={() => wrapperFunction()}
-        //onClick={() => history.push("/add")}
-      >
-        Add task
-      </button>
+      <TodoList
+        selectFolder={null}
+        todos={todos}
+        folders={folders}
+        handleDelete={handleDelete}
+        postTaskHandler={postTaskHandler}
+        setSelectedTask={setSelectedTask}
+      />
     </div>
   );
 };
